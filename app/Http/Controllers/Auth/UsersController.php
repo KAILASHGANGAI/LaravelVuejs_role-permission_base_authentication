@@ -39,7 +39,8 @@ class UsersController extends Controller
                 'status' => 1,
                 'message' => 'Login Success',
                 'token' => $token, 
-                'name'=>$user->name
+                'username'=>$user->name,
+                    'role'=>$user->getRoleNames()
             ]);
         }
  

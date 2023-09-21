@@ -23,21 +23,20 @@
                         <router-link class="nav-link" to="/post"  v-if="$store.getters.getToken != 0">post</router-link>
 
                     </li>
-                    <li class="nav-item" @click="logout">
-                        <span class="nav-link"  v-if="$store.getters.getToken != 0" >Logout</span>
-                    </li>
-                    <li class="nav-item dropdown">
+                   
+                    <li class="nav-item dropdown" v-if="$store.getters.getToken != 0">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
+                            {{ $store.getters.getUser }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" @click="logout" href="#">Logout</a></li>
+                            
                         </ul>
                     </li>
 
@@ -66,7 +65,8 @@ export default {
         logout(){
             axios.get('/api/logout').then((res) => {
                 store.dispatch('removeToken')
-                router.push('/')
+                store.dispatch('removeUser')
+                window.location = "/"
                 console.log(res)
             });
         }

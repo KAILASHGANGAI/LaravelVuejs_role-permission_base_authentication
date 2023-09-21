@@ -28,11 +28,11 @@
 </template>
 <script>
 import router from '../../router'
-import {useStore} from 'vuex'
+import { useStore } from 'vuex'
 import store from '../../store'
 
 export default {
-    setup(){
+    setup() {
         const store = useStore()
     },
     data() {
@@ -46,17 +46,19 @@ export default {
     },
     methods: {
         async login() {
-            await axios.post('/api/login', this.form).then((res) => {
+            await  axios.get('/sanctum/csrf-cookie').then(response => {
+             axios.post('/api/login', this.form).then((res) => {
                 console.log(res)
                 if (res.data.status == 1) {
-                    store.dispatch('setToken',res.data.token)
-                  
-                     router.push('/post')
+                    store.dispatch('setUser', res.data.username)
+                    store.dispatch('setToken', res.data.token)
+                    router.push('/post')
                 } else {
 
-                    this.error = res.data.status   
+                    this.error = res.data.status
                 }
             })
+    });
         }
     }
 }

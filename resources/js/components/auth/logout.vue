@@ -19,6 +19,7 @@ export default{
         logout() {
             axios.get('/api/logout').then((res) => {
                 store.dispatch('removeToken')
+                store.dispatch('removeUser')
                 router.push({name:home})
                 console.log(res)
             })
