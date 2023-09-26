@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import adminHome from '../components/admin/index.vue';
 import adminlogin from '../components/admin/auth/login.vue';
+import userlist from '../components/admin/users/userlist.vue';
 
 const routes = [
     {
@@ -18,6 +19,15 @@ const routes = [
         component: adminlogin,
         meta: {
             requiresAuth: false,
+        },
+       
+    },
+    {
+        path: "/admin/users",
+        name: "userlist",
+        component: userlist,
+        meta: {
+            requiresAuth: true,
         },
        
     },

@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "laravel-permission-to-vuejs": "^3.0.1",
+        "laravel-vue-pagination": "^*",
         "vue-router": "^4.0.13",
         "vuex": "^4.0.2"
     }
