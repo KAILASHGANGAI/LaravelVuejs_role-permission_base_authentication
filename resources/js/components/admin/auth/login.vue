@@ -15,16 +15,20 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                
                             </div>
                             <form class="user" method="post" @submit.prevent="login">
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user"
-                                        id="exampleInputEmail" v-model="form.email" aria-describedby="emailHelp"
+                                        id="exampleInputEmail" v-model="form.email" autocomplete="current-password" aria-describedby="emailHelp"
                                         placeholder="Enter Email Address...">
+                <small v-if="error" class="text-danger">{{ error }}</small>
+                <small v-if="errors.email" class="text-danger">{{ errors.email[0] }}</small>
+
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-user"
-                                        id="exampleInputPassword" v-model="form.password" placeholder="Password">
+                                        id="exampleInputPassword" v-model="form.password" autocomplete="current-password" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox small">
@@ -69,7 +73,8 @@ export default {
                 email: '',
                 password: '',
             },
-            error: ''
+            error: '',
+            errors:{}
         }
     },
     methods: {
@@ -80,13 +85,16 @@ export default {
                 if (res.data.status == 1) {
                     adminstore.dispatch('setAdminUser', res.data.username)
                     adminstore.dispatch('setAdminToken', res.data.token)
+                    toast.fire({
+                    icon: "success",
+                    title: res.data.message,
+                });
                     window.location ='/admin'
                     //adminrouter.push('/admin/')
                 } else {
-
-                    this.error = res.data.status
+                    this.error = res.data.message   
                 }
-            })
+            }).catch((error) => (this.errors = error.response.data.errors))
     });
         }
     }

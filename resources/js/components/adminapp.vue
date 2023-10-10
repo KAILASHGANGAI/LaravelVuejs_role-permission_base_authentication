@@ -2,7 +2,7 @@
  <!-- Page Wrapper -->
  <div id="wrapper">
 <!-- Sidebar -->
-<sidebar  v-if="$route.path !== '/admin/login'"></sidebar>
+<sidebar   v-if="$route.path !== '/admin/login'"></sidebar>
 <!-- End of Sidebar -->
 
 <!-- Content Wrapper -->
@@ -11,7 +11,7 @@
     <!-- Main Content -->
     <div id="content">
         <!-- Topbar -->
-        <headervue  v-if="$route.path !== '/admin/login'"></headervue>
+        <headervue   v-if="$route.path !== '/admin/login'"></headervue>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->

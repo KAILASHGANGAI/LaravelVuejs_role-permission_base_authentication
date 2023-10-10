@@ -3,7 +3,7 @@ import Home from "../components/index.vue";
 import login from "../components/auth/login.vue";
 import logout from "../components/auth/logout.vue";
 import register from "../components/auth/register.vue";
-import post from "../components/post/post.vue";
+// import post from "../components/post/post.vue";
 
 const routes = [
     {
@@ -36,14 +36,14 @@ const routes = [
             requiresAuth: true,
         },
     },
-    {
-        path: "/post",
-        name: "post",
-        component: post,
-        meta: {
-            requiresAuth: true,
-        },
-    },
+    // {
+    //     path: "/post",
+    //     name: "post",
+    //     component: post,
+    //     meta: {
+    //         requiresAuth: true,
+    //     },
+    //},
 
 ];
 const router = createRouter({
