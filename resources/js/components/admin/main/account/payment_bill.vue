@@ -1,16 +1,16 @@
 <template>
   <section class="container-fluid">
     <div class="card w-75 border table p-5">
-      <table class="border table" id="myDiv" width="50%">
+      <table class="border table w-50 h-50" id="myDiv" width="50%">
         <tr>
 
           <div class="d-flex text-center justify-content-between">
             <img :src="'../../' + details.logo" class="img" alt="" />
 
             <div>
-              <h3 class="card-title text-center m-0 pb-0 pt-0">
+              <p class="card-title text-center m-0 pb-0 pt-0">
                 {{ details.school_name }}
-              </h3>
+              </p>
               <span class="address">{{ details.address }}, {{ details.phone }}</span> <br>
               <span class="address">Email: {{ details.email }}</span>
             </div>
@@ -23,10 +23,10 @@
           </div>
         </tr>
 
-        <tr class="container text-left">
+        <tr class=" text-left">
           <div class="">
-            <span>Name : {{ student.name }}</span>
-            <span>Roll No. : {{ student.id }}</span><br />
+            <span class="p-2">Name : {{ student.name }}</span>
+            <span class="p-2">Roll No. : {{ student.id }}</span><br />
 
             <span>faculty : {{ student.faculty.faculty_name }}, {{ student.semester.semester_years }}</span><br />
 
@@ -124,11 +124,12 @@ export default {
       console.log(this.totalpayed)
     });
   },
+  
   methods: {
     myfunction() {
-      // const print = printJS({
+      //     const print = printJS({
       //   printable: 'myDiv',
-      //   type: 'html',
+      // type: 'html',
       //   landscape: true,
       //   doubleSided: false,
       //   targetStyles: ['*'],
@@ -150,9 +151,9 @@ export default {
   width: 90px;
 }
 
-.address {
+/* .address {
   font-size: 12px;
-}
+} */
 
 @page {
   size: auto;
@@ -178,4 +179,9 @@ th {
   border-radius: 7px;
   padding: 4px;
 }
+.table{
+  font-size: 9px;
+  line-height: 20px;
+}
+
 </style>

@@ -30,11 +30,11 @@
                     <td>{{ data.created_at }}</td>
                     <td>
 
-                        <button class=" btn text-success" @click="Editbotes(data.id)">
-                            <i class="ri-edit-box-fill"></i>
+                        <button class=" btn btn-success" @click="Editbotes(data.id)">
+                            Edit
                         </button>
-                        <button class="btn text-danger" @click="deletebotes(data.id)">
-                            <i class="ri-delete-bin-2-fill"></i>
+                        <button class="btn btn-danger" @click="deletebotes(data.id)">
+                           Delete
                         </button>
 
                     </td>

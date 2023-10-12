@@ -21,14 +21,14 @@
           <td>{{ data.no_of_periods }}</td>
 
           <td>
-            <button class="text-success" @click="view(data.id)">
+            <button class="btn-success" @click="view(data.id)">
               <i class="eye"> View </i>
             </button>
-            <!-- <button class="text-success" @click="EditPeriod(data.id)">
-              <i class="ri-edit-box-fill"></i>
-            </button> -->
-            <button class="text-danger" @click="deletePeriod(data.id)">
-              <i class="ri-delete-bin-2-fill"></i>
+            <button class="btn-success" @click="EditPeriod(data.id)">
+             Edit
+            </button>
+            <button class="btn-danger" @click="deletePeriod(data.id)">
+             Delete
             </button>
           </td>
         </tr>

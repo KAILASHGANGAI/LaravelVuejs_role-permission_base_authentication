@@ -23,15 +23,15 @@
                         <td>{{ data.exam_type }}</td>
                         <td>{{ data.date }}</td>
                         <td>{{ data.time }}</td>
-                        <td class="float-end">
-                            <span class=" text-warning" @click="View(data.id)">
-                                <i class="ri-eye-fill"></i>
+                        <td class="">
+                            <span class=" btn btn-warning" @click="View(data.id)">
+                               View
                             </span>
-                            <span class="  text-success" @click="Edit(data.id)">
-                                <i class="ri-edit-box-fill"></i>
+                            <span class="  btn btn-success" @click="Edit(data.id)">
+                               Edit
                             </span>
-                            <span class=" text-danger" @click="Delete(data.id)">
-                                <i class="ri-delete-bin-2-fill"></i>
+                            <span class=" btn btn-danger" @click="Delete(data.id)">
+                                Delete
                             </span>
                         </td>
 

@@ -2,7 +2,8 @@
  <!-- Page Wrapper -->
  <div id="wrapper">
 <!-- Sidebar -->
-<sidebar   v-if="$route.path !== '/admin/login'"></sidebar>
+<sidebar    v-if="$route.path !== '/admin/login' && is('admin')" ></sidebar>
+<TeacherSidebar v-if="$route.path !== '/admin/login' && is('writer')"></TeacherSidebar>
 <!-- End of Sidebar -->
 
 <!-- Content Wrapper -->
@@ -39,6 +40,7 @@
 </a>
 </template>
 <script>
+import TeacherSidebar from './admin/parts/teacher_side.vue';
 import Footer from './admin/parts/footer.vue';
 import headervue from './admin/parts/header.vue';
 import Sidebar from './admin/parts/sidebar.vue';
@@ -48,7 +50,8 @@ export default{
     components:{
         'headervue': headervue,
         'sidebar': Sidebar,
-        'footervue':Footer
+        'footervue':Footer,
+        'TeacherSidebar':TeacherSidebar
     },
 data(){
     return{

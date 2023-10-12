@@ -27,14 +27,14 @@
                     <td>{{ data.created_at }}</td>
                     <td>
 
-                        <button class=" btn text-success" @click="EditAssignment(data.id)">
-                            <i class="ri-edit-box-fill"></i>
+                        <button class=" btn btn-success" @click="EditAssignment(data.id)">
+                            Edit
                         </button>
-                        <button class=" btn text-success" @click="ViewAssignment(data.id)">
+                        <button class=" btn btn-success" @click="ViewAssignment(data.id)">
                             view
                         </button>
-                        <button class="btn text-danger" @click="DeleteAssignment(data.id)">
-                            <i class="ri-delete-bin-2-fill"></i>
+                        <button class="btn btn-danger" @click="DeleteAssignment(data.id)">
+                            Delete
                         </button>
 
                     </td>

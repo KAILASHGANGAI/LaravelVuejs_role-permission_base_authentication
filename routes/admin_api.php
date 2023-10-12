@@ -40,12 +40,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-// Route::post('/admin/login', [usersController::class, 'Login']);
-
-// Route::post('/admin/register', [usersController::class, 'register']);
-
-
-
 Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function () {
     Route::get('/detailed-summery', [utilityController::class, 'summery']);
     Route::get('/general-details', [utilityController::class, 'owner']);

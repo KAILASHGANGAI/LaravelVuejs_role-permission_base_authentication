@@ -25,11 +25,11 @@
                     </td>
                     <td>{{ data.event_date }}</td>
                     <td>
-                        <span class="  text-success" @click="Edit(data.id)">
-                            <i class="ri-edit-box-fill"></i>
+                        <span class="  btn btn-success" @click="Edit(data.id)">
+                           Edit
                         </span>
-                        <span class=" text-danger" @click="Delete(data.id)">
-                            <i class="ri-delete-bin-2-fill"></i>
+                        <span class=" btn btn-danger" @click="Delete(data.id)">
+                            Delete
                         </span>
                     </td>
                 </tr>

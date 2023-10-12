@@ -21,15 +21,15 @@
                         <td>{{ data.section.section_name }}</td>
                         <td>{{ data.exam_type }}</td>
 
-                        <td class="float-end">
-                            <span class=" text-warning" @click="ShowMarks(data.id)">
-                                <i class="ri-eye-fill"></i>
+                        <td class="">
+                            <span class=" btn btn-warning" @click="ShowMarks(data.id)">
+                               View
                             </span>
-                            <span class="text-info" @click="addMarks(data.id)">
-                                <i class="ri-edit-box-fill"></i>
+                            <span class="btn btn-info" @click="addMarks(data.id)">
+                               Add +
                             </span>
-                            <span class="text-success" @click="markslaser(data.id)">
-                                <i class="ri-edit-box-fill"></i>
+                            <span class="btn btn-success" @click="markslaser(data.id)">
+                              laser
                             </span>
                         </td>
                     </tr>

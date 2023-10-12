@@ -19,12 +19,12 @@
                     <td>{{ data.description }}</td>
                     <td><img :src="'../'+data.image" alt="" width="50"></td>
                     <td>
-                        <span class="  text-success" @click="Edit(data.id)">
-                            <i class="ri-edit-box-fill"></i>
-                        </span>
-                        <span class=" text-danger" @click="Delete(data.id)">
-                            <i class="ri-delete-bin-2-fill"></i>
-                        </span>
+                        <button class=" btn btn-success" @click="Edit(data.id)">
+                            Edit
+                        </button>
+                        <button class=" btn btn-danger" @click="Delete(data.id)">
+                          Delete
+                        </button>
                     </td>
                 </tr>
 

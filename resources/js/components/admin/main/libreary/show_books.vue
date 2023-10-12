@@ -28,11 +28,11 @@
                         <td>{{ data.status }}</td>
                         <td>
 
-                            <button class=" btn text-success" @click="EditBook(data.id)">
-                                <i class="ri-edit-box-fill"></i>
+                            <button class=" btn btn-success" @click="EditBook(data.id)">
+                               Edit
                             </button>
-                            <button class="btn text-danger" @click="deleteBook(data.id)">
-                                <i class="ri-delete-bin-2-fill"></i>
+                            <button class="btn btn-danger" @click="deleteBook(data.id)">
+                                Delete
                             </button>
                         </td>
                     </tr>

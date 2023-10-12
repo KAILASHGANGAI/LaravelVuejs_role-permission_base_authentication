@@ -38,11 +38,11 @@
           <td>{{ staff.staff_category }}</td>
           <td>{{ staff.bloodgroup }}</td>
           <td class="float-end">
-            <button class="text-success" @click="EditStaff(staff.id)">
-              <i class="ri-edit-box-fill"></i>
+            <button class="btn-success" @click="EditStaff(staff.id)">
+           Edit
             </button>
-            <button class="text-danger" @click="deleteStaff(staff.id)">
-              <i class="ri-delete-bin-2-fill"></i>
+            <button class="btn-danger" @click="deleteStaff(staff.id)">
+              Delete
             </button>
           </td>
 
