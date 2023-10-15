@@ -2,7 +2,8 @@
  <!-- Page Wrapper -->
  <div id="wrapper">
 <!-- Sidebar -->
-<sidebar  v-if="$route.path !== '/admin/login'"></sidebar>
+<sidebar    v-if="$route.path !== '/admin/login' && is('admin')" ></sidebar>
+<TeacherSidebar v-if="$route.path !== '/admin/login' && is('writer')"></TeacherSidebar>
 <!-- End of Sidebar -->
 
 <!-- Content Wrapper -->
@@ -11,7 +12,7 @@
     <!-- Main Content -->
     <div id="content">
         <!-- Topbar -->
-        <headervue  v-if="$route.path !== '/admin/login'"></headervue>
+        <headervue   v-if="$route.path !== '/admin/login'"></headervue>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
@@ -39,6 +40,7 @@
 </a>
 </template>
 <script>
+import TeacherSidebar from './admin/parts/teacher_side.vue';
 import Footer from './admin/parts/footer.vue';
 import headervue from './admin/parts/header.vue';
 import Sidebar from './admin/parts/sidebar.vue';
@@ -48,7 +50,8 @@ export default{
     components:{
         'headervue': headervue,
         'sidebar': Sidebar,
-        'footervue':Footer
+        'footervue':Footer,
+        'TeacherSidebar':TeacherSidebar
     },
 data(){
     return{
@@ -59,6 +62,12 @@ created(){
     if (this.getAdminToken == 0) {
         router.push('/admin/login')
     }
-}
+},
+mounted() {
+    setTimeout(() => {
+      localStorage.removeItem('admintoken');
+      localStorage.removeItem('adminusername');
+    }, 20 * 60 * 1000); // 20 minutes in milliseconds
+  },
 }
 </script>

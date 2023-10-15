@@ -10,14 +10,18 @@
         "@vitejs/plugin-vue": "^4.0.0",
         "axios": "^1.2.0-alpha.1",
         "bootstrap": "^5.2.3",
+        "laravel-permission-to-vuejs": "^3.0.1",
         "laravel-vite-plugin": "^0.8.0",
         "sass": "^1.56.1",
         "vite": "^4.0.0",
         "vue": "^3.2.37"
     },
     "dependencies": {
-        "laravel-permission-to-vuejs": "^3.0.1",
+        "datatables.net": "^1.13.6",
+        "datatables.net-dt": "^1.13.6",
+        "datatables.net-vue3": "^2.1.3",
         "laravel-vue-pagination": "^*",
+        "sweetalert2": "^11.6.13",
         "vue-router": "^4.0.13",
         "vuex": "^4.0.2"
     }

@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
+
 class PermissionsSeeder extends Seeder
 {
     /**
@@ -26,7 +28,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'account-delete']);
         Permission::create(['name' => 'account-add']);
         Permission::create(['name' => 'account-view']);
-        
+
 
         // create roles and assign existing permissions
         $role1 = Role::create(['name' => 'writer']);
@@ -48,7 +50,7 @@ class PermissionsSeeder extends Seeder
         $role5->givePermissionTo('account-view');
         $role5->givePermissionTo('account-add');
 
-        
+
         $role3 = Role::create(['name' => 'Super-Admin']);
         // gets all permissions via Gate::before rule; see AuthServiceProvider
         $role4 = Role::create(['name' => 'visitor']);
@@ -59,24 +61,29 @@ class PermissionsSeeder extends Seeder
         $user = \App\Models\User::factory()->create([
             'name' => 'teacher-writer',
             'email' => 'teacher@teacher.com',
+            'password' => Hash::make('password')
         ]);
         $user->assignRole($role1);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin manager',
             'email' => 'manager@manager.com',
+            'password' => Hash::make('password')
+
         ]);
         $user->assignRole($role2);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'SuperAdmin',
             'email' => 'superadmin@superadmin.com',
+            'password' => Hash::make('password')
         ]);
         $user->assignRole($role3);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'accountent',
             'email' => 'accountent@accountent.com',
+            'password' => Hash::make('password')
         ]);
         $user->assignRole($role5);
     }
