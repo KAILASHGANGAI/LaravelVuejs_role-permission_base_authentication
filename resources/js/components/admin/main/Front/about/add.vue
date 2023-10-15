@@ -42,7 +42,9 @@
 </template>
     
 <script>
-import axios from 'axios';
+import axios from 'axios';    
+import store from '../../../../../adminstore';
+
 import router from '../../../../../adminrouter';
 export default {
     data() {
@@ -75,7 +77,7 @@ export default {
             axios.post('/api/add-about', this.form, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 router.push('/admin/about')

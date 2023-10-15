@@ -69,6 +69,8 @@
   
 <script>
 import axios from 'axios';
+import store from '../../../../adminstore';
+
 export default {
 
   data() {
@@ -107,7 +109,7 @@ export default {
     axios.get("/api/periods/create", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " +store.getters.getAdminToken,
       },
     }).then((res) => {
 
@@ -117,7 +119,7 @@ export default {
     axios.get("/api/getclass/details" + this.id, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " +store.getters.getAdminToken,
       },
     }).then((res) => {
       console.log(res);
@@ -140,7 +142,7 @@ export default {
       axios.post('/api/get-students-subjects', this.form, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.subjects = res.data.subjects,
@@ -159,7 +161,7 @@ export default {
       axios.post('/api/store-marks', this.marks, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         toast.fire({

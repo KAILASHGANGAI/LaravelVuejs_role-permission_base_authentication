@@ -45,6 +45,7 @@
 
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
 
 export default {
     props: ['id'],
@@ -66,7 +67,7 @@ export default {
         axios.get('/api/create-attendance/' + this.id, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " + store.getters.getAdminToken,
             },
         }).then((res) => {
             this.detail = res.data.created
@@ -104,7 +105,7 @@ export default {
             axios.post('/api/attendance', this.form, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + store.getters.getAdminToken,
                 },
             }).then((res) => {
 

@@ -43,6 +43,7 @@
 <script>
 import axios from 'axios';
 import router from '../../../../../adminrouter';
+import store from '../../../../../adminstore';
 
 export default {
     data() {
@@ -65,7 +66,7 @@ export default {
         axios.get('/api/edit-slider/' + this.id, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
             this.form = res.data
@@ -93,7 +94,7 @@ export default {
             axios.patch('/api/slider/' + this.id, this.form, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 router.push('/admin/slider')

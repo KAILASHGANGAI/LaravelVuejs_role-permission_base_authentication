@@ -136,6 +136,8 @@
 </template>
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
+
 export default {
   data() {
     return {
@@ -170,7 +172,7 @@ export default {
     axios.get("/api/students/create", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " +store.getters.getAdminToken,
       },
     }).then((res) => {
       console.log(res);
@@ -220,7 +222,7 @@ export default {
       axios.post("/api/students", student, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       })
         .then((Response) => {

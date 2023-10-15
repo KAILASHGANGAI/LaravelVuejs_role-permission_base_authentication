@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import store from '../../../../adminstore';
+
 export default {
     props: ['id'],
     data() {
@@ -66,7 +68,7 @@ export default {
         axios.get('/api/attendance/' + this.id, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " + store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res)

@@ -35,6 +35,7 @@
 <script>
 import axios from 'axios';
 import router from '../../../../../adminrouter';
+import store from '../../../../../adminstore';
 
 export default {
     data() {
@@ -49,7 +50,7 @@ export default {
         axios.get('/api/news', {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res)
@@ -71,7 +72,7 @@ export default {
             axios.delete('/api/news/' + index, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 toast.fire({

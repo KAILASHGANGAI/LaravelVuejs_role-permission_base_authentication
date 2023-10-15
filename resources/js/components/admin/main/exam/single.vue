@@ -85,6 +85,8 @@
 </template>
 
 <script>
+    import store from '../../../../adminstore';
+
 export default {
 
     data() {
@@ -110,7 +112,7 @@ export default {
         axios.get('/api/exams/' + this.id, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " + store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res)
@@ -130,7 +132,7 @@ export default {
             // axios.post("/api/questions", this.form,  {
             // headers: {
             //     "Content-Type": "application/json",
-            //     Authorization: "Bearer " + localStorage.getItem("token"),
+            //     Authorization: "Bearer " + store.getters.getAdminToken,
             // },
             //   }).then((res) => {
             //     console.log(res)

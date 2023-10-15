@@ -44,6 +44,8 @@
 </template>
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
+
 export default {
   data() {
     return {
@@ -66,7 +68,7 @@ export default {
     axios.get("/api/guardian/" + this.id + "/edit", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: "Bearer " +store.getters.getAdminToken,
       },
     }).then((res) => {
       let data = res.data;
@@ -116,7 +118,7 @@ export default {
       axios.patch("/api/guardian/" + this.id, Parents, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((Response) => {
         router.push("/admin/students");

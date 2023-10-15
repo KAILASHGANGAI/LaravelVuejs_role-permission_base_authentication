@@ -62,6 +62,8 @@
 </template>
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
+
 
 export default {
 
@@ -91,7 +93,7 @@ export default {
         axios.get("/api/periods/create", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res);
@@ -122,7 +124,7 @@ export default {
             axios.post('/api/subjects', this.form, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 toast.fire({

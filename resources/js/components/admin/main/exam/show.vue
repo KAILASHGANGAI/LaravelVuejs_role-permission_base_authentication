@@ -46,6 +46,7 @@
 
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
 
 export default {
     data() {
@@ -60,7 +61,7 @@ export default {
         axios.get('/api/exams', {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " + store.getters.getAdminToken,
             },
         }).then((res) => {
             this.datas = res.data
@@ -84,7 +85,7 @@ export default {
             axios.delete('/api/exams/' + index, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + store.getters.getAdminToken,
                 },
             }).then((res) => {
                 console.log(res.status);

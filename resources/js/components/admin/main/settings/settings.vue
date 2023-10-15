@@ -200,6 +200,7 @@
 <script>
 import axios from 'axios';
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
 
 export default {
   data() {
@@ -233,7 +234,7 @@ export default {
       axios.get('/api/classes', {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.cdata = res.data
@@ -250,7 +251,7 @@ export default {
       axios.get('/api/sections', {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.sdata = res.data
@@ -268,7 +269,7 @@ export default {
       axios.get('/api/faculties', {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.fdata = res.data
@@ -278,7 +279,7 @@ export default {
       axios.get('/api/bloods', {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.bdata = res.data
@@ -299,7 +300,7 @@ export default {
       axios.post('/api/classes', this.form, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.getclass()
@@ -319,7 +320,7 @@ export default {
       axios.post('/api/sections', this.form, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         toast.fire({
@@ -338,7 +339,7 @@ export default {
       axios.post('/api/faculties', this.form, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.getfaculty()
@@ -357,7 +358,7 @@ export default {
       axios.post('/api/bloods', this.form, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.getbloods()
@@ -374,7 +375,7 @@ export default {
       axios.delete('/api/classes/' + index, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.cdata = this.cdata.filter(cdata => {
@@ -387,7 +388,7 @@ export default {
       axios.delete('/api/sections/' + index, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.sdata = this.sdata.filter(sdata => {
@@ -400,7 +401,7 @@ export default {
       axios.delete('/api/faculties/' + index, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.fdata = this.fdata.filter(fdata => {
@@ -413,7 +414,7 @@ export default {
       axios.delete('/api/bloods/' + index, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((res) => {
         this.bdata = this.bdata.filter(bdata => {

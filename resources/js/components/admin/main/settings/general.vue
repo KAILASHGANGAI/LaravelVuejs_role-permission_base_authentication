@@ -48,6 +48,7 @@
 </template>
 <script>
 import axios from 'axios';
+import store from '../../../../adminstore';
 
 export default {
     data() {
@@ -70,7 +71,7 @@ export default {
         axios.get('/api/general-details', {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
             this.form = res.data
@@ -99,7 +100,7 @@ export default {
             axios.put('/api/general-details/' + this.form.id, this.form, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 console.log(res)

@@ -47,6 +47,8 @@
 
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
+
 export default {
     data() {
         return {
@@ -60,7 +62,7 @@ export default {
         axios.get("/api/notes", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
             this.datas = res.data
@@ -81,7 +83,7 @@ export default {
             axios.delete("/api/notes/" + index, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
 

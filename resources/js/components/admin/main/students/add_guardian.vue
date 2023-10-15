@@ -45,6 +45,8 @@
 </template>
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
+
 export default {
   data() {
     return {
@@ -90,7 +92,7 @@ export default {
       axios.post("http://127.0.0.1:8000/api/guardian", Parents, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " +store.getters.getAdminToken,
         },
       }).then((Response) => {
         router.push("/admin/students");

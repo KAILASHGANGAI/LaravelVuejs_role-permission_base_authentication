@@ -57,6 +57,8 @@
 
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
+
 export default {
     data() {
         return {
@@ -79,7 +81,7 @@ export default {
         axios.get("/api/libreary/create", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " + store.getters.getAdminToken,
             },
         }).then((res) => {
             // console.log(res);
@@ -88,7 +90,7 @@ export default {
         axios.get("/api/libreary/" + this.id + "/edit", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " + store.getters.getAdminToken,
             },
         }).then((res) => {
             (this.name = res.data.book_name),
@@ -118,7 +120,7 @@ export default {
             axios.patch("/api/libreary/" + this.id, libreary, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + store.getters.getAdminToken,
                 },
             }).then((res) => {
                 router.push("/admin/show-books");

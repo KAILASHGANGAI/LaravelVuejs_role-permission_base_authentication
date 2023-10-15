@@ -51,6 +51,7 @@
 <script>
 import axios from "axios";
 // import PrintJS from 'print-js';
+import store from '../../../../adminstore';
 
 export default {
     data() {
@@ -169,7 +170,7 @@ export default {
             axios.get("/api/get-marks-lasers/" + this.id, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + store.getters.getAdminToken,
                 },
             }).then((res) => {
                 this.datas = res.data.data;

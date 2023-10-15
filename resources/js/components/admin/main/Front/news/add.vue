@@ -38,6 +38,7 @@
 <script>
 import axios from 'axios';
 import router from '../../../../../adminrouter';
+import store from '../../../../../adminstore';
 
 export default {
     data() {
@@ -70,7 +71,7 @@ export default {
             axios.post('/api/add-news', this.form, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 router.push('/admin/news')

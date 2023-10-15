@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import store from '../../../../adminstore';
+
 export default {
     data() {
         return {
@@ -50,7 +52,7 @@ export default {
         axios.get("/api/periods/" + this.id, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res.data.subjects);

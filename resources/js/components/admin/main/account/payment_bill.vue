@@ -79,6 +79,7 @@
 <script>
 // import PrintJS from 'print-js';
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
 
 export default {
   data() {
@@ -94,7 +95,7 @@ export default {
     axios.get("/api/general-details/", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem('token')
+        Authorization: "Bearer " + store.getters.getAdminToken
       }
     }).then((res) => {
       this.details = res.data
@@ -110,7 +111,7 @@ export default {
     axios.get("/api/payment/bill/" + this.id, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem('token')
+        Authorization: "Bearer " + store.getters.getAdminToken
       }
     }).then((res) => {
       console.log(res.data.student.payments);

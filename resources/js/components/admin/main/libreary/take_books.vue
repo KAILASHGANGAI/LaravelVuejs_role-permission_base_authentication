@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import store from '../../../../adminstore';
 export default {
     data() {
         return {
@@ -104,7 +105,7 @@ export default {
         axios.get("/api/periods/create", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res);
@@ -129,7 +130,7 @@ export default {
             axios.post('/api/show-student-detail', std, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 console.log(res)
@@ -144,7 +145,7 @@ export default {
             axios.post('/api/show-books-list', book, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 this.books = res.data
@@ -160,7 +161,7 @@ export default {
             axios.post('/api/save-books-taken', taken, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 console.log(res)

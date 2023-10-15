@@ -23,7 +23,7 @@
                 </option>
             </select>
         </div>
-        <router-link to="/add-subjects" class="btn btn-success p-0"> Add Subject</router-link>
+        <router-link to="/admin/add-subjects" class="btn btn-success p-0"> Add Subject</router-link>
 
     </div>
     <hr>
@@ -66,6 +66,8 @@
 </template>
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
+
 export default {
     data() {
         return {
@@ -89,7 +91,7 @@ export default {
         axios.get("/api/periods/create", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res);
@@ -116,7 +118,7 @@ export default {
             }, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 console.log(res)
@@ -136,7 +138,7 @@ export default {
             axios.get('/api/subjects/faculty=/' + item, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 this.datas = res.data
@@ -153,7 +155,7 @@ export default {
             axios.get('/api/subjects/delete/' + index, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
                 console.log(res)

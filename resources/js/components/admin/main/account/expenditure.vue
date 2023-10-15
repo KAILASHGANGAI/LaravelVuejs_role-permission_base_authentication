@@ -56,6 +56,7 @@
 
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
 export default {
 
     data() {
@@ -78,7 +79,7 @@ export default {
             axios.get('/api/expenditure', {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem('token')
+                    Authorization: "Bearer " + store.getters.getAdminToken
                 }
             })
                 .then(({
@@ -98,7 +99,7 @@ export default {
             router.push("/admin/edit-expenditure/" + id, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem('token')
+                    Authorization: "Bearer " + store.getters.getAdminToken
                 }
             })
         },
@@ -107,7 +108,7 @@ export default {
             axios.delete('/api/expenditure/' + id, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem('token')
+                    Authorization: "Bearer " + store.getters.getAdminToken
                 }
             }).then((res) => {
                 this.expenses = this.expenses.filter(expense => {

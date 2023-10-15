@@ -113,6 +113,7 @@
 </template>
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
 
 export default {
     data() {
@@ -163,7 +164,7 @@ export default {
             axios.get('/api/payment/' + this.student_roll, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem('token')
+                    Authorization: "Bearer " + store.getters.getAdminToken
                 }
             }).then((Res) => {
                 this.data = Res.data
@@ -183,7 +184,7 @@ export default {
             axios.post('/api/payment', payment, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem('token')
+                    Authorization: "Bearer " + store.getters.getAdminToken
                 }
             }).then((res) => {
                 router.push('/admin/payment-bill-print/' + this.student_roll)

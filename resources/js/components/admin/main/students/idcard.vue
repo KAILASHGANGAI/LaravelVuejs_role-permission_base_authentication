@@ -76,6 +76,8 @@
 <script>
 import axios from "axios";
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
+
 export default {
     data() {
         return {
@@ -98,7 +100,7 @@ export default {
         axios.get("/api/periods/create", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res);
@@ -120,7 +122,7 @@ export default {
                 .post("/api/getstudents-details", this.form, {
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: "Bearer " + localStorage.getItem("token"),
+                        Authorization: "Bearer " +store.getters.getAdminToken,
                     },
                 })
                 .then((res) => {

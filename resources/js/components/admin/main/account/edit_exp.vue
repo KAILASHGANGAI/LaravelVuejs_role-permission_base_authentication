@@ -63,7 +63,9 @@
 </template>
 
 <script>
-import router from '../../../../adminrouter';
+import router from '../../../../adminrouter';    
+import store from '../../../../adminstore';
+
 export default {
 
     data() {
@@ -82,7 +84,7 @@ export default {
         axios.get('/api/expenditure/' + this.id, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem('token')
+                Authorization: "Bearer " + store.getters.getAdminToken
             }
         })
             .then(({
@@ -105,7 +107,7 @@ export default {
             axios.patch('/api/expenditure/' + this.id, this.form, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem('token')
+                    Authorization: "Bearer " + store.getters.getAdminToken
                 }
             })
                 .then((res) => {

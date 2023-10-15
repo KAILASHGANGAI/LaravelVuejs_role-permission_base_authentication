@@ -30,6 +30,11 @@ class StudentsController extends Controller
 
         try {
             $data = students::with(['faculty', 'semester', 'section', 'blood:id,blood_group'])->get();
+            $data->each(function ($student) {
+                $student->image = '<img src="/' . $student->image . '" alt="" height="50">';
+                $student->edit = '<span class="btn btn-success" @click="' . "EditStudent(" . $student->id . ')">Edit</span>';
+                $student->delete = '<span class="btn btn-danger" @click="deleteStudent(' . $student->id . ')">Delete</i></span>';
+            });
             return response()->json(
                 ['students' => $data]
             );

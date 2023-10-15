@@ -61,6 +61,8 @@
 
 <script>
 import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
+
 export default {
     data() {
 
@@ -88,7 +90,7 @@ export default {
         axios.get("/api/student/facylty/class/section", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " + store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res.data.sem);
@@ -103,7 +105,7 @@ export default {
             axios.post('/api/exams', this.form, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + store.getters.getAdminToken,
                 },
             }).then((res) => {
                 console.log(res.status)
