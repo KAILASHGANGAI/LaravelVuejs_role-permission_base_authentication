@@ -67,7 +67,7 @@ mounted() {
     setTimeout(() => {
       localStorage.removeItem('admintoken');
       localStorage.removeItem('adminusername');
-    }, 20 * 60 * 1000); // 20 minutes in milliseconds
+    }, 150 * 60 * 1000); // 20 minutes in milliseconds
   },
 }
 </script>

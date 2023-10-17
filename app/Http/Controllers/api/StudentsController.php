@@ -30,11 +30,7 @@ class StudentsController extends Controller
 
         try {
             $data = students::with(['faculty', 'semester', 'section', 'blood:id,blood_group'])->get();
-            $data->each(function ($student) {
-                $student->image = '<img src="/' . $student->image . '" alt="" height="50">';
-                $student->edit = '<span class="btn btn-success" @click="' . "EditStudent(" . $student->id . ')">Edit</span>';
-                $student->delete = '<span class="btn btn-danger" @click="deleteStudent(' . $student->id . ')">Delete</i></span>';
-            });
+
             return response()->json(
                 ['students' => $data]
             );
@@ -212,13 +208,18 @@ class StudentsController extends Controller
     {
         $data = students::find($id);
         $guardian = guardian::where('students_id', $data->id)->first();
+
+
         if (!file_exists($data->image)) {
             $data->delete();
             $guardian->delete();
             return response()->json(['status' => 'record deleted successfully']);
         } else {
-            unlink($data->image);
-            unlink($data->guardian->image);
+            if (file_exists($data->image)) {
+                unlink($data->image);
+                unlink($data->guardian->image);
+            }
+
             $data->delete();
             $guardian->delete();
             return response()->json(['status' => 'record deleted successfully']);

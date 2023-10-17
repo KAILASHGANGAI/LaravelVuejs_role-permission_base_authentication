@@ -2,7 +2,13 @@
   <div class="card-body table-responsive">
     <h5 class="card-title">All Staffs Details</h5>
 
-    <table class="table table-border table-responsive">
+    <DataTable
+                 :data="staffs"
+                :columns="columns"
+                           
+                           
+                        >
+   
       <thead>
         <tr>
           <th scope="col">S.N</th>
@@ -11,45 +17,18 @@
           <th scope="col">Address</th>
           <th scope="col">Phone</th>
           <th scope="col">Email</th>
-          <th scope="col">Password</th>
           <th scope="col">Experience</th>
           <th scope="col">Date_of_Birth</th>
           <th scope="col">Salary</th>
           <th scope="col">Gender</th>
           <th scope="col">Category</th>
           <th scope="col">Blood_Group</th>
-          <th scope="col">Action</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
 
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="(staff, index) in staffs" :key="index">
-          <td>{{+ + index }}</td>
-          <td><img :src="'/' + staff.images" alt="" height="50"></td>
-          <td>{{ staff.name }}</td>
-          <td>{{ staff.address }}</td>
-          <td>{{ staff.contact }}</td>
-          <td>{{ staff.email }}</td>
-          <td>{{ staff.password }}</td>
-          <td>{{ staff.experience }}</td>
-          <td>{{ staff.dob }}</td>
-          <td>{{ staff.salary }}</td>
-          <td>{{ staff.gender }}</td>
-          <td>{{ staff.staff_category }}</td>
-          <td>{{ staff.bloodgroup }}</td>
-          <td class="float-end">
-            <button class="btn-success" @click="EditStaff(staff.id)">
-           Edit
-            </button>
-            <button class="btn-danger" @click="deleteStaff(staff.id)">
-              Delete
-            </button>
-          </td>
-
-        </tr>
-
-      </tbody>
-    </table>
+     </DataTable>
 
 
   </div>
@@ -62,6 +41,39 @@ export default {
   data() {
     return {
       staffs: [],
+      columns: [
+                    { data: 'id' },
+                    {
+                      data:'images',
+                      render: function (data) {
+                        return  `<img src="${'/'+data}" alt="" height="50">`;
+                        }
+                    },
+                    {data:'name'},
+                    {data:'address'},
+                    {data:'contact'},
+                    {data:'email'},
+                    {data:'experience'},
+                    {data:'dob'},
+                    {data:'salary'},
+                    {data:'gender'},
+                    {data:'staff_category'},
+                    {data:'bloodgroup'},
+                    
+                    {
+                        data: 'id',
+                        render: function (data) {
+                        return  `<button data-id="${data}" class="btn btn-info" id="edit">Edit</button>`;
+                        }
+                    },
+                    {
+                        data: 'id',
+                        render: function (data) {
+                        return `<button data-id="${data}" class="btn btn-danger" id="delete">Delete</button>`;
+                        }
+                    },
+                    
+    ]
     };
   },
   created() {
@@ -85,11 +97,24 @@ export default {
         title: error.response.data.message
       })
     })
+    $(document).on('click',this.handel);
   },
+  // mounted(){
+  //           $(document).on('click','#edit',function(){
+  //               let id = $(this).data('id');
+  //               router.push("/admin/staffs/edit/" + id);
+  //           })
+            
+  //       },
   methods: {
-    EditStaff(index) {
-      router.push("/admin/staffs/edit/" + index);
+    handel(event){
+      if (event.target && event.target.id === 'delete') {
+        let id = event.target.getAttribute('data-id');
+        // console.log(event.target.getAttribute('data-id'))
+        this.deleteStaff(id); // Call the defined method within Vue instance
+      }
     },
+  
     deleteStaff(index) {
       axios.delete("/api/staffs/" + index, {
         headers: {
@@ -100,7 +125,7 @@ export default {
         this.staffs = this.staffs.filter(staffs => {
           return staffs.id != index
         })
-        router.push("/admin/Staffs");
+        router.push("/admin/staff-details");
         console.log(res);
       });
     },
