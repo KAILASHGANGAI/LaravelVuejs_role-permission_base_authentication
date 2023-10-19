@@ -2,9 +2,9 @@
     <h3>Marks Lasere of students</h3>
 
 
-    <button @click="printMe()" type="submit">Print</button>
+    <button v-print="'#printMe'">Print local range</button>
 
-    <div class="container" id="myDiv">
+    <div class="container" id="printMe">
         <div class="text-center">
             <h5 class="text-center">{{ exam.exam_type }}</h5>
             <span>Faculty: {{ exam.faculty.faculty_name }}</span> <br>
@@ -33,7 +33,7 @@
                     <span v-if="obtain.marks >= obtain.subject.passmarks">
                         {{ obtain.marks }} + {{ obtain.practical }}
                     </span>
-                    <span class="text-danger" v-else> {{ obtain.marks }} + {{ obtain.practical }}</span>
+                    <span  v-else> {{ obtain.marks }} + {{ obtain.practical }}</span>
                 </td>
                 <td>{{ totalMarks(--index) }}</td>
                 <td>{{ getGpa(index) }}</td>
@@ -194,7 +194,7 @@ export default {
 tr,
 th,
 td {
-    border: 1px solid black;
+   
     padding: 2px;
 }
 </style>

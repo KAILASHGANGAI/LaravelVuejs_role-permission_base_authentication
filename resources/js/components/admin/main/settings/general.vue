@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="">logo</label>
                         <input type="file" name="logo" id="logo" @change="changeImg" />
-                        <img :src="img" alt="" srcset="" height="100" />
+                        <img :src="'/'+img" alt="" srcset="" height="100" />
                     </div>
                 </div>
                 <input type="submit" value="Save" class="btn btn-success mt-4" />

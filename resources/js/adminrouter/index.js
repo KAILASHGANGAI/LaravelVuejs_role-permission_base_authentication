@@ -14,6 +14,7 @@ import studentId from '../components/admin/main/students/idcard.vue'
 import add_staffs from '../components/admin/main/staffs/add_staffs.vue'
 import show_staffs from '../components/admin/main/staffs/show_staffs.vue'
 import edit_staff from '../components/admin/main/staffs/edit_staff.vue'
+import staff_category from '../components/admin/main/staffs/staff_category.vue'
 
 import add_periods from '../components/admin/main/periods/add_periods.vue'
 import show_periods from '../components/admin/main/periods/show_periods.vue'
@@ -139,6 +140,7 @@ const routes = [
     { path: '/admin/guardian/edit/:id', component: edit_guardian, props: true },
 
     { path: '/admin/add_guardian', component: add_guardian },
+    { path: '/admin/staff-category', component: staff_category },
     { path: '/admin/staff-details', component: show_staffs },
     { path: '/admin/add-staff-members', component: add_staffs },
     { path: '/admin/staffs/edit/:id', component: edit_staff, props: true },

@@ -31,7 +31,7 @@ class PermissionsSeeder extends Seeder
 
 
         // create roles and assign existing permissions
-        $role1 = Role::create(['name' => 'writer']);
+        $role1 = Role::create(['name' => 'teacher']);
         $role1->givePermissionTo('edit');
         $role1->givePermissionTo('delete');
         $role1->givePermissionTo('add');
@@ -53,21 +53,21 @@ class PermissionsSeeder extends Seeder
 
         $role3 = Role::create(['name' => 'Super-Admin']);
         // gets all permissions via Gate::before rule; see AuthServiceProvider
-        $role4 = Role::create(['name' => 'visitor']);
+        $role4 = Role::create(['name' => 'student']);
         $role4->givePermissionTo('view');
 
 
         // create demo users
         $user = \App\Models\User::factory()->create([
-            'name' => 'teacher-writer',
-            'email' => 'teacher@teacher.com',
+            'name' => 'teacher-teacher',
+            'email' => 'teacher@gmail.com',
             'password' => Hash::make('password')
         ]);
         $user->assignRole($role1);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin manager',
-            'email' => 'manager@manager.com',
+            'email' => 'manager@gmail.com',
             'password' => Hash::make('password')
 
         ]);
@@ -75,14 +75,21 @@ class PermissionsSeeder extends Seeder
 
         $user = \App\Models\User::factory()->create([
             'name' => 'SuperAdmin',
-            'email' => 'superadmin@superadmin.com',
+            'email' => 'superadmin@gmail.com',
             'password' => Hash::make('password')
         ]);
         $user->assignRole($role3);
 
         $user = \App\Models\User::factory()->create([
+            'name' => 'student',
+            'email' => 'student@gmail.com',
+            'password' => Hash::make('password')
+        ]);
+        $user->assignRole($role4);
+
+        $user = \App\Models\User::factory()->create([
             'name' => 'accountent',
-            'email' => 'accountent@accountent.com',
+            'email' => 'accountent@gmail.com',
             'password' => Hash::make('password')
         ]);
         $user->assignRole($role5);

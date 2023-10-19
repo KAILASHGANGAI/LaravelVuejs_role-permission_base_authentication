@@ -53,6 +53,7 @@
     <div id="Staff" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
+            <router-link class="collapse-item" to="/admin/staff-category">Staff Category LIst</router-link>           
             <router-link class="collapse-item" to="/admin/add-staff-members">Add Staff</router-link>           
         </div>
     </div>

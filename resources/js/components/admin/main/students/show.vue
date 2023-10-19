@@ -52,7 +52,12 @@
                 
                 columns: [
                     { data: 'id' },
-                    { data: 'image' },
+                     {
+                      data:'image',
+                      render: function (data) {
+                        return  `<img src="${'/'+data}" alt="" height="50">`;
+                        }
+                    },
                     { data: 'name' },
                     { data: 'address' },
                     { data: 'phone_no' },
@@ -62,18 +67,17 @@
                     { data: 'section.section_name' },
                     { data: 'nationality' },
                     { data: 'tuitionfee' },
-                    // { data: 'edit' },
-                    // { data: 'delete' },
+                   
                     {
                         data: 'id',
                         render: function (data) {
-                        return '<button class="btn btn-success">Edit</button>';
+                        return  `<button data-id="${data}" class="btn btn-info" id="edit">Edit</button>`;
                         }
                     },
                     {
                         data: 'id',
                         render: function (data) {
-                        return ' <button class="btn btn-success">Edit</button>';
+                        return `<button data-id="${data}" class="btn btn-danger" id="delete">Delete</button>`;
                         }
                     },
                    
@@ -84,10 +88,9 @@
             };
             
         },
+        
         created() {
-            // if (!User.loggedIn()) {
-            //   router.push("/admin/login")
-            // }
+           
             axios.get("/api/students", {
                 headers: {
                     "Content-Type": "application/json",
@@ -106,11 +109,7 @@
             })
         },
         methods: {
-            
-
-             EditStudent(index) {
-                router.push("/admin/students/edit/" + index);
-            },
+                   
              deleteStudent(index) {
                 axios.delete("/api/students/" + index, {
                     headers: {
@@ -125,6 +124,16 @@
                     console.log(res);
                 });
             },
+        },
+        mounted(){
+            $(document).on('click','#edit',function(){
+                let id = $(this).data('id');
+                router.push("/admin/students/edit/" + id);
+            })
+            // $(document).on('click','#delete',function(){
+            //     let id = $(this).data('id');
+            //     this.deleteStudent(id);
+            // })
         },
     };
 </script>

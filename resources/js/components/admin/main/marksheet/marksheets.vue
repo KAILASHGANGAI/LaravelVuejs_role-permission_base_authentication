@@ -4,9 +4,10 @@
     <span>Faculty: {{ exam.faculty.faculty_name }}</span> <br>
     <span>semester: {{ exam.semester.semester_years }}</span>
     <button @click="printSelectedDiv">Print</button> -->
+    <button class="btn btn-info" v-print="'#printMe'">Print</button>
 
     <div class="container-fluid">
-        <div class="row" id="myDiv">
+        <div class="row"  id="printMe">
             
             <div class=" col-6 bg-white fw-bold " v-if="datas.length" v-for="(data, index) in datas" :key="index">
                 <div class="m-2 py-2" style="border:2px solid black">

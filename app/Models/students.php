@@ -22,7 +22,8 @@ class students extends Model
         'gender',
         'nationality',
         'tuitionfee',
-        'image'
+        'image',
+        'user_id'
     ];
     public function guardian()
     {

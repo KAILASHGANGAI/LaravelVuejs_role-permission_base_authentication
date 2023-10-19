@@ -28,6 +28,7 @@ use App\Http\Controllers\api\QuestionController;
 use App\Http\Controllers\api\sectionsController;
 use App\Http\Controllers\api\SemesterController;
 use App\Http\Controllers\api\SlidersController;
+use App\Http\Controllers\api\StaffCategoryController;
 use App\Http\Controllers\api\StaffController;
 use App\Http\Controllers\api\StudentsController;
 use App\Http\Controllers\api\SubjectsController;
@@ -49,6 +50,9 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
     Route::resource('/students', StudentsController::class);
     Route::resource('/guardian', guardianController::class);
     Route::resource('/staffs', StaffController::class);
+    Route::get('/staff-category/index', [StaffCategoryController::class, 'index']);
+    Route::delete('/staff-category/{id}/delete', [StaffCategoryController::class, 'delete']);
+    Route::post('/staff-category/store', [StaffCategoryController::class, 'store']);
     Route::resource('/periods', PeriodController::class);
 
     Route::resource('/create-attendance', TakeatdController::class);
