@@ -1,7 +1,7 @@
 <template>
   <section class="container-fluid">
     <div class="card w-75 border table p-5">
-      <table class="border table w-50 h-50" id="myDiv" width="50%">
+      <table class="border table w-50 h-50" id="printMe" width="50%">
         <tr>
 
           <div class="d-flex text-center justify-content-between">
@@ -71,9 +71,8 @@
 
     </div>
 
-    <button type="button" id="print" class="btn btn-primary float-right mr-5" @click="myfunction()">
-      print now
-    </button>
+    <button class="btn btn-info" v-print="'#printMe'">Print</button>
+
   </section>
 </template>
 <script>

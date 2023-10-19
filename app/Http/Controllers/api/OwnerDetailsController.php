@@ -16,7 +16,7 @@ class OwnerDetailsController extends Controller
     }
     public function store(Request $req)
     {
-        
+
         $req->validate([
             "school_name" => "required",
             "email" => "required|email|unique:owner_details",
@@ -68,7 +68,9 @@ class OwnerDetailsController extends Controller
             $img = Image::make($req->logo)->resize(240, 240);
             $upload_path = 'images/general/';
             $image_url = $upload_path . $name;
-            unlink($update->logo);
+            if (file_exists($req->logo)) {
+                unlink($update->logo);
+            }
             if ($img->save($image_url)) {
                 $update->logo = $image_url;
             }

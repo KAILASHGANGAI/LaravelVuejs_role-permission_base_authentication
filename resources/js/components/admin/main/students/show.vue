@@ -53,7 +53,7 @@
                 columns: [
                     { data: 'id' },
                      {
-                      data:'images',
+                      data:'image',
                       render: function (data) {
                         return  `<img src="${'/'+data}" alt="" height="50">`;
                         }

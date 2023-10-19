@@ -11,7 +11,7 @@
               <div class="col-md-12">
                 <input type="text" class="form-control" id="inputName5" placeholder="Student Name"
                   v-model="studentname" />
-                <small v-if="errors.studentname" class="text-danger">{{ errors.studentname[0] }}</small>
+                <small v-if="errors.studentname" class="text-danger">{{ errors.name[0] }}</small>
               </div>
               <div class="col-md-6">
                 <input type="email" class="form-control" id="inputEmail5" placeholder="Email" v-model="email" />

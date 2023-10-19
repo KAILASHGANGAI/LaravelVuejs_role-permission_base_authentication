@@ -79,39 +79,59 @@ class StudentsController extends Controller
             'gender' => 'required',
             'tuitionfee' => 'required'
         ]);
-        $new = new students();
-        $new->name = $request->studentname;
-        $new->email = $request->email;
-        $new->password = Hash::make(123123);
-
-        $new->phone_no = $request->phone;
-        $new->address = $request->address;
-        $new->DOB = $request->studentdob;
-        $new->nationality = $request->nationality;
-        $new->tuitionfee = $request->tuitionfee;
-        $new->blood_group = $request->blood;
-        $new->faculty_id = $request->faculty;
-        $new->section_id = $request->section;
-        $new->semesters_id = $request->sem;
-        $new->gender = $request->gender;
-
-        if ($request->photo) {
-            $position = strpos($request->photo, ';');
-            $sub = substr($request->photo, 0, $position);
-            $ext = explode('/', $sub)[1];
-            $name = time() . "." . $ext;
-            $img = Image::make($request->photo)->resize(240, 240);
-            $upload_path = 'images/students/';
-            $image_url = $upload_path . $name;
-            if ($img->save($image_url)) {
-                $new->image = $image_url;
-            }
-        }
-
-        if ($new->save()) {
-            return response()->json([
-                'status' => 'record saved successfullly',
+        try {
+            $user =  User::create([
+                'name' => $request->studentname,
+                'email' => $request->email,
+                'password' => Hash::make('password')
             ]);
+            $user->assignRole('student');
+
+            if (isset($user)) {
+                $new = new students();
+                $new->name = $request->studentname;
+                $new->email = $request->email;
+                $new->password = Hash::make('password');
+
+                $new->phone_no = $request->phone;
+                $new->address = $request->address;
+                $new->DOB = $request->studentdob;
+                $new->nationality = $request->nationality;
+                $new->tuitionfee = $request->tuitionfee;
+                $new->blood_group = $request->blood;
+                $new->faculty_id = $request->faculty;
+                $new->section_id = $request->section;
+                $new->semesters_id = $request->sem;
+                $new->gender = $request->gender;
+                $new->user_id = $user->id;
+
+                if ($request->photo) {
+                    $position = strpos($request->photo, ';');
+                    $sub = substr($request->photo, 0, $position);
+                    $ext = explode('/', $sub)[1];
+                    $name = time() . "." . $ext;
+                    $img = Image::make($request->photo)->resize(240, 240);
+                    $upload_path = 'images/students/';
+                    $image_url = $upload_path . $name;
+                    if ($img->save($image_url)) {
+                        $new->image = $image_url;
+                    }
+                }
+
+                if ($new->save()) {
+
+                    return response()->json([
+                        'status' => 'record saved successfullly',
+                    ]);
+                }
+            }
+            return response()->json([
+                'status' => 'record Already Exist',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'Server Error',
+            ], 500);
         }
     }
 

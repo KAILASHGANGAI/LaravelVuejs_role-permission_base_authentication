@@ -5,8 +5,7 @@
     <DataTable
                  :data="staffs"
                 :columns="columns"
-                           
-                           
+
                         >
    
       <thead>
@@ -59,7 +58,6 @@ export default {
                     {data:'gender'},
                     {data:'staff_category'},
                     {data:'bloodgroup'},
-                    
                     {
                         data: 'id',
                         render: function (data) {
@@ -97,23 +95,20 @@ export default {
         title: error.response.data.message
       })
     })
-    $(document).on('click',this.handel);
+    
   },
-  // mounted(){
-  //           $(document).on('click','#edit',function(){
-  //               let id = $(this).data('id');
-  //               router.push("/admin/staffs/edit/" + id);
-  //           })
-            
-  //       },
+  mounted(){
+            $(document).on('click','#edit',function(){
+                let id = $(this).data('id');
+                router.push("/admin/staffs/edit/" + id);
+            })
+            $(document).on('click','#delete',function(){
+                let id = $(this).data('id');
+                router.push("/admin/staffs/edit/" + id);
+            })
+        },
   methods: {
-    handel(event){
-      if (event.target && event.target.id === 'delete') {
-        let id = event.target.getAttribute('data-id');
-        // console.log(event.target.getAttribute('data-id'))
-        this.deleteStaff(id); // Call the defined method within Vue instance
-      }
-    },
+   
   
     deleteStaff(index) {
       axios.delete("/api/staffs/" + index, {

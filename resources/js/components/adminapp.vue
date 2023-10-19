@@ -2,8 +2,9 @@
  <!-- Page Wrapper -->
  <div id="wrapper">
 <!-- Sidebar -->
-<sidebar    v-if="$route.path !== '/admin/login' && is('admin')" ></sidebar>
-<TeacherSidebar v-if="$route.path !== '/admin/login' && is('writer')"></TeacherSidebar>
+<sidebar    v-if="$route.path !== '/admin/login' && is('Super-Admin')" ></sidebar>
+<TeacherSidebar v-if="$route.path !== '/admin/login' && is('teacher')"></TeacherSidebar>
+<student v-if="$route.path !== '/admin/login' && is('student')"></student>
 <!-- End of Sidebar -->
 
 <!-- Content Wrapper -->
@@ -41,6 +42,7 @@
 </template>
 <script>
 import TeacherSidebar from './admin/parts/teacher_side.vue';
+import Student from './admin/parts/student_side.vue';
 import Footer from './admin/parts/footer.vue';
 import headervue from './admin/parts/header.vue';
 import Sidebar from './admin/parts/sidebar.vue';
@@ -51,7 +53,8 @@ export default{
         'headervue': headervue,
         'sidebar': Sidebar,
         'footervue':Footer,
-        'TeacherSidebar':TeacherSidebar
+        'TeacherSidebar':TeacherSidebar,
+        'student':Student
     },
 data(){
     return{
@@ -67,6 +70,7 @@ mounted() {
     setTimeout(() => {
       localStorage.removeItem('admintoken');
       localStorage.removeItem('adminusername');
+      locastorage.clear();
     }, 150 * 60 * 1000); // 20 minutes in milliseconds
   },
 }

@@ -21,6 +21,8 @@ import adminstore from './adminstore';
 import laravelPermissionToVuejs from 'laravel-permission-to-vuejs'
 import DataTablesLib from 'datatables.net'; 
 import DataTable from 'datatables.net-vue3';
+import print from 'vue3-print-nb'
+
  
 DataTable.use(DataTablesLib);
 createApp(AdminApp)
@@ -28,5 +30,5 @@ createApp(AdminApp)
             .use(adminstore)
             .use(laravelPermissionToVuejs)
             .component('DataTable', DataTable) 
-
+            .use(print)
             .mount("#adminapp")

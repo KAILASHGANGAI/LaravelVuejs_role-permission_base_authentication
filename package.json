@@ -25,6 +25,7 @@
         "laravel-vue-pagination": "^*",
         "sweetalert2": "^11.6.13",
         "vue-router": "^4.0.13",
+        "vue3-print-nb": "^0.1.4",
         "vuex": "^4.0.2"
     }
 }
