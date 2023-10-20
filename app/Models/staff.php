@@ -26,4 +26,5 @@ class staff extends Model
 
 
     ];
+    
 }

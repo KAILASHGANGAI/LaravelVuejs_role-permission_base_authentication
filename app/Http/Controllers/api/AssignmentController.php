@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
+
 use function PHPUnit\Framework\returnSelf;
 
 class AssignmentController extends Controller
@@ -21,7 +22,16 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        $data = assignment::with('faculty:id,faculty_name','semester:id,semester_years','section:id,section_name','user:id,name')->get();
+        $role = Auth::user()->roles->pluck('name');
+        if ($role = 'teacher') {
+            $data = assignment::with('faculty:id,faculty_name', 'semester:id,semester_years', 'section:id,section_name', 'user:id,name')->where('teachers_id', Auth::id())->get();
+        }
+        if ($role = 'admin' || $role = 'Super-Admin') {
+            $data = assignment::with('faculty:id,faculty_name', 'semester:id,semester_years', 'section:id,section_name', 'user:id,name')->get();
+        }
+        if ($role = 'student') {
+            $data = assignment::with('faculty:id,faculty_name', 'semester:id,semester_years', 'section:id,section_name', 'user:id,name')->get();
+        }
         return response()->json($data);
     }
 
@@ -35,7 +45,7 @@ class AssignmentController extends Controller
         $data = assignment::findorfail($id);
         $filePath = $data->file_path;
         $fullPath = storage_path('app/' . $filePath);
-    
+
         if (Storage::exists($filePath)) {
             return response()->download($fullPath);
         } else {
@@ -51,27 +61,26 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-     
+
         $new = new assignment();
         $new->subject = $request->subjects;
-        $new->faculty_id =$request->faculty;
+        $new->faculty_id = $request->faculty;
         $new->semesters_id = $request->semester;
         $new->sections_id = $request->section;
         $new->teachers_id = Auth::id();
         $new->topic = $request->topic;
         $new->deadline = $request->deadline;
-        if($request->file()) {
-            $file_name = time().'_'.$request->file->getClientOriginalName();
+        if ($request->file()) {
+            $file_name = time() . '_' . $request->file->getClientOriginalName();
             $file_path = $request->file('file')->storeAs('uploads/assignments', $file_name, 'public');
 
-            $newname = time().'_'.$request->file->getClientOriginalName();
-           $new->file_path = 'public/' . $file_path;
-           $new->save();
+            $newname = time() . '_' . $request->file->getClientOriginalName();
+            $new->file_path = 'public/' . $file_path;
+            $new->save();
 
-            return response()->json(['status'=>'File uploaded successfully.']);
+            return response()->json(['status' => 'File uploaded successfully.']);
         }
-        return response()->json(['status'=>'File Not uploaded.']);
-            
+        return response()->json(['status' => 'File Not uploaded.']);
     }
 
     /**
@@ -83,7 +92,6 @@ class AssignmentController extends Controller
     public function show(assignment $assignment)
     {
         return response()->json($assignment);
-        
     }
 
     /**
@@ -108,24 +116,24 @@ class AssignmentController extends Controller
     {
         $assignment = assignment::find($request->id);
         $assignment->subject = $request->subjects;
-        $assignment->faculty_id =$request->faculty;
+        $assignment->faculty_id = $request->faculty;
         $assignment->semesters_id = $request->semester;
         $assignment->sections_id = $request->section;
         $assignment->topic = $request->topic;
         $assignment->deadline = $request->deadline;
-    
-        if($request->file()) {
+
+        if ($request->file()) {
             if (Storage::exists($assignment->file_path)) {
                 Storage::delete($assignment->file_path);
             }
-            $file_name = time().'_'.$request->file->getClientOriginalName();
+            $file_name = time() . '_' . $request->file->getClientOriginalName();
             $file_path = $request->file('file')->storeAs('uploads/assignments', $file_name, 'public');
 
-            $newname = time().'_'.$request->file->getClientOriginalName();
-           $assignment->file_path = 'public/' . $file_path;
+            $newname = time() . '_' . $request->file->getClientOriginalName();
+            $assignment->file_path = 'public/' . $file_path;
         }
         $assignment->save();
-        return response()->json(['ststus'=>'assignments Updated successfully.']);
+        return response()->json(['ststus' => 'assignments Updated successfully.']);
     }
 
     /**
@@ -141,9 +149,9 @@ class AssignmentController extends Controller
         if (Storage::exists($filePath)) {
             Storage::delete($filePath);
         }
-        if($assignment->delete()){
+        if ($assignment->delete()) {
             return response()->json([
-                "status"=>"deleted successfully"
+                "status" => "deleted successfully"
             ]);
         }
     }
