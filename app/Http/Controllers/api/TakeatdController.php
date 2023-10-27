@@ -6,7 +6,8 @@ use App\Models\students;
 use App\Http\Controllers\Controller;
 use App\Models\takeatd;
 use Illuminate\Http\Request;
-   
+use Illuminate\Support\Facades\Auth;
+
 class TakeatdController extends Controller
 {
     /**
@@ -17,9 +18,8 @@ class TakeatdController extends Controller
     public function index()
     {
 
-        $data = takeatd::with(['faculty','semester','section'])->get();
+        $data = takeatd::with(['faculty', 'semester', 'section', 'user:id,name'])->get();
         return response()->json($data);
-
     }
 
     /**
@@ -41,10 +41,11 @@ class TakeatdController extends Controller
     public function store(Request $request)
     {
         $new = new takeatd();
-        $new->staff_id=$request->staff_id;
+        $new->staff_id = $request->staff_id;
         $new->faculty_id = $request->faculties_id;
-        $new->semesters_id=$request->semesters_id;
-        $new->section_id =$request->section;
+        $new->semesters_id = $request->semesters_id;
+        $new->section_id = $request->section;
+        $new->staff_id = Auth::id();
         if ($new->save()) {
             return response()->json(date('d-m-Y'));
         }
@@ -58,16 +59,15 @@ class TakeatdController extends Controller
      */
     public function show($id)
     {
-        $takeatd = takeatd::with(['faculty','semester','section'])->where('id',$id)->first();
-        $data = students::select('id','name')->where('faculty_id', $takeatd->faculty->id)
-        ->where('section_id', $takeatd->section->id)
-        ->where('semesters_id',$takeatd->semester->id)->get();
-       
+        $takeatd = takeatd::with(['faculty', 'semester', 'section'])->where('id', $id)->first();
+        $data = students::select('id', 'name')->where('faculty_id', $takeatd->faculty->id)
+            ->where('section_id', $takeatd->section->id)
+            ->where('semesters_id', $takeatd->semester->id)->get();
+
         return response()->json([
-            "created"=>$takeatd,
-            "students"=>$data
+            "created" => $takeatd,
+            "students" => $data
         ]);
-    
     }
 
     /**
@@ -104,6 +104,6 @@ class TakeatdController extends Controller
         $data = takeatd::find($id);
         $data->attendances()->delete();
         $data->delete();
-        return response()->json(['status'=>'successfully deleted']);
+        return response()->json(['status' => 'successfully deleted']);
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="container card pb-5">
         <h1 class="card-title">create notices</h1>
-        <router-link class="btn btn-success" to="/add-notices">Add notices</router-link>
+        <router-link class="btn btn-success" to="/admin/add-notices">Add notices</router-link>
         <div class="container">
             <table class="table">
                 <tr>
@@ -66,7 +66,7 @@ export default {
     },
     methods: {
         Edit(index) {
-            router.push('/edit-notices/' + index)
+            router.push('/admin/edit-notices/' + index)
         },
         Delete(index) {
             axios.delete('/api/notices/' + index, {

@@ -2,7 +2,7 @@
     <div>
 
         <div class="row">
-            <router-link to="/admin/expense" class="btn btn-primary">All Expense </router-link>
+            <router-link to="/admin/expenditure" class="btn btn-primary">All Expense </router-link>
 
         </div>
 
@@ -12,7 +12,7 @@
                     <div class="card-body p-0">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="login-form">
+                                <div class="login-form p-4">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Add Expense</h1>
                                     </div>

@@ -26,6 +26,9 @@ import show_attendance from '../components/admin/main/attendance/show_attendance
 import single_att from '../components/admin/main/attendance/single_attendance.vue'
 import detail_att from '../components/admin/main/attendance/detail.vue'
 
+import teacher_attendance from '../components/admin/main/attendance/teacher/show.vue';
+import create_teacher_attendance from '../components/admin/main/attendance/teacher/create.vue';
+
 
 import account from '../components/admin/main/account/account.vue'
 import payment from '../components/admin/main/account/payment.vue'
@@ -101,6 +104,27 @@ import show_marksheet from "../components/admin/main/marksheet/show.vue";
 import laser_marksheet from "../components/admin/main/marksheet/laser.vue";
 import marksheet from "../components/admin/main/marksheet/marksheets.vue";
 
+// teachers section 
+import Tea_add_notes from "../components/TeacherAdmin/notes/create.vue";
+import Tea_show_notes from "../components/TeacherAdmin/notes/show.vue";
+import Tea_edit_notes from "../components/TeacherAdmin/notes/edit.vue";
+import Tea_view_notes from "../components/TeacherAdmin/notes/view.vue";
+
+import Tea_add_assignment from "../components/TeacherAdmin/assignment/create.vue";
+import Tea_show_assignment from "../components/TeacherAdmin/assignment/show.vue";
+import Tea_edit_assignment from "../components/TeacherAdmin/assignment/edit.vue";
+import Tea_view_assignment from "../components/TeacherAdmin/assignment/view.vue";
+
+import Tea_add_marksheet from "../components/TeacherAdmin/marksheet/add.vue";
+import Tea_show_marksheet from "../components/TeacherAdmin/marksheet/show.vue";
+import Tea_laser_marksheet from "../components/TeacherAdmin/marksheet/laser.vue";
+import Tea_marksheet from "../components/TeacherAdmin/marksheet/marksheets.vue";
+import Tea_routing from "../components/TeacherAdmin/marksheet/routing.vue";
+import Tea_notice from "../components/TeacherAdmin/notice/show.vue";
+import Tea_attendance from '../components/TeacherAdmin/attendance/showAttendance.vue'
+import Tea_class from '../components/TeacherAdmin/classManage/showClass.vue'
+
+
 const routes = [
     {
         path: "/admin",
@@ -161,6 +185,9 @@ const routes = [
         component: detail_att,
         props: true
     },
+    {path:'/admin/teacher-attendance', component:teacher_attendance},
+    {path:'/admin/create-teacher-attendance/', component:create_teacher_attendance},
+
     { path: '/admin/account-details', component: account },
     { path: '/admin/payment', component: payment },
     { path: '/admin/payment-records', component: payment_records },
@@ -242,6 +269,26 @@ const routes = [
     { path: '/admin/add-marksheet/:id', component: add_marksheet, props:true },
     { path: '/admin/marksheet-laser/:id', component: laser_marksheet, props:true },
     { path: '/admin/marksheet/:id', component: marksheet, props:true },
+//end of admin section
+// teachers section
+    { path: '/teacher/show-notes', component: Tea_show_notes },
+    { path: '/teacher/add-notes', component: Tea_add_notes },
+    { path: '/teacher/edit-notes/:id', component: Tea_edit_notes, props: true },
+    { path: '/teacher/view-notes/:id', component: Tea_view_notes, props: true },
+
+    { path: '/teacher/show-assignment', component: Tea_show_assignment },
+    { path: '/teacher/add-assignment', component: Tea_add_assignment },
+    { path: '/teacher/edit-assignment/:id', component: Tea_edit_assignment, props: true },
+    { path: '/teacher/view-assignment/:id', component: Tea_view_assignment, props: true },
+
+    { path: '/teacher/marksheet-show', component: Tea_show_marksheet },
+    { path: '/teacher/add-marksheet/:id', component: Tea_add_marksheet, props:true },
+    { path: '/teacher/marksheet-laser/:id', component: Tea_laser_marksheet, props:true },
+    { path: '/teacher/marksheet/:id', component: Tea_marksheet, props:true },
+    { path: '/teacher/exam-routing', component: Tea_routing },
+    { path: '/teacher/notice', component: Tea_notice },
+    {path: '/teacher/show-attendance', component:Tea_attendance},
+    {path: '/teacher/show-class', component:Tea_class},
 
 ];
 const router = createRouter({

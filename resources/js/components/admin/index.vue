@@ -9,7 +9,7 @@
 
         <!-- Content Row -->
         <div class="row">
-            <div class="col-xl-3 col-md-6 mb-4" v-if="is('writer')">
+            <div class="col-xl-3 col-md-6 mb-4" v-if="is('teacher')">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -72,7 +72,7 @@
             </div>
 
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" v-if="is('visitor')">
+            <div class="col-xl-3 col-md-6 mb-4" v-if="is('student')">
                 <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">

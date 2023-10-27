@@ -35,6 +35,7 @@ use App\Http\Controllers\api\SubjectsController;
 use App\Http\Controllers\api\TakeatdController;
 use App\Http\Controllers\api\TestimonialsController;
 use App\Http\Controllers\api\utilityController;
+use App\Http\Controllers\TeacherAttendanceController;
 use App\Models\assignment;
 use App\Models\sliders;
 use Illuminate\Http\Request;
@@ -57,6 +58,9 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
 
     Route::resource('/create-attendance', TakeatdController::class);
     Route::resource('/attendance', AttendanceController::class);
+    Route::post('/attendance/teacher', [TeacherAttendanceController::class, 'store']);
+    Route::get('/attendance/teacher/list', [TeacherAttendanceController::class, 'index']);
+    Route::post('/attendance/teacher/bydate', [TeacherAttendanceController::class, 'search']);
 
     Route::resource('/payment', PaymentController::class);
     Route::resource('/expenditure', ExpenditureController::class);

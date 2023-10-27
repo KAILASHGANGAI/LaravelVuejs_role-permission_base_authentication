@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class staff extends Model
 {
@@ -26,4 +27,9 @@ class staff extends Model
 
 
     ];
+
+    public function attendance(): HasMany
+    {
+        return $this->hasMany(teacherAttendance::class, 'staff_id', 'id');
+    }
 }

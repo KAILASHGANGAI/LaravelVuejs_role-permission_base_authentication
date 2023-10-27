@@ -12,9 +12,10 @@
                 <th>Action</th>
             </thead>
             <tbody>
+              
                 <tr v-for="(data, index) in datas" :key="index">
                     <td>{{ ++index }}</td>
-                    <td>{{ data.staff_id }}</td>
+                    <td>{{ data.user.name}}</td>
                     <td>{{ data.faculty.faculty_name }}</td>
                     <td>{{ data.semester.semester_years }}</td>
                     <td>{{ data.section.section_name }}</td>

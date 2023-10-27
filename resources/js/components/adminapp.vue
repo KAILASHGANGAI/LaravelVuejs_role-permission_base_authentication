@@ -62,16 +62,17 @@ data(){
     }
 },
 created(){
+    
     if (this.getAdminToken == 0) {
         router.push('/admin/login')
     }
-},
-mounted() {
     setTimeout(() => {
-      localStorage.removeItem('admintoken');
-      localStorage.removeItem('adminusername');
-      locastorage.clear();
-    }, 150 * 60 * 1000); // 20 minutes in milliseconds
+        
+        store.dispatch('removeToken')
+        store.dispatch('removeUser')
+    }, 150 * 60 * 1000); 
   },
+
+    
 }
 </script>
