@@ -21,9 +21,11 @@ Route::get('/admin', function () {
 Route::get('/{pathMatch}', function () {
     return view('welcome');
 })->where('any', ".*");
+
 Route::get('/admin/{pathMatch}', function () {
     return view('admin.welcome');
 })->where('any', ".*");
+
 Route::get('/teacher/{pathMatch}', function () {
     return view('admin.welcome');
 })->where('any', ".*");

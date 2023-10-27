@@ -28,18 +28,12 @@
 </div>
 
 <li class="nav-item">
-    <router-link class="nav-link collapsed" to="/teacher/show-notes" data-toggle="collapse" data-target="#attendance"
+    <router-link class="nav-link collapsed" to="/teacher/show-attendance" data-toggle="collapse" data-target="#attendance"
         aria-expanded="true" aria-controls="attendance">
         <i class="fas fa-fw fa-cog"></i>
         <span>Attendance</span>
     </router-link>
-    <div id="attendance" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <router-link class="collapse-item" to="/teacher/show-notes">Show Notes</router-link>           
-            <router-link class="collapse-item" to="/teacher/add-notes">Add Notes</router-link>           
-        </div>
-    </div>
+  
 </li>
 <li class="nav-item">
     <router-link class="nav-link collapsed" to="/teacher/show-notes" data-toggle="collapse" data-target="#notes"
@@ -70,18 +64,12 @@
     </div>
 </li>
 <li class="nav-item">
-    <router-link class="nav-link collapsed" to="/teacher/show-notes" data-toggle="collapse" data-target="#Class"
+    <router-link class="nav-link collapsed" to="/teacher/show-class" data-toggle="collapse" data-target="#Class"
         aria-expanded="true" aria-controls="Class">
         <i class="fas fa-fw fa-cog"></i>
-        <span> Class Management </span>
+        <span> Classes </span>
     </router-link>
-    <div id="Class" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <router-link class="collapse-item" to="/teacher/show-notes">Show Notes</router-link>           
-            <router-link class="collapse-item" to="/teacher/add-notes">Add Notes</router-link>           
-        </div>
-    </div>
+   
 </li>
 <li class="nav-item">
     <router-link class="nav-link collapsed" to="/teacher/marksheet-show" data-toggle="collapse" data-target="#MarksSheet"
@@ -98,18 +86,18 @@
     </div>
 </li>
 <li class="nav-item">
-    <router-link class="nav-link collapsed" to="/teacher/show-notes" data-toggle="collapse" data-target="#notes"
-        aria-expanded="true" aria-controls="notes">
+    <router-link class="nav-link collapsed" to="/teacher/notice" data-toggle="collapse" data-target="#notice"
+        aria-expanded="true" aria-controls="notice">
         <i class="fas fa-fw fa-cog"></i>
         <span>Notice  </span>
     </router-link>
-    <div id="notes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <!-- <div id="notice" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <router-link class="collapse-item" to="/teacher/show-notes">Show Notes</router-link>           
-            <router-link class="collapse-item" to="/teacher/add-notes">Add Notes</router-link>           
+            <router-link class="collapse-item" to="/teacher/notices">Notices</router-link>           
+        
         </div>
-    </div>
+    </div> -->
 </li>
 </ul>
 </template>

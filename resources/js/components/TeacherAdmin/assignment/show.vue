@@ -11,7 +11,7 @@
                 <th>Teacher</th>
                 <th>Topic</th>
                 <th>Deadline</th>
-                <th>Date</th>
+                <!-- <th>Date</th> -->
                 <th>Action</th>
             </thead>
             <tbody>
@@ -24,13 +24,13 @@
                     <td>{{ data.user.name }}</td>
                     <td>{{ data.topic }}</td>
                     <td>{{ data.deadline }}</td>
-                    <td>{{ data.created_at }}</td>
+                    <!-- <td>{{ data.created_at }}</td> -->
                     <td>
 
                         <button class=" btn btn-success" @click="EditAssignment(data.id)">
                             Edit
                         </button>
-                        <button class=" btn btn-success" @click="ViewAssignment(data.id)">
+                        <button class=" btn btn-warning" @click="ViewAssignment(data.id)">
                             view
                         </button>
                         <button class="btn btn-danger" @click="DeleteAssignment(data.id)">

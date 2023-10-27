@@ -13,7 +13,6 @@
                 <th>Teacher</th>
                 <th>Topic</th>
 
-                <th>File Path</th>
                 <th>Date</th>
                 <th>Action</th>
             </thead>
@@ -25,13 +24,16 @@
                     <td>{{ data.semester.semester_years}}</td>
                     <td>{{ data.user.name }}</td>
                     <td>{{ data.topic }}</td>
-                    <td>{{ data.file_path }}</td>
+                    <!-- <td>{{ data.file_path }}</td> -->
 
                     <td>{{ data.created_at }}</td>
                     <td>
 
                         <button class=" btn btn-success" @click="Editbotes(data.id)">
                             Edit
+                        </button>
+                        <button class=" btn btn-warning" @click="ViewNotes(data.id)">
+                            view
                         </button>
                         <button class="btn btn-danger" @click="deletebotes(data.id)">
                            Delete
@@ -75,6 +77,11 @@ export default {
         })
     },
     methods: {
+        ViewNotes(index){
+            router.push('/teacher/view-notes/' + index);
+
+
+        },
         Editbotes(index) {
             router.push("/teacher/edit-notes/" + index);
         },

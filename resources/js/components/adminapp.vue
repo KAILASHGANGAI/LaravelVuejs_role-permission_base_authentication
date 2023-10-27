@@ -62,10 +62,12 @@ data(){
     }
 },
 created(){
+    
     if (this.getAdminToken == 0) {
         router.push('/admin/login')
     }
     setTimeout(() => {
+        
         store.dispatch('removeToken')
         store.dispatch('removeUser')
     }, 150 * 60 * 1000); 

@@ -5,6 +5,7 @@ use App\Http\Controllers\api\ExamController;
 use App\Http\Controllers\api\levelManageCon;
 use App\Http\Controllers\api\MarksSheetController;
 use App\Http\Controllers\api\NoteController;
+use App\Http\Controllers\api\NoticesController;
 use App\Http\Controllers\api\PeriodController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UsersController;
@@ -29,4 +30,5 @@ Route::middleware(['auth:sanctum', 'role:teacher'])->prefix('teacher')->group(fu
     Route::post('/store-marks', [MarksSheetController::class, 'store']);
     Route::get('/get-marks-lasers/{id}', [MarksSheetController::class, 'lasers']);
     Route::get('/getclass/details/{id}', [MarksSheetController::class, 'single']);
+    Route::get('/notices', [NoticesController::class, 'index']);
 });
