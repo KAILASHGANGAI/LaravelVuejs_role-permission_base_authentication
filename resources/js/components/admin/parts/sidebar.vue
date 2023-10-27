@@ -78,9 +78,10 @@
         <span>Attendance</span>
     </router-link>
     <div id="Attendance" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
+        <div class="bg-white py-2 collapse-inner rounded">  
             <h6 class="collapse-header">Custom Components:</h6>
-            <router-link class="collapse-item" to="/admin/add-attendance">Add Attendance</router-link>           
+            <router-link class="collapse-item" to="/admin/add-attendance"> Student Attendance</router-link>           
+            <router-link class="collapse-item" to="/admin/teacher-attendance">Teachers Attendance</router-link>           
         </div>
     </div>
 </li>

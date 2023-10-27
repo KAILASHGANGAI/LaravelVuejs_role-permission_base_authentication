@@ -26,6 +26,9 @@ import show_attendance from '../components/admin/main/attendance/show_attendance
 import single_att from '../components/admin/main/attendance/single_attendance.vue'
 import detail_att from '../components/admin/main/attendance/detail.vue'
 
+import teacher_attendance from '../components/admin/main/attendance/teacher/show.vue';
+import create_teacher_attendance from '../components/admin/main/attendance/teacher/create.vue';
+
 
 import account from '../components/admin/main/account/account.vue'
 import payment from '../components/admin/main/account/payment.vue'
@@ -182,6 +185,9 @@ const routes = [
         component: detail_att,
         props: true
     },
+    {path:'/admin/teacher-attendance', component:teacher_attendance},
+    {path:'/admin/create-teacher-attendance/', component:create_teacher_attendance},
+
     { path: '/admin/account-details', component: account },
     { path: '/admin/payment', component: payment },
     { path: '/admin/payment-records', component: payment_records },
