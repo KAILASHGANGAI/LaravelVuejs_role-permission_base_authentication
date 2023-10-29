@@ -43,7 +43,7 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                       Total Working day</div>
+                                       Total School day</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ data.present_count + data.absent_count }}</div>
                                 </div>
                                 <div class="col-auto">
@@ -61,7 +61,7 @@
                 </tr>
                 <tr v-for="(item, index) in data.attendance" :key="index">
                     <td>{{ ++index }}</td>
-                    <td>{{  item.date.toString()}}</td>
+                    <td>{{  item.created_at.split('T')[0]}}</td>
                     <td v-if="item.status == 1">{{ 'Preasent' }}</td>
                     <td v-else>{{'Absent' }}</td>
                 </tr>
@@ -77,7 +77,7 @@
             }
         },
         created() {
-            axios.get('/api/teacher/attendance').then((res) => {
+            axios.get('/api/student/attendance').then((res) => {
                 this.data = res.data
                 console.log(res)
             })

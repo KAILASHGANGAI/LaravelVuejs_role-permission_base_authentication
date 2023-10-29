@@ -46,7 +46,7 @@ import store from '../../../adminstore';
       //   router.push("/admin/login")
       // }
       //get api data
-      axios.get("/api/teacher/periods", {
+      axios.get("/api/student/periods", {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + store.getters.getAdminToken,
@@ -65,7 +65,7 @@ import store from '../../../adminstore';
     },
     methods: {
       view(index) {
-        router.push("/teacher/periods/single/" + index);
+        router.push("/student/periods-single/" + index);
       }
     }
   };

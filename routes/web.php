@@ -28,3 +28,6 @@ Route::get('/admin/{pathMatch}', function () {
 Route::get('/teacher/{pathMatch}', function () {
     return view('admin.welcome');
 })->where('any', '.*');
+Route::get('/student/{pathMatch}', function () {
+    return view('admin.welcome');
+})->where('any', '.*');

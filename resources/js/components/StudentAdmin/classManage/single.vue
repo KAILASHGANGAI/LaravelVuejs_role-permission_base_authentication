@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import store from '../../../../adminstore';
+import store from '../../../adminstore';
 
 export default {
     data() {
@@ -49,7 +49,7 @@ export default {
         //     router.push("/admin/login")
         // }
         //get api data
-        axios.get("/api/periods/" + this.id, {
+        axios.get("/api/student/periods/" + this.id, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " +store.getters.getAdminToken,

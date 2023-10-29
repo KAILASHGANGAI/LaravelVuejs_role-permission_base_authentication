@@ -123,7 +123,24 @@ import Tea_routing from "../components/TeacherAdmin/marksheet/routing.vue";
 import Tea_notice from "../components/TeacherAdmin/notice/show.vue";
 import Tea_attendance from '../components/TeacherAdmin/attendance/showAttendance.vue'
 import Tea_class from '../components/TeacherAdmin/classManage/showClass.vue'
+import Tea_class_single from '../components/TeacherAdmin/classManage/single.vue'
 
+
+
+// student section 
+import Stu_show_notes from "../components/StudentAdmin/notes/show.vue";
+import Stu_view_notes from "../components/StudentAdmin/notes/view.vue";
+
+import Stu_show_assignment from "../components/StudentAdmin/assignment/show.vue";
+import Stu_view_assignment from "../components/StudentAdmin/assignment/view.vue";
+
+import Stu_show_marksheet from "../components/StudentAdmin/marksheet/show.vue";
+import Stu_marksheet from "../components/StudentAdmin/marksheet/marksheets.vue";
+import Stu_routing from "../components/StudentAdmin/marksheet/routing.vue";
+import Stu_notice from "../components/StudentAdmin/notice/show.vue";
+import Stu_attendance from '../components/StudentAdmin/attendance/showAttendance.vue'
+import Stu_class from '../components/StudentAdmin/classManage/showClass.vue'
+import Stu_class_single from '../components/StudentAdmin/classManage/single.vue'
 
 const routes = [
     {
@@ -289,6 +306,22 @@ const routes = [
     { path: '/teacher/notice', component: Tea_notice },
     {path: '/teacher/show-attendance', component:Tea_attendance},
     {path: '/teacher/show-class', component:Tea_class},
+    {path: '/teacher/periods/single/:id', component:Tea_class_single, props:true},
+
+    //student section 
+    { path: '/student/show-notes', component: Stu_show_notes },
+    { path: '/student/view-notes/:id', component: Stu_view_notes, props: true },
+
+    { path: '/student/show-assignment', component: Stu_show_assignment },
+    { path: '/student/view-assignment/:id', component: Stu_view_assignment, props: true },
+
+    { path: '/student/marksheet-show', component: Stu_show_marksheet },
+    { path: '/student/marksheet/:id', component: Stu_marksheet, props:true },
+    { path: '/student/exam-routing', component: Stu_routing },
+    { path: '/student/notice', component: Stu_notice },
+    {path: '/student/show-attendance', component:Stu_attendance},
+    {path: '/student/show-class', component:Stu_class},
+    {path: '/student/periods-single/:id', component:Stu_class_single, props:true},
 
 ];
 const router = createRouter({
