@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
-            $table->foreignId("faculty_id");
-            $table->foreignId("sections_id");
-            $table->foreignId("semesters_id");
-            $table->foreignId("teachers_id");
+            $table->foreignId('faculty_id');
+            $table->foreignId('sections_id');
+            $table->foreignId('semesters_id');
+            $table->foreignId('teachers_id');
             $table->string('topic');
             $table->string('file_path');
             $table->date('deadline');

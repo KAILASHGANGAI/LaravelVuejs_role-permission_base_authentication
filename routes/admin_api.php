@@ -3,7 +3,6 @@
 use App\Http\Controllers\api\AboutController;
 use App\Http\Controllers\api\AssignmentController;
 use App\Http\Controllers\api\AttendanceController;
-use App\Http\Controllers\api\auth\usersController;
 use App\Http\Controllers\api\BloodGroupController;
 use App\Http\Controllers\api\BookstakenController;
 use App\Http\Controllers\api\EventsController;
@@ -13,7 +12,6 @@ use App\Http\Controllers\api\FacultyController;
 use App\Http\Controllers\api\FacultyMembersController;
 use App\Http\Controllers\api\GalleryController;
 use App\Http\Controllers\api\guardianController;
-use App\Http\Controllers\api\HomeController;
 use App\Http\Controllers\api\idcardController;
 use App\Http\Controllers\api\levelManageCon;
 use App\Http\Controllers\api\LibrearyController;
@@ -36,11 +34,7 @@ use App\Http\Controllers\api\TakeatdController;
 use App\Http\Controllers\api\TestimonialsController;
 use App\Http\Controllers\api\utilityController;
 use App\Http\Controllers\TeacherAttendanceController;
-use App\Models\assignment;
-use App\Models\sliders;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 
 Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function () {
     Route::get('/detailed-summery', [utilityController::class, 'summery']);

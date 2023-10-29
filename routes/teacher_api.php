@@ -7,10 +7,7 @@ use App\Http\Controllers\api\MarksSheetController;
 use App\Http\Controllers\api\NoteController;
 use App\Http\Controllers\api\NoticesController;
 use App\Http\Controllers\api\PeriodController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\UsersController;
 use App\Http\Controllers\TeachersController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'role:teacher'])->prefix('teacher')->group(function () {
@@ -31,4 +28,5 @@ Route::middleware(['auth:sanctum', 'role:teacher'])->prefix('teacher')->group(fu
     Route::get('/get-marks-lasers/{id}', [MarksSheetController::class, 'lasers']);
     Route::get('/getclass/details/{id}', [MarksSheetController::class, 'single']);
     Route::get('/notices', [NoticesController::class, 'index']);
+    Route::get('/attendance', [TeachersController::class, 'attendence']);
 });

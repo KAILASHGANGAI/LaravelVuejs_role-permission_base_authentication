@@ -20,14 +20,14 @@ return new class extends Migration
             $table->string('phone_no')->nullable();
             $table->string('DOB')->nullable();
             $table->string('email')->unique();
-            $table->string('password')->Hash("123123");
+            $table->string('password')->Hash('123123');
             $table->string('faculty_id')->nullable();
             $table->foreignId('section_id')->nullable();
             $table->string('semesters_id')->nullable();
             $table->string('blood_group')->nullable();
             $table->string('gender')->nullable();
             $table->string('nationality')->nullable();
-            $table->integer('tuitionfee');       
+            $table->integer('tuitionfee');
             $table->string('image')->nullable();
             $table->timestamps();
         });

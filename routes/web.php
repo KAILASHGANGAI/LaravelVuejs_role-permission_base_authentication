@@ -9,7 +9,6 @@ Route::group(['middleware' => ['role:admin']], function () {
     });
 });
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,12 +19,12 @@ Route::get('/admin', function () {
 
 Route::get('/{pathMatch}', function () {
     return view('welcome');
-})->where('any', ".*");
+})->where('any', '.*');
 
 Route::get('/admin/{pathMatch}', function () {
     return view('admin.welcome');
-})->where('any', ".*");
+})->where('any', '.*');
 
 Route::get('/teacher/{pathMatch}', function () {
     return view('admin.welcome');
-})->where('any', ".*");
+})->where('any', '.*');

@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class takeatd extends Model
 {
     use HasFactory;
-    protected $table = "takeatds";
+
+    protected $table = 'takeatds';
+
     protected $fillable = [
         'staff_id',
         'faculty_id',
@@ -22,18 +24,22 @@ class takeatd extends Model
     {
         return $this->hasMany('App\Models\attendance', 'createattendances_id', 'id');
     }
+
     public function faculty()
     {
         return $this->hasOne('App\Models\faculty', 'id', 'faculty_id');
     }
+
     public function semester()
     {
         return $this->hasOne('App\Models\semester', 'id', 'semesters_id');
     }
+
     public function section()
     {
         return $this->hasOne('App\Models\section', 'id', 'section_id');
     }
+
     public function user(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'staff_id');

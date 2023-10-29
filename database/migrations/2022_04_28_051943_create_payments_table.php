@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('left_due')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('fee_type');
-           
+
             $table->timestamps();
         });
     }

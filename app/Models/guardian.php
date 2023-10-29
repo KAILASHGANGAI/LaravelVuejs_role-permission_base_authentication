@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class guardian extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-    	
-        'students_id',	
-        'name',	
-        'address',	
-        'phone_no',	
-        'email'.	
-        'password',	
-        'image',	
+
+        'students_id',
+        'name',
+        'address',
+        'phone_no',
+        'email'.
+        'password',
+        'image',
     ];
 }

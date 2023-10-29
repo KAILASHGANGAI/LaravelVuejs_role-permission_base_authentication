@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('faculty_id');
             $table->foreignId('semesters_id');
             $table->foreignId('section_id')->nullable();
-            $table->boolean('status')->default(0);          
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

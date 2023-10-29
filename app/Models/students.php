@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class students extends Model
 {
     use HasFactory;
+
     protected $table = 'students';
+
     protected $fillable = [
         'name',
         'address',
@@ -23,36 +25,44 @@ class students extends Model
         'nationality',
         'tuitionfee',
         'image',
-        'user_id'
+        'user_id',
     ];
+
     public function guardian()
     {
         return $this->hasOne('App\Models\guardian');
     }
+
     public function payments()
     {
         return $this->hasMany('App\Models\payment');
     }
+
     public function libreary()
     {
         return $this->hasMany('App\Models\bookstaken');
     }
+
     public function faculty()
     {
         return $this->hasOne('App\Models\faculty', 'id', 'faculty_id');
     }
+
     public function semester()
     {
         return $this->hasOne('App\Models\semester', 'id', 'semesters_id');
     }
+
     public function section()
     {
         return $this->hasOne('App\Models\section', 'id', 'section_id');
     }
+
     public function blood()
     {
         return $this->hasOne('App\Models\blood_group', 'id', 'blood_group');
     }
+
     public function payment()
     {
         return $this->hasMany('App\Models\payment', 'students_id', 'id');
