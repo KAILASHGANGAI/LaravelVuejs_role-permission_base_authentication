@@ -8,6 +8,7 @@ use App\Models\marks;
 use App\Models\students;
 use App\Models\subjects;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MarksSheetController extends Controller
@@ -51,49 +52,98 @@ class MarksSheetController extends Controller
                 'status' => 'marks Saved Sucessfully',
             ]);
         }
-
     }
 
     public function lasers($id)
     {
         $exam = exam::with('faculty', 'semester')->where('id', $id)->first();
-        $data = students::select('id', 'name')
-            ->with([
-                'marks' => function ($query) use ($id) {
-                    $query->select('id', 'student_id', 'subject_id', 'exam_id', 'marks', 'practical')
-                        ->where('exam_id', $id);
-                },
-                'marks.subject' => function ($query) {
-                    $query->select('id', 'subjects', 'fullmarks', 'passmarks', 'practical_fullmarks', 'practical_passmarks', 'creadit_hrs');
-                },
-                'marks.exam' => function ($query) {
-                    $query->select('id', 'exam_type');
-                },
-            ])
-            ->whereHas('marks.exam', function ($query) use ($id, $exam) {
-                $query->where('id', $id)
-                    ->where('faculty_id', $exam->faculty_id)
-                    ->where('semesters_id', $exam->semester_id);
-            })
-            ->where('faculty_id', $exam->faculty_id)
-            ->where('semesters_id', $exam->semester_id)
-            ->get();
+        $user = Auth::user();
+        if ($user->hasRole('student')) {
+            $studentId = students::select('id')->where('user_id', Auth::id())->first();
+            $data = students::select('id', 'name')
+                ->with([
+                    'marks' => function ($query) use ($id, $studentId) {
+                        $query->select('id', 'student_id', 'subject_id', 'exam_id', 'marks', 'practical')
+                            ->where('exam_id', $id)->where('student_id', $studentId->id);
+                    },
+                    'marks.subject' => function ($query) {
+                        $query->select('id', 'subjects', 'fullmarks', 'passmarks', 'practical_fullmarks', 'practical_passmarks', 'creadit_hrs');
+                    },
+                    'marks.exam' => function ($query) {
+                        $query->select('id', 'exam_type');
+                    },
+                ])
+                ->whereHas('marks.exam', function ($query) use ($id, $exam) {
+                    $query->where('id', $id)
+                        ->where('faculty_id', $exam->faculty_id)
+                        ->where('semesters_id', $exam->semester_id);
+                })
+                ->where('faculty_id', $exam->faculty_id)
+                ->where('semesters_id', $exam->semester_id)
+                ->where('id', $studentId->id)
+                ->get();
+            $subjects = subjects::select('subjects')->where('faculty_id', $exam->faculty_id)->where('semester_id', $exam->semester_id)->get();
+            $ranks = DB::table(function ($query) use ($exam) {
+                $query->select(
+                    'students.id as student_id',
+                    'students.name',
+                    DB::raw('SUM(marks.marks) as total_marks'),
+                    DB::raw('SUM(marks.practical) as total_practical')
+                )
+                    ->from('students')
+                    ->join('marks', 'students.id', '=', 'marks.student_id')
+                    ->where('students.faculty_id', $exam->faculty_id)
+                    ->where('students.semesters_id', $exam->semester_id)
+                    ->groupBy('students.id', 'students.name')
+                    ->orderByDesc('total_marks')
+                    ->orderByDesc('total_practical');
+            }, 'sub')
+                ->select('sub.*', DB::raw('ROW_NUMBER() OVER (ORDER BY sub.total_marks DESC, sub.total_practical DESC) as rank'))
+                ->get();
+        } else {
+            $data = students::select('id', 'name')
+                ->with([
+                    'marks' => function ($query) use ($id) {
+                        $query->select('id', 'student_id', 'subject_id', 'exam_id', 'marks', 'practical')
+                            ->where('exam_id', $id);
+                    },
+                    'marks.subject' => function ($query) {
+                        $query->select('id', 'subjects', 'fullmarks', 'passmarks', 'practical_fullmarks', 'practical_passmarks', 'creadit_hrs');
+                    },
+                    'marks.exam' => function ($query) {
+                        $query->select('id', 'exam_type');
+                    },
+                ])
+                ->whereHas('marks.exam', function ($query) use ($id, $exam) {
+                    $query->where('id', $id)
+                        ->where('faculty_id', $exam->faculty_id)
+                        ->where('semesters_id', $exam->semester_id);
+                })
+                ->where('faculty_id', $exam->faculty_id)
+                ->where('semesters_id', $exam->semester_id)
+                ->get();
+            $subjects = subjects::select('subjects')->where('faculty_id', $exam->faculty_id)->where('semester_id', $exam->semester_id)->get();
+            $ranks = DB::table(function ($query) use ($exam) {
+                $query->select(
+                    'students.id as student_id',
+                    'students.name',
+                    DB::raw('SUM(marks.marks) as total_marks'),
+                    DB::raw('SUM(marks.practical) as total_practical')
+                )
+                    ->from('students')
+                    ->join('marks', 'students.id', '=', 'marks.student_id')
+                    ->where('students.faculty_id', $exam->faculty_id)
+                    ->where('students.semesters_id', $exam->semester_id)
+                    ->groupBy('students.id', 'students.name')
+                    ->orderByDesc('total_marks')
+                    ->orderByDesc('total_practical');
+            }, 'sub')
+                ->select('sub.*', DB::raw('ROW_NUMBER() OVER (ORDER BY sub.total_marks DESC, sub.total_practical DESC) as rank'))
+                ->get();
+        }
 
-        $subjects = subjects::select('subjects')->where('faculty_id', $exam->faculty_id)->where('semester_id', $exam->semester_id)->get();
-        $ranks = DB::table(function ($query) use ($exam) {
-            $query->select('students.id as student_id', 'students.name',
-                DB::raw('SUM(marks.marks) as total_marks'),
-                DB::raw('SUM(marks.practical) as total_practical'))
-                ->from('students')
-                ->join('marks', 'students.id', '=', 'marks.student_id')
-                ->where('students.faculty_id', $exam->faculty_id)
-                ->where('students.semesters_id', $exam->semester_id)
-                ->groupBy('students.id', 'students.name')
-                ->orderByDesc('total_marks')
-                ->orderByDesc('total_practical');
-        }, 'sub')
-            ->select('sub.*', DB::raw('ROW_NUMBER() OVER (ORDER BY sub.total_marks DESC, sub.total_practical DESC) as rank'))
-            ->get();
+
+
 
         return response()->json([
             'exam' => $exam,

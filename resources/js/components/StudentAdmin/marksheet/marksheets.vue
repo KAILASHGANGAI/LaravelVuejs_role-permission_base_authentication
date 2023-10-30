@@ -344,7 +344,7 @@ export default {
             }
         },
         getDatas() {
-            axios.get("/api/teacher/get-marks-lasers/" + this.id, {
+            axios.get("/api/student/get-marks-lasers/" + this.id, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + store.getters.getAdminToken,

@@ -25,4 +25,6 @@ Route::middleware(['auth:sanctum', 'role:student'])->prefix('student')->group(fu
     Route::get('/getclass/details/{id}', [MarksSheetController::class, 'single']);
     Route::get('/notices', [NoticesController::class, 'index']);
     Route::get('/attendance', [TeachersController::class, 'attendence']);
+
+    Route::get('/get-marks-lasers/{id}', [MarksSheetController::class, 'lasers']);
 });

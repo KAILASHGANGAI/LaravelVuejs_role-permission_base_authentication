@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\note;
+use App\Models\students;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -17,8 +18,23 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $data = note::with('faculty:id,faculty_name', 'semester:id,semester_years', 'user:id,name')->get();
+        $user = Auth::user();
+        if ($user->hasRole('teacher')) {
+            $data = note::with('faculty:id,faculty_name', 'semester:id,semester_years',  'user:id,name')->where('teachers_id', Auth::id())->get();
+        }
+        if ($user->hasRole('admin') || $user->hasRole('Super-Admin')) {
+            $data = note::with('faculty:id,faculty_name', 'semester:id,semester_years',  'user:id,name')->get();
+        }
+        if ($user->hasRole('student')) {
+            $student = students::select('id', 'faculty_id', 'semesters_id')
+                ->where('user_id', Auth::id())
+                ->first();
 
+            $data = note::with('faculty:id,faculty_name', 'semester:id,semester_years',  'user:id,name')
+                ->where('faculty_id', $student->faculty_id)
+                ->where('semesters_id', $student->semesters_id)
+                ->get();
+        }
         return response()->json($data);
     }
 
@@ -29,7 +45,6 @@ class NoteController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -51,18 +66,17 @@ class NoteController extends Controller
         $new->topic = $request->topic;
 
         if ($request->file()) {
-            $file_name = time().'_'.$request->file->getClientOriginalName();
+            $file_name = time() . '_' . $request->file->getClientOriginalName();
             $file_path = $request->file('file')->storeAs('uploads/notes', $file_name, 'public');
 
-            $newname = time().'_'.$request->file->getClientOriginalName();
-            $new->file_path = 'public/'.$file_path;
+            $newname = time() . '_' . $request->file->getClientOriginalName();
+            $new->file_path = 'public/' . $file_path;
             $new->save();
 
             return response()->json(['success' => 'File uploaded successfully.']);
         }
 
         return response()->json(['success' => 'File Not uploaded.']);
-
     }
 
     /**
@@ -103,16 +117,15 @@ class NoteController extends Controller
             if (Storage::exists($note->file_path)) {
                 Storage::delete($note->file_path);
             }
-            $file_name = time().'_'.$request->file->getClientOriginalName();
+            $file_name = time() . '_' . $request->file->getClientOriginalName();
             $file_path = $request->file('file')->storeAs('uploads/notes', $file_name, 'public');
 
-            $newname = time().'_'.$request->file->getClientOriginalName();
-            $note->file_path = 'public/'.$file_path;
+            $newname = time() . '_' . $request->file->getClientOriginalName();
+            $note->file_path = 'public/' . $file_path;
         }
         $note->save();
 
         return response()->json(['success' => 'Notes Updated successfully.']);
-
     }
 
     /**

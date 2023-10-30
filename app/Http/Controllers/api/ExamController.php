@@ -4,7 +4,9 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\exam;
+use App\Models\students;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -15,7 +17,18 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $data = exam::with(['faculty', 'semester', 'section'])->get();
+        $user = Auth::user();
+        if ($user->hasRole('student')) {
+            $student = students::select('id', 'faculty_id', 'semesters_id', 'section_id')
+                ->where('user_id', Auth::id())
+                ->first();
+            $data = exam::with(['faculty', 'semester', 'section'])
+                ->where('faculty_id', $student->faculty_id)
+                ->where('semester_id', $student->semesters_id)
+                ->get();
+        } else {
+            $data = exam::with(['faculty', 'semester', 'section'])->get();
+        }
 
         return response()->json($data);
     }
@@ -116,7 +129,6 @@ class ExamController extends Controller
             return response()->json(['status' => 1, 'data' => $data]);
         } else {
             return response()->json(['status' => 0, 'data' => $data]);
-
         }
     }
 }
