@@ -36,9 +36,20 @@ use App\Http\Controllers\api\utilityController;
 use App\Http\Controllers\TeacherAttendanceController;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware(['auth:sanctum', 'role:admin|Super-Admin|accountent'])->group(function () {
+    Route::resource('/payment', PaymentController::class);
+    Route::resource('/expenditure', ExpenditureController::class);
+    Route::get('/payment/bill/{id}', [PaymentController::class, 'billShow']);
+    Route::get('/get-payment-records', [PaymentController::class, 'index']);
+
+    Route::post('/general-details', [OwnerDetailsController::class, 'store']);
+    Route::put('/general-details/{id}', [OwnerDetailsController::class, 'update']);
+    Route::get('/general-details', [OwnerDetailsController::class, 'index']);
+    Route::get('/general-details', [utilityController::class, 'owner']);
+});
+
 Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function () {
     Route::get('/detailed-summery', [utilityController::class, 'summery']);
-    Route::get('/general-details', [utilityController::class, 'owner']);
 
     Route::get('/student/facylty/class/section', [levelManageCon::class, 'index']);
 
@@ -55,10 +66,10 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
     Route::post('/attendance/teacher', [TeacherAttendanceController::class, 'store']);
     Route::get('/attendance/teacher/list', [TeacherAttendanceController::class, 'index']);
     Route::post('/attendance/teacher/bydate', [TeacherAttendanceController::class, 'search']);
+    Route::post('/attendance/teacher/bymonth', [TeacherAttendanceController::class, 'bymonth']);
 
-    Route::resource('/payment', PaymentController::class);
-    Route::resource('/expenditure', ExpenditureController::class);
-    Route::get('/payment/bill/{id}', [PaymentController::class, 'billShow']);
+
+
 
     Route::resource('/libreary', LibrearyController::class);
     Route::post('/show-books-list', [BookstakenController::class, 'getBooks']);
@@ -77,7 +88,6 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
     Route::resource('/questions', QuestionController::class);
     Route::post('/getstudents-details', [idcardController::class, 'idcard']);
 
-    Route::get('/get-payment-records', [PaymentController::class, 'index']);
 
     // website controlling roures
     Route::controller(SlidersController::class)->group(function () {
@@ -152,9 +162,6 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
     Route::get('/gallery', [GalleryController::class, 'index']);
     Route::delete('/gallery/{id}', [GalleryController::class, 'delete']);
 
-    Route::post('/general-details', [OwnerDetailsController::class, 'store']);
-    Route::put('/general-details/{id}', [OwnerDetailsController::class, 'update']);
-    Route::get('/general-details', [OwnerDetailsController::class, 'index']);
 
     Route::post('/subjects', [SubjectsController::class, 'store']);
     Route::get('/subjects', [SubjectsController::class, 'index']);

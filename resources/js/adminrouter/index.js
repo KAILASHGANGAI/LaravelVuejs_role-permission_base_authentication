@@ -27,6 +27,7 @@ import single_att from '../components/admin/main/attendance/single_attendance.vu
 import detail_att from '../components/admin/main/attendance/detail.vue'
 
 import teacher_attendance from '../components/admin/main/attendance/teacher/show.vue';
+import show_teacher_attendance_monthwise from '../components/admin/main/attendance/teacher/monthwise.vue';
 import create_teacher_attendance from '../components/admin/main/attendance/teacher/create.vue';
 
 
@@ -150,7 +151,7 @@ const routes = [
         meta: {
             requiresAuth: true,
         },
-       
+
     },
     {
         path: "/admin/login",
@@ -159,7 +160,7 @@ const routes = [
         meta: {
             requiresAuth: false,
         },
-       
+
     },
     {
         path: "/admin/users",
@@ -168,7 +169,7 @@ const routes = [
         meta: {
             requiresAuth: true,
         },
-       
+
     },
     // { path: '/admin/login', component: login_to_admin },
     // { path: '/admin/logout', component: admin_logout },
@@ -202,8 +203,9 @@ const routes = [
         component: detail_att,
         props: true
     },
-    {path:'/admin/teacher-attendance', component:teacher_attendance},
-    {path:'/admin/create-teacher-attendance/', component:create_teacher_attendance},
+    { path: '/admin/teacher-attendance', component: teacher_attendance },
+    { path: '/admin/create-teacher-attendance/', component: create_teacher_attendance },
+    { path: '/admin/show-teacher-attendance-monthwise', component: show_teacher_attendance_monthwise },
 
     { path: '/admin/account-details', component: account },
     { path: '/admin/payment', component: payment },
@@ -247,35 +249,35 @@ const routes = [
     // { path: '/admin/student/admin/:id/:usertype', component: student_admin, props: true }
     { path: '/admin/slider', component: admin_slider },
     { path: '/admin/add-slider', component: Add_slider },
-    { path: '/admin/edit-slider/:id', component:Edit_slider , props:true},
+    { path: '/admin/edit-slider/:id', component: Edit_slider, props: true },
 
     { path: '/admin/testimonials', component: admin_testimonials },
     { path: '/admin/add-testimonials', component: Add_testimonials },
-    { path: '/admin/edit-testimonials/:id', component:Edit_testimonials , props:true},
+    { path: '/admin/edit-testimonials/:id', component: Edit_testimonials, props: true },
 
     { path: '/admin/about', component: admin_about },
     { path: '/admin/add-about', component: Add_about },
-    { path: '/admin/edit-about/:id', component:Edit_about , props:true},
+    { path: '/admin/edit-about/:id', component: Edit_about, props: true },
 
     { path: '/admin/events', component: admin_events },
     { path: '/admin/add-events', component: Add_events },
-    { path: '/admin/edit-events/:id', component:Edit_events , props:true},
+    { path: '/admin/edit-events/:id', component: Edit_events, props: true },
 
     { path: '/admin/notices', component: admin_notices },
     { path: '/admin/add-notices', component: Add_notices },
-    { path: '/admin/edit-notices/:id', component:Edit_notices , props:true},
+    { path: '/admin/edit-notices/:id', component: Edit_notices, props: true },
 
     { path: '/admin/faculty-members', component: admin_facultymembers },
     { path: '/admin/add-faculty-members', component: Add_facultymembers },
-    { path: '/admin/edit-faculty-members/:id', component:Edit_facultymembers , props:true},
+    { path: '/admin/edit-faculty-members/:id', component: Edit_facultymembers, props: true },
 
-    
+
     { path: '/admin/gallery', component: gallery },
     { path: '/admin/add-gallery', component: add_gallery },
 
     { path: '/admin/news', component: admin_news },
     { path: '/admin/add-news', component: Add_news },
-    { path: '/admin/edit-news/:id', component:Edit_news , props:true},
+    { path: '/admin/edit-news/:id', component: Edit_news, props: true },
 
     { path: '/admin/settings', component: settings },
     { path: '/admin/general-settings', component: general_settings },
@@ -283,11 +285,11 @@ const routes = [
     { path: '/admin/add-subjects', component: add_subjects },
 
     { path: '/admin/marksheet-show', component: show_marksheet },
-    { path: '/admin/add-marksheet/:id', component: add_marksheet, props:true },
-    { path: '/admin/marksheet-laser/:id', component: laser_marksheet, props:true },
-    { path: '/admin/marksheet/:id', component: marksheet, props:true },
-//end of admin section
-// teachers section
+    { path: '/admin/add-marksheet/:id', component: add_marksheet, props: true },
+    { path: '/admin/marksheet-laser/:id', component: laser_marksheet, props: true },
+    { path: '/admin/marksheet/:id', component: marksheet, props: true },
+    //end of admin section
+    // teachers section
     { path: '/teacher/show-notes', component: Tea_show_notes },
     { path: '/teacher/add-notes', component: Tea_add_notes },
     { path: '/teacher/edit-notes/:id', component: Tea_edit_notes, props: true },
@@ -299,14 +301,14 @@ const routes = [
     { path: '/teacher/view-assignment/:id', component: Tea_view_assignment, props: true },
 
     { path: '/teacher/marksheet-show', component: Tea_show_marksheet },
-    { path: '/teacher/add-marksheet/:id', component: Tea_add_marksheet, props:true },
-    { path: '/teacher/marksheet-laser/:id', component: Tea_laser_marksheet, props:true },
-    { path: '/teacher/marksheet/:id', component: Tea_marksheet, props:true },
+    { path: '/teacher/add-marksheet/:id', component: Tea_add_marksheet, props: true },
+    { path: '/teacher/marksheet-laser/:id', component: Tea_laser_marksheet, props: true },
+    { path: '/teacher/marksheet/:id', component: Tea_marksheet, props: true },
     { path: '/teacher/exam-routing', component: Tea_routing },
     { path: '/teacher/notice', component: Tea_notice },
-    {path: '/teacher/show-attendance', component:Tea_attendance},
-    {path: '/teacher/show-class', component:Tea_class},
-    {path: '/teacher/periods/single/:id', component:Tea_class_single, props:true},
+    { path: '/teacher/show-attendance', component: Tea_attendance },
+    { path: '/teacher/show-class', component: Tea_class },
+    { path: '/teacher/periods/single/:id', component: Tea_class_single, props: true },
 
     //student section 
     { path: '/student/show-notes', component: Stu_show_notes },
@@ -316,12 +318,12 @@ const routes = [
     { path: '/student/view-assignment/:id', component: Stu_view_assignment, props: true },
 
     { path: '/student/marksheet-show', component: Stu_show_marksheet },
-    { path: '/student/marksheet/:id', component: Stu_marksheet, props:true },
+    { path: '/student/marksheet/:id', component: Stu_marksheet, props: true },
     { path: '/student/exam-routing', component: Stu_routing },
     { path: '/student/notice', component: Stu_notice },
-    {path: '/student/show-attendance', component:Stu_attendance},
-    {path: '/student/show-class', component:Stu_class},
-    {path: '/student/periods-single/:id', component:Stu_class_single, props:true},
+    { path: '/student/show-attendance', component: Stu_attendance },
+    { path: '/student/show-class', component: Stu_class },
+    { path: '/student/periods-single/:id', component: Stu_class_single, props: true },
 
 ];
 const router = createRouter({
@@ -329,14 +331,14 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach((to,from)=>{
-    if (to.meta.requiresAuth  && !localStorage.getItem('admintoken')) {
-        return {name:adminlogin}
-    } 
-     if(to.meta.requiresAuth == false &&  localStorage.getItem('admintoken')) {
-        return {name:adminHome}
+router.beforeEach((to, from) => {
+    if (to.meta.requiresAuth && !localStorage.getItem('admintoken')) {
+        return { name: adminlogin }
     }
-    
-   
+    if (to.meta.requiresAuth == false && localStorage.getItem('admintoken')) {
+        return { name: adminHome }
+    }
+
+
 })
 export default router;

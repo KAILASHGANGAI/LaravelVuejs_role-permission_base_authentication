@@ -107,10 +107,10 @@ class StudentsController extends Controller
                     $position = strpos($request->photo, ';');
                     $sub = substr($request->photo, 0, $position);
                     $ext = explode('/', $sub)[1];
-                    $name = time().'.'.$ext;
+                    $name = time() . '.' . $ext;
                     $img = Image::make($request->photo)->resize(240, 240);
                     $upload_path = 'images/students/';
-                    $image_url = $upload_path.$name;
+                    $image_url = $upload_path . $name;
                     if ($img->save($image_url)) {
                         $new->image = $image_url;
                     }
@@ -195,10 +195,10 @@ class StudentsController extends Controller
             $position = strpos($request->photo, ';');
             $sub = substr($request->photo, 0, $position);
             $ext = explode('/', $sub)[1];
-            $name = time().'.'.$ext;
+            $name = time() . '.' . $ext;
             $img = Image::make($request->photo)->resize(240, 240);
             $upload_path = 'images/students/';
-            $image_url = $upload_path.$name;
+            $image_url = $upload_path . $name;
             // unlink($update->image);
             if ($img->save($image_url)) {
                 $update->image = $image_url;
@@ -222,12 +222,12 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(students $students, $id)
+    public function destroy($id)
     {
         $data = students::find($id);
         $guardian = guardian::where('students_id', $data->id)->first();
 
-        if (! file_exists($data->image)) {
+        if (!file_exists($data->image)) {
             $data->delete();
             $guardian->delete();
 

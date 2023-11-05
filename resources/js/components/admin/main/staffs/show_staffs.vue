@@ -1,8 +1,8 @@
 <template>
-  <div class="card-body table-responsive">
+  <div class="card-body table-responsive" style="background: white;">
     <h5 class="card-title">All Staffs Details</h5>
 
-    <DataTable
+    <DataTable 
                  :data="staffs"
                 :columns="columns"
 
@@ -11,14 +11,11 @@
       <thead>
         <tr>
           <th scope="col">S.N</th>
-          <th scope="col">Image</th>
+         
           <th scope="col">Name</th>
           <th scope="col">Address</th>
           <th scope="col">Phone</th>
           <th scope="col">Email</th>
-          <th scope="col">Experience</th>
-          <th scope="col">Date_of_Birth</th>
-          <th scope="col">Salary</th>
           <th scope="col">Gender</th>
           <th scope="col">Category</th>
           <th scope="col">Blood_Group</th>
@@ -42,19 +39,14 @@ export default {
       staffs: [],
       columns: [
                     { data: 'id' },
-                    {
-                      data:'images',
-                      render: function (data) {
-                        return  `<img src="${'/'+data}" alt="" height="50">`;
-                        }
-                    },
+                   
                     {data:'name'},
                     {data:'address'},
                     {data:'contact'},
                     {data:'email'},
-                    {data:'experience'},
-                    {data:'dob'},
-                    {data:'salary'},
+                   
+                  
+               
                     {data:'gender'},
                     {data:'staff_category'},
                     {data:'bloodgroup'},

@@ -18,7 +18,7 @@ Route::middleware(['auth:sanctum', 'role:teacher'])->prefix('teacher')->group(fu
     Route::post('/assignment/update', [AssignmentController::class, 'update']);
     Route::get('/download/assignment/{id}', [AssignmentController::class, 'download']);
 
-    Route::resource('/periods', PeriodController::class)->only(['create']);
+    Route::resource('/periods', PeriodController::class)->only(['index', 'show']);
 
     Route::get('/exams/list', [ExamController::class, 'index']);
     Route::post('/routing', [ExamController::class, 'routing']);

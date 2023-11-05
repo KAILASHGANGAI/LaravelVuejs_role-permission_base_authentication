@@ -2,28 +2,22 @@
     <div class="card p-2">
         <h1 class="card-title">Exam details</h1>
         <div class="d-flex justify-content-between">
-            {{ data }}
+           
             <div class="">
-                <span> Faculty:{{ data.faculties_id }}</span> <br>
-                <span> Semester/Yrs :{{ data.semesters_id }}</span> <br>
+                <span> Faculty:{{ data.faculty.faculty_name }}</span> <br>
+                <span> Semester/Yrs :{{ data.semester.semester_years }}</span> <br>
             </div>
             <div>
-                <span>Section :{{ data.section_id }}</span> <br>
+                <span>Section :{{ data.section.section_name }}</span> <br>
                 <span>Exam Type : {{ data.exam_type }}</span> <br>
             </div>
             <div>
-                <span>Subjects :{{ data.subject }}</span> <br>
+               
                 <span>Date :{{ data.date }}</span> <br>
                 <span>Time: {{ data.time }}</span> <br>
             </div>
-            <div>
-                <span>Total Marks: {{ data.total_marks }}</span> <br>
-                <span> Pass Marks :{{ data.pass_marks }}</span> <br>
-            </div>
-            <div>
-                <span> One Ques Marks: {{ data.one_que_marks }}</span> <br>
-                <span> Negative Marks :{{ data.neg_marks }}</span> <br>
-            </div>
+           
+          
         </div>
         <hr>
         <div class="container-fluid">

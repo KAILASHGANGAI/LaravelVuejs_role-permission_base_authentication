@@ -2,7 +2,7 @@
  <!-- Page Wrapper -->
  <div id="wrapper">
 <!-- Sidebar -->
-<sidebar    v-if="$route.path !== '/admin/login' && is('Super-Admin')" ></sidebar>
+<sidebar    v-if="$route.path !== '/admin/login' && is('Super-Admin | accountent')" ></sidebar>
 <TeacherSidebar v-if="$route.path !== '/admin/login' && is('teacher')"></TeacherSidebar>
 <student v-if="$route.path !== '/admin/login' && is('student')"></student>
 <!-- End of Sidebar -->
@@ -70,7 +70,8 @@ created(){
         
         store.dispatch('removeToken')
         store.dispatch('removeUser')
-    }, 150 * 60 * 1000); 
+        localStorage.clear()
+    }, 24 * 60 * 60 * 1000); 
   },
 
     

@@ -8,7 +8,7 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">All Students Details</h6>
             </div>
-            <div class="card-body table-responsive p-6 text-gray-900">
+            <div class="card-body table-responsive p-2 text-gray-900">
                
                 <DataTable
                             :data="students"
@@ -19,16 +19,15 @@
                             <thead>
                                 <tr>
                                 <th>RollNo</th>
-                                <th>Image</th>
+                            
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Phone_no</th>
-                                <th>DOB</th>
+                              
                                 <th>Email</th>
                                 <th>Faculty</th>
                                 <th>Section</th>
                                 <th>Semester/Years</th>
-                                <th>Tuitionfee</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                                 </tr>
@@ -52,21 +51,16 @@
                 
                 columns: [
                     { data: 'id' },
-                     {
-                      data:'image',
-                      render: function (data) {
-                        return  `<img src="${'/'+data}" alt="" height="50">`;
-                        }
-                    },
+                    
                     { data: 'name' },
                     { data: 'address' },
                     { data: 'phone_no' },
-                    { data: 'DOB' },
+                    
                     { data: 'email' },
                     { data: 'faculty.faculty_name' },
                     { data: 'section.section_name' },
-                    { data: 'nationality' },
-                    { data: 'tuitionfee' },
+                    { data: 'semester.semester_years' },
+                  
                    
                     {
                         data: 'id',

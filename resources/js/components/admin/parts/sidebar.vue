@@ -6,7 +6,8 @@
     <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">Admin</div>
+    <div v-if="is('Super-Admin')" class="sidebar-brand-text mx-3">Admin</div>
+    <div v-if="is('accountent')" class="sidebar-brand-text mx-3">Accounten</div>
 </a>
 
 <!-- Divider -->
@@ -28,7 +29,7 @@
 </div>
 
 <!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item">
+<li  v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/students" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
@@ -44,7 +45,7 @@
     </div>
 </li>
 
-<li class="nav-item">
+<li v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/staff-details" data-toggle="collapse" data-target="#Staff"
         aria-expanded="true" aria-controls="Staff">
         <i class="fas fa-fw fa-cog"></i>
@@ -58,7 +59,7 @@
         </div>
     </div>
 </li>
-<li class="nav-item">
+<li  v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/period-details" data-toggle="collapse" data-target="#Class"
         aria-expanded="true" aria-controls="Class">
         <i class="fas fa-fw fa-cog"></i>
@@ -71,7 +72,7 @@
         </div>
     </div>
 </li>
-<li class="nav-item">
+<li v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/attendance-details" data-toggle="collapse" data-target="#Attendance"
         aria-expanded="true" aria-controls="Attendance">
         <i class="fas fa-fw fa-cog"></i>
@@ -85,8 +86,8 @@
         </div>
     </div>
 </li>
-<li class="nav-item">
-    <router-link class="nav-link collapsed" to="/admin/account-details" data-toggle="collapse" data-target="#Account"
+<li class="nav-item" v-if="is('accountent')" >
+    <router-link  class="nav-link collapsed" to="/admin/account-details" data-toggle="collapse" data-target="#Account"
         aria-expanded="true" aria-controls="Account">
         <i class="fas fa-fw fa-cog"></i>
         <span>Account</span>
@@ -99,7 +100,7 @@
         </div>
     </div>
 </li>
-<li class="nav-item">
+<li  v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/show-books" data-toggle="collapse" data-target="#Libreary"
         aria-expanded="true" aria-controls="Libreary">
         <i class="fas fa-fw fa-cog"></i>
@@ -114,7 +115,7 @@
         </div>
     </div>
 </li>
-<li class="nav-item">
+<li  v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/exam-show" data-toggle="collapse" data-target="#Exam"
         aria-expanded="true" aria-controls="Exam">
         <i class="fas fa-fw fa-cog"></i>
@@ -128,7 +129,7 @@
         </div>
     </div>
 </li>
-<li class="nav-item">
+<li  v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/marksheet-show" data-toggle="collapse" data-target="#MarksSheet"
         aria-expanded="true" aria-controls="MarksSheet">
         <i class="fas fa-fw fa-cog"></i>
@@ -142,7 +143,7 @@
         </div>
     </div>
 </li>
-<li class="nav-item">
+<li  v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/show-notes" data-toggle="collapse" data-target="#notes"
         aria-expanded="true" aria-controls="notes">
         <i class="fas fa-fw fa-cog"></i>
@@ -156,7 +157,7 @@
         </div>
     </div>
 </li>
-<li class="nav-item">
+<li  v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/show-notes" data-toggle="collapse" data-target="#Assignment"
         aria-expanded="true" aria-controls="Assignment">
         <i class="fas fa-fw fa-cog"></i>
@@ -171,7 +172,7 @@
     </div>
 </li>
 <!-- Nav Item - Utilities Collapse Menu -->
-<!-- <li class="nav-item">
+<!-- <li  v-if="is('Super-Admin')" class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
         aria-expanded="true" aria-controls="collapseUtilities">
         <i class="fas fa-fw fa-wrench"></i>
@@ -199,7 +200,7 @@
 </div>
 
 <!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item">
+<li  v-if="is('Super-Admin')" class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
         aria-expanded="true" aria-controls="collapsePages">
         <i class="fas fa-fw fa-folder"></i>
@@ -219,7 +220,7 @@
         </div>
     </div>
 </li>
-<li class="nav-item">
+<li  v-if="is('Super-Admin')" class="nav-item">
     <router-link class="nav-link collapsed" to="/admin/show-notes" data-toggle="collapse" data-target="#general"
         aria-expanded="true" aria-controls="general">
         <i class="fas fa-fw fa-cog"></i>

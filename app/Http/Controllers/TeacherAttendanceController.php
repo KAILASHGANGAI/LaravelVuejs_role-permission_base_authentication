@@ -10,6 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class TeacherAttendanceController extends Controller
 {
+    public function bymonth(Request $request)
+    {
+
+        $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
+
+        if (isset($request->month) && isset($request->year)) {
+            $month = $request->month;
+            $year = $request->year;
+        }
+
+        $staffDetails = Staff::select('id', 'name')->with([
+            'attendance' => function ($query) use ($month, $year) {
+
+                $query->select('id', 'staff_id', 'status', 'date')->whereMonth('date', $month)
+                    ->whereYear('date', $year)
+                    ->orderBy('date');
+            },
+        ])->get();
+        return response()->json($staffDetails);
+    }
     public function search(Request $request)
     {
         $staffDetails = Staff::select('id', 'name')->withCount([

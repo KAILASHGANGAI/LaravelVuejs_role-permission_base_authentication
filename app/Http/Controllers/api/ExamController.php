@@ -69,10 +69,9 @@ class ExamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(exam $exam)
+    public function show($id)
     {
-        $ques = $exam->ques;
-
+        $exam  = exam::with(['faculty', 'semester', 'section'])->where('id', $id)->first();
         return response()->json($exam);
     }
 

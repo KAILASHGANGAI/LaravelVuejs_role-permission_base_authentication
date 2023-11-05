@@ -1,6 +1,7 @@
 <template>
     <h4>Show Staff attendance 
-        <router-link class="btn btn-primary" to="/admin/create-teacher-attendance">Take Attendance</router-link> </h4>          
+        <router-link class="btn btn-primary" to="/admin/create-teacher-attendance">Take Attendance</router-link>         
+        <router-link class="btn btn-info mx-2" to="/admin/show-teacher-attendance-monthwise">MonthWise Attendance Show</router-link> </h4>          
 
 <input type="month" v-model="formattedDate" @change="getdata" class="btn btn-success mx-2" id="month">
 <div class="container pt-4">
