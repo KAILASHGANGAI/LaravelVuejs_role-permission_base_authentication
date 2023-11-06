@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    
     /**
      * Create a new controller instance.
      *
@@ -27,7 +25,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    
+
     /**
      * Show the application dashboard.
      *
@@ -37,7 +35,7 @@ class HomeController extends Controller
     {
         return view('admin/login');
     }
-  
+
     /**
      * Show the application dashboard.
      *
@@ -47,5 +45,4 @@ class HomeController extends Controller
     {
         return view('managerHome');
     }
-
 }

@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class question extends Model
 {
     use HasFactory;
-   protected $fillable=[
 
-    'exams_id',
-    'questions',
-    'option1',
-    'option2',
-    'option3',
-    'option4',
-    'trueoption'
+    protected $fillable = [
+
+        'exams_id',
+        'questions',
+        'option1',
+        'option2',
+        'option3',
+        'option4',
+        'trueoption',
     ];
 }

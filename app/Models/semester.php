@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class semester extends Model
 {
     use HasFactory;
+
     protected $table = 'semesters';
-    protected $fillable =['semester_years'];
+
+    protected $fillable = ['semester_years'];
+
     public $timestamps = false;
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Models\faculty;
 use App\Http\Controllers\Controller;
+use App\Models\faculty;
 use Illuminate\Http\Request;
 
 class FacultyController extends Controller
@@ -16,6 +16,7 @@ class FacultyController extends Controller
     public function index()
     {
         $data = faculty::all();
+
         return response()->json($data);
     }
 
@@ -32,7 +33,6 @@ class FacultyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,14 +47,13 @@ class FacultyController extends Controller
         }
 
         return response()->json([
-            'status' => 'Data saved successfully'
+            'status' => 'Data saved successfully',
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\faculty  $faculty
      * @return \Illuminate\Http\Response
      */
     public function show(faculty $faculty)
@@ -65,7 +64,6 @@ class FacultyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\faculty  $faculty
      * @return \Illuminate\Http\Response
      */
     public function edit(faculty $faculty)
@@ -76,8 +74,6 @@ class FacultyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\faculty  $faculty
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, faculty $faculty)
@@ -96,11 +92,11 @@ class FacultyController extends Controller
         $data = faculty::find($id);
         if ($data->delete()) {
             return response()->json([
-                'status' => 'Data deleted successfully'
+                'status' => 'Data deleted successfully',
             ]);
         } else {
             return response()->json([
-                'status' => 'Data not deleted successfully'
+                'status' => 'Data not deleted successfully',
             ]);
         }
     }

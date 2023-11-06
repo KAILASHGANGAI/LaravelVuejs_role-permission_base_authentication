@@ -24,7 +24,7 @@
                     <td>{{ data.user.name }}</td>
                     <td>{{ data.topic }}</td>
                     <td>{{ data.deadline }}</td>
-                    <td>{{ data.created_at }}</td>
+                    <td>{{ data.created_at.split('T')[0] }}</td>
                     <td>
 
                         <button class=" btn btn-success" @click="EditAssignment(data.id)">

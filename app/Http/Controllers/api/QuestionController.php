@@ -16,6 +16,7 @@ class QuestionController extends Controller
     public function index()
     {
         $data = question::all();
+
         return response()->json($data);
     }
 
@@ -32,7 +33,6 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,14 +46,13 @@ class QuestionController extends Controller
         $new->option4 = $request->option4;
         $new->trueoption = $request->trueoption;
         if ($new->save()) {
-            return response()->json(['status'=>"Successfully Added"]);
+            return response()->json(['status' => 'Successfully Added']);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\question  $question
      * @return \Illuminate\Http\Response
      */
     public function show(question $question)
@@ -64,7 +63,6 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\question  $question
      * @return \Illuminate\Http\Response
      */
     public function edit(question $question)
@@ -75,8 +73,6 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\question  $question
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, question $question)
@@ -89,21 +85,20 @@ class QuestionController extends Controller
         $question->option4 = $request->option4;
         $question->trueoption = $request->trueoption;
         if ($question->save()) {
-            return response()->json(['status'=>"Successfully Added"]);
+            return response()->json(['status' => 'Successfully Added']);
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\question  $question
      * @return \Illuminate\Http\Response
      */
     public function destroy(question $question)
     {
         if ($question->delete()) {
             return response()->json([
-            "status"=>"deleted successfully"
+                'status' => 'deleted successfully',
             ]);
         }
     }

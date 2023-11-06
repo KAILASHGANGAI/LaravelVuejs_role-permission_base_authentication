@@ -11,12 +11,14 @@ class sectionsController extends Controller
     public function index()
     {
         $data = section::all();
+
         return response()->json($data);
     }
+
     public function store(Request $request)
     {
-        
-        foreach($request->sections as $data){
+
+        foreach ($request->sections as $data) {
             if (isset($data)) {
                 $new = new section();
                 $new->section_name = $data;
@@ -25,18 +27,20 @@ class sectionsController extends Controller
         }
 
         return response()->json([
-            'status'=>'Data saved successfully'
+            'status' => 'Data saved successfully',
         ]);
     }
-    public function delete($id){
+
+    public function delete($id)
+    {
         $data = section::find($id);
         if ($data->delete()) {
             return response()->json([
-                'status'=>'Data deleted successfully'
+                'status' => 'Data deleted successfully',
             ]);
-        }else{
+        } else {
             return response()->json([
-                'status'=>'Data not deleted successfully'
+                'status' => 'Data not deleted successfully',
             ]);
         }
     }

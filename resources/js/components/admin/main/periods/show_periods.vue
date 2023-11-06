@@ -1,7 +1,7 @@
 <template>
-  <div class="card p-2">
+  <div class="card-body  p-2" style="background: white;">
     <h5 class="card-title">Periods</h5>
-    <table class="table">
+    <table class="table table-info">
       <thead>
         <tr>
           <th>S.N</th>
@@ -24,12 +24,12 @@
             <button class="btn-success" @click="view(data.id)">
               <i class="eye"> View </i>
             </button>
-            <button class="btn-success" @click="EditPeriod(data.id)">
+            <!-- <button class="btn-success" @click="EditPeriod(data.id)">
              Edit
             </button>
             <button class="btn-danger" @click="deletePeriod(data.id)">
              Delete
-            </button>
+            </button> -->
           </td>
         </tr>
       </tbody>

@@ -10,7 +10,7 @@
             <span>Faculty: {{ exam.faculty.faculty_name }}</span> <br>
             <span>semester: {{ exam.semester.semester_years }}</span>
         </div>
-        <table class="table border text-center w-100">
+        <table class=" border text-center w-100">
             <tr>
                 <th>S.N</th>
                 <th>Students Name</th>
@@ -189,12 +189,4 @@ export default {
     },
 };
 </script>
-<style scoped>
-.table,
-tr,
-th,
-td {
-   
-    padding: 2px;
-}
-</style>
+

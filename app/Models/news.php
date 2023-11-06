@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class news extends Model
 {
     use HasFactory;
+
     protected $table = 'news';
+
     protected $fillable = ['
     heading',
-    'description',
-    'image'];
+        'description',
+        'image'];
 }

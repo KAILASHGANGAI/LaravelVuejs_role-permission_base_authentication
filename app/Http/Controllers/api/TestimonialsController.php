@@ -2,81 +2,91 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Models\testimonials;
 use App\Http\Controllers\Controller;
+use App\Models\testimonials;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class TestimonialsController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = testimonials::all();
+
         return response()->json($data);
     }
-    
-    public function store(Request $req){
+
+    public function store(Request $req)
+    {
         $new = new testimonials();
         $new->name = $req->name;
         $new->post = $req->post;
         $new->message = $req->message;
-        if($req->image){
-            $position = strpos($req->image,';');
-            $sub = substr($req->image, 0 , $position);
-            $ext = explode('/',$sub)[1];
-            $name = time().".".$ext;
-            $img = Image::make($req->image)->resize(240,240);
+        if ($req->image) {
+            $position = strpos($req->image, ';');
+            $sub = substr($req->image, 0, $position);
+            $ext = explode('/', $sub)[1];
+            $name = time().'.'.$ext;
+            $img = Image::make($req->image)->resize(240, 240);
             $upload_path = 'images/testimonials/';
             $image_url = $upload_path.$name;
-          
-            if($img->save($image_url)){
+
+            if ($img->save($image_url)) {
                 $new->image = $image_url;
             }
-          }
+        }
         if ($new->save()) {
             return response()->json([
-                'status'=>'Testimonials added successfully'
+                'status' => 'Testimonials added successfully',
             ]);
-        }else{
+        } else {
             return response()->json([
-                'status'=>'Testimonials Not added successfully'
+                'status' => 'Testimonials Not added successfully',
             ]);
         }
-    } 
-    function edit($id){
+    }
+
+    public function edit($id)
+    {
         $data = testimonials::find($id);
+
         return response()->json($data);
     }
-    function update(Request $req, $id){
+
+    public function update(Request $req, $id)
+    {
         $update = testimonials::find($id);
         $update->name = $req->name;
         $update->post = $req->post;
         $update->message = $req->message;
-        if($req->image != $update->image){
-            $position = strpos($req->image,';');
-            $sub = substr($req->image, 0 , $position);
-            $ext = explode('/',$sub)[1];
-            $name = time().".".$ext;
-            $img = Image::make($req->image)->resize(240,240);
+        if ($req->image != $update->image) {
+            $position = strpos($req->image, ';');
+            $sub = substr($req->image, 0, $position);
+            $ext = explode('/', $sub)[1];
+            $name = time().'.'.$ext;
+            $img = Image::make($req->image)->resize(240, 240);
             $upload_path = 'images/testimonials/';
             $image_url = $upload_path.$name;
-          if (isset($update->image)) {
+            if (isset($update->image)) {
                 unlink($update->image);
-          }
-            if($img->save($image_url)){
+            }
+            if ($img->save($image_url)) {
                 $update->image = $image_url;
             }
-          }
+        }
         if ($update->save()) {
             return response()->json([
-                'status'=>'Testimonials updated successfully'
+                'status' => 'Testimonials updated successfully',
             ]);
-        }else{
+        } else {
             return response()->json([
-                'status'=>'Testimonials Not updated successfully'
+                'status' => 'Testimonials Not updated successfully',
             ]);
         }
     }
-    function delete($id){
+
+    public function delete($id)
+    {
         $data = testimonials::find($id);
         if (isset($data->image)) {
             unlink($data->image);
@@ -84,11 +94,11 @@ class TestimonialsController extends Controller
         }
         if ($data->delete()) {
             return response()->json([
-                'status'=>'Testimonials deleted successfully'
+                'status' => 'Testimonials deleted successfully',
             ]);
-        }else{
+        } else {
             return response()->json([
-                'status'=>'Testimonials not deleted'
+                'status' => 'Testimonials not deleted',
             ]);
         }
     }

@@ -11,12 +11,14 @@ class SemesterController extends Controller
     public function index()
     {
         $data = semester::all();
+
         return response()->json($data);
     }
+
     public function store(Request $request)
     {
-        
-        foreach($request->classes as $data){
+
+        foreach ($request->classes as $data) {
             if (isset($data)) {
                 $new = new semester();
                 $new->semester_years = $data;
@@ -25,18 +27,20 @@ class SemesterController extends Controller
         }
 
         return response()->json([
-            'status'=>'Data saved successfully'
+            'status' => 'Data saved successfully',
         ]);
     }
-    public function delete($id){
+
+    public function delete($id)
+    {
         $data = semester::find($id);
         if ($data->delete()) {
             return response()->json([
-                'status'=>'Data deleted successfully'
+                'status' => 'Data deleted successfully',
             ]);
-        }else{
+        } else {
             return response()->json([
-                'status'=>'Data not deleted successfully'
+                'status' => 'Data not deleted successfully',
             ]);
         }
     }

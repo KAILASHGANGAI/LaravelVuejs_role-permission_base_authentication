@@ -8,15 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 use LaravelAndVueJS\Traits\LaravelPermissionToVueJS;
-
-
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasRoles, LaravelPermissionToVueJS, Notifiable;
-
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +48,6 @@ class User extends Authenticatable
 
     public function takeatd(): BelongsTo
     {
-        return $this->belongsTo(takeatd::class, "staff_id", 'id');
+        return $this->belongsTo(takeatd::class, 'staff_id', 'id');
     }
 }

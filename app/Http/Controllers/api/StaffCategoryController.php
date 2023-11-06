@@ -11,12 +11,14 @@ class StaffCategoryController extends Controller
     public function index()
     {
         $datas = staff_category::all();
+
         return response()->json($datas);
     }
+
     public function store(Request $request)
     {
         $request->validate([
-            'category_name' => 'required | unique:staff_categories'
+            'category_name' => 'required | unique:staff_categories',
         ]);
 
         $new = new staff_category();
@@ -24,20 +26,22 @@ class StaffCategoryController extends Controller
 
         if ($new->save()) {
             return response()->json([
-                'status' => 'Category Added'
+                'status' => 'Category Added',
             ]);
         }
     }
+
     public function delete($id)
     {
         $data = staff_category::find($id);
         if ($data->delete()) {
             return response()->json([
-                'status' => 'Category Deleted'
+                'status' => 'Category Deleted',
             ]);
         }
+
         return response()->json([
-            'status' => 'Category Not Found'
+            'status' => 'Category Not Found',
         ]);
     }
 }

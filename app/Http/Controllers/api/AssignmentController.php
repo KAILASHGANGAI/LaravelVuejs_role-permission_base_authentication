@@ -4,14 +4,10 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\assignment;
-use GuzzleHttp\Psr7\Response;
+use App\Models\students;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as Image;
-
-
-use function PHPUnit\Framework\returnSelf;
 
 class AssignmentController extends Controller
 {
@@ -22,16 +18,25 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        $role = Auth::user()->roles->pluck('name');
-        if ($role = 'teacher') {
+        $user = Auth::user();
+        if ($user->hasRole('teacher')) {
             $data = assignment::with('faculty:id,faculty_name', 'semester:id,semester_years', 'section:id,section_name', 'user:id,name')->where('teachers_id', Auth::id())->get();
         }
-        if ($role = 'admin' || $role = 'Super-Admin') {
+        if ($user->hasRole('admin') || $user->hasRole('Super-Admin')) {
             $data = assignment::with('faculty:id,faculty_name', 'semester:id,semester_years', 'section:id,section_name', 'user:id,name')->get();
         }
-        if ($role = 'student') {
-            $data = assignment::with('faculty:id,faculty_name', 'semester:id,semester_years', 'section:id,section_name', 'user:id,name')->get();
+        if ($user->hasRole('student')) {
+            $student = students::select('id', 'faculty_id', 'semesters_id', 'section_id')
+                ->where('user_id', Auth::id())
+                ->first();
+
+            $data = assignment::with('faculty:id,faculty_name', 'semester:id,semester_years', 'section:id,section_name', 'user:id,name')
+                ->where('faculty_id', $student->faculty_id)
+                ->where('semesters_id', $student->semesters_id)
+                ->where('sections_id', $student->section_id)
+                ->get();
         }
+
         return response()->json($data);
     }
 
@@ -49,14 +54,13 @@ class AssignmentController extends Controller
         if (Storage::exists($filePath)) {
             return response()->download($fullPath);
         } else {
-            return "failed";
+            return 'failed';
         }
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -80,13 +84,13 @@ class AssignmentController extends Controller
 
             return response()->json(['status' => 'File uploaded successfully.']);
         }
+
         return response()->json(['status' => 'File Not uploaded.']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\assignment  $assignment
      * @return \Illuminate\Http\Response
      */
     public function show(assignment $assignment)
@@ -97,7 +101,6 @@ class AssignmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\assignment  $assignment
      * @return \Illuminate\Http\Response
      */
     public function edit(assignment $assignment)
@@ -108,7 +111,6 @@ class AssignmentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\assignment  $assignment
      * @return \Illuminate\Http\Response
      */
@@ -133,13 +135,13 @@ class AssignmentController extends Controller
             $assignment->file_path = 'public/' . $file_path;
         }
         $assignment->save();
+
         return response()->json(['ststus' => 'assignments Updated successfully.']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\assignment  $assignment
      * @return \Illuminate\Http\Response
      */
     public function destroy(assignment $assignment)
@@ -151,7 +153,7 @@ class AssignmentController extends Controller
         }
         if ($assignment->delete()) {
             return response()->json([
-                "status" => "deleted successfully"
+                'status' => 'deleted successfully',
             ]);
         }
     }

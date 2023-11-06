@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Models\students;
 use App\Http\Controllers\Controller;
+use App\Models\students;
 use App\Models\takeatd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +19,7 @@ class TakeatdController extends Controller
     {
 
         $data = takeatd::with(['faculty', 'semester', 'section', 'user:id,name'])->get();
+
         return response()->json($data);
     }
 
@@ -35,7 +36,6 @@ class TakeatdController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -65,15 +65,14 @@ class TakeatdController extends Controller
             ->where('semesters_id', $takeatd->semester->id)->get();
 
         return response()->json([
-            "created" => $takeatd,
-            "students" => $data
+            'created' => $takeatd,
+            'students' => $data,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\takeatd  $takeatd
      * @return \Illuminate\Http\Response
      */
     public function edit(takeatd $takeatd)
@@ -84,8 +83,6 @@ class TakeatdController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\takeatd  $takeatd
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, takeatd $takeatd)
@@ -104,6 +101,7 @@ class TakeatdController extends Controller
         $data = takeatd::find($id);
         $data->attendances()->delete();
         $data->delete();
+
         return response()->json(['status' => 'successfully deleted']);
     }
 }

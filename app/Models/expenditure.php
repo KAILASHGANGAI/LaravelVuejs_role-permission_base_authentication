@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class expenditure extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'details', 'amount'
+        'details', 'amount',
     ];
 }

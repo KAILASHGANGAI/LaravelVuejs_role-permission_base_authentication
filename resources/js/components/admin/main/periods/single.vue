@@ -7,10 +7,10 @@
                 Faculty : {{ datas.faculty_id }}
             </h6>
             <h6>
-                Faculty : {{ datas.semesters_id }}
+                Semester / Years : {{ datas.semesters_id }}
             </h6>
             <h6>
-                Faculty :{{ datas.section_id }}
+                Section :{{ datas.section_id }}
             </h6>
             <h6>Number Of Periods :{{ datas.no_of_periods }}</h6>
         </div>

@@ -8,25 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class note extends Model
 {
     use HasFactory;
-protected $fillable = [
-        'subject'.	
-        'faculty_id',	
-        'semesters_id',	
-        'teachers_id',	
-        'topic',	
-        'file_path'
-        ];
+
+    protected $fillable = [
+        'subject'.
+        'faculty_id',
+        'semesters_id',
+        'teachers_id',
+        'topic',
+        'file_path',
+    ];
+
     public function faculty()
     {
-        return $this->hasOne('App\Models\faculty','id','faculty_id');
+        return $this->hasOne('App\Models\faculty', 'id', 'faculty_id');
     }
+
     public function semester()
     {
-        return $this->hasOne('App\Models\semester','id','semesters_id');
+        return $this->hasOne('App\Models\semester', 'id', 'semesters_id');
     }
+
     public function user()
     {
-        return $this->hasOne('App\Models\user','id','teachers_id');
+        return $this->hasOne('App\Models\user', 'id', 'teachers_id');
     }
-   
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
-use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 use App\Models\blood_group;
 use App\Models\faculty;
 use App\Models\guardian;
@@ -11,10 +11,8 @@ use App\Models\semester;
 use App\Models\students;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManagerStatic as Image;
-use SebastianBergmann\Environment\Console;
 
 //use Intervention\Image\ImageManager;
 
@@ -50,12 +48,13 @@ class StudentsController extends Controller
         $faculty = faculty::all();
         $sem = semester::all();
         $section = section::all();
+
         return response()->json(
             [
                 'blood' => $blood,
                 'faculty' => $faculty,
                 'sem' => $sem,
-                'section' => $section
+                'section' => $section,
             ]
         );
     }
@@ -63,7 +62,6 @@ class StudentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -77,13 +75,13 @@ class StudentsController extends Controller
             'section' => 'required',
             'sem' => 'required',
             'gender' => 'required',
-            'tuitionfee' => 'required'
+            'tuitionfee' => 'required',
         ]);
         try {
-            $user =  User::create([
+            $user = User::create([
                 'name' => $request->studentname,
                 'email' => $request->email,
-                'password' => Hash::make('password')
+                'password' => Hash::make('password'),
             ]);
             $user->assignRole('student');
 
@@ -109,7 +107,7 @@ class StudentsController extends Controller
                     $position = strpos($request->photo, ';');
                     $sub = substr($request->photo, 0, $position);
                     $ext = explode('/', $sub)[1];
-                    $name = time() . "." . $ext;
+                    $name = time() . '.' . $ext;
                     $img = Image::make($request->photo)->resize(240, 240);
                     $upload_path = 'images/students/';
                     $image_url = $upload_path . $name;
@@ -125,6 +123,7 @@ class StudentsController extends Controller
                     ]);
                 }
             }
+
             return response()->json([
                 'status' => 'record Already Exist',
             ]);
@@ -138,13 +137,13 @@ class StudentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\students  $students
      * @return \Illuminate\Http\Response
      */
     public function show(students $students)
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -154,13 +153,13 @@ class StudentsController extends Controller
     public function edit($id)
     {
         $data = students::find($id);
+
         return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\students  $students
      * @return \Illuminate\Http\Response
      */
@@ -175,7 +174,7 @@ class StudentsController extends Controller
             'section' => 'required',
             'sem' => 'required',
             'gender' => 'required',
-            'tuitionfee' => 'required'
+            'tuitionfee' => 'required',
         ]);
         $update = students::find($request->id);
         $update->name = $request->studentname;
@@ -196,7 +195,7 @@ class StudentsController extends Controller
             $position = strpos($request->photo, ';');
             $sub = substr($request->photo, 0, $position);
             $ext = explode('/', $sub)[1];
-            $name = time() . "." . $ext;
+            $name = time() . '.' . $ext;
             $img = Image::make($request->photo)->resize(240, 240);
             $upload_path = 'images/students/';
             $image_url = $upload_path . $name;
@@ -209,7 +208,7 @@ class StudentsController extends Controller
         if ($update->save()) {
             return response()->json([
                 'status' => 'record saved successfullly',
-                $update->guardian->id
+                $update->guardian->id,
             ]);
         } else {
             return response()->json([
@@ -221,18 +220,17 @@ class StudentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\students  $students
      * @return \Illuminate\Http\Response
      */
-    public function destroy(students $students, $id)
+    public function destroy($id)
     {
         $data = students::find($id);
         $guardian = guardian::where('students_id', $data->id)->first();
 
-
         if (!file_exists($data->image)) {
             $data->delete();
             $guardian->delete();
+
             return response()->json(['status' => 'record deleted successfully']);
         } else {
             if (file_exists($data->image)) {
@@ -242,6 +240,7 @@ class StudentsController extends Controller
 
             $data->delete();
             $guardian->delete();
+
             return response()->json(['status' => 'record deleted successfully']);
         }
     }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Models\faculty;
 use App\Models\period;
-use App\Http\Controllers\Controller;
 use App\Models\section;
 use App\Models\semester;
 use Illuminate\Http\Request;
@@ -19,6 +19,7 @@ class PeriodController extends Controller
     public function index()
     {
         $data = period::all();
+
         return response()->json($data);
     }
 
@@ -32,35 +33,35 @@ class PeriodController extends Controller
         $section = section::all();
         $faculty = faculty::all();
         $sem = semester::all();
+
         return response()->json(
             [
-                'section'=>$section,
-                'faculty'=>$faculty,
-                'sem'=>$sem
+                'section' => $section,
+                'faculty' => $faculty,
+                'sem' => $sem,
             ]
-            );
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $new = new period();
-        $new->faculty_id =$request->faculty;
+        $new->faculty_id = $request->faculty;
         $new->semesters_id = $request->semester;
         $new->section_id = $request->section;
-        	$new->no_of_periods = $request->period_no;
-            $new->teachers = $request->teacher;
-            $new->subjects = $request->subject;
-            $new->starttimes=$request->starttime;
-            $new->endtimes = $request->endtime;
-            if($new->save()){
-                return response()->json("successful");
-            }
+        $new->no_of_periods = $request->period_no;
+        $new->teachers = $request->teacher;
+        $new->subjects = $request->subject;
+        $new->starttimes = $request->starttime;
+        $new->endtimes = $request->endtime;
+        if ($new->save()) {
+            return response()->json('successful');
+        }
     }
 
     /**
@@ -72,13 +73,13 @@ class PeriodController extends Controller
     public function show($id)
     {
         $data = period::find($id);
+
         return response()->json($data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\period  $period
      * @return \Illuminate\Http\Response
      */
     public function edit(period $period)
@@ -89,8 +90,6 @@ class PeriodController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\period  $period
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, period $period)
@@ -101,7 +100,6 @@ class PeriodController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\period  $period
      * @return \Illuminate\Http\Response
      */
     public function destroy(period $period)

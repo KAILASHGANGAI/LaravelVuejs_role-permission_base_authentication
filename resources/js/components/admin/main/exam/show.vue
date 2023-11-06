@@ -2,8 +2,8 @@
     <div class="container card">
         <h1 class="card-title">Exams Lists</h1>
 
-        <div class="responsive">
-            <table class="table border">
+        <div class="table-responsive">
+            <table class="table ">
                 <thead class="bg-success text-white">
                     <th>S.N</th>
                     <th>Faculty</th>

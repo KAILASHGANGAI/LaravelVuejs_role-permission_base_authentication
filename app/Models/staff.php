@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class staff extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'address',
@@ -23,8 +24,7 @@ class staff extends Model
         'experience',
         'education',
         'images',
-        'user_id'
-
+        'user_id',
 
     ];
 

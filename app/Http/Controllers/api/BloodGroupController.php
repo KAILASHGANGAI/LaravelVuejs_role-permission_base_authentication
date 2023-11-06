@@ -11,12 +11,14 @@ class BloodGroupController extends Controller
     public function index()
     {
         $data = blood_group::all();
+
         return response()->json($data);
     }
+
     public function store(Request $request)
     {
-        
-        foreach($request->bloods as $data){
+
+        foreach ($request->bloods as $data) {
             if (isset($data)) {
                 $new = new blood_group();
                 $new->blood_group = $data;
@@ -25,18 +27,20 @@ class BloodGroupController extends Controller
         }
 
         return response()->json([
-            'status'=>'Data saved successfully'
+            'status' => 'Data saved successfully',
         ]);
     }
-    public function delete($id){
+
+    public function delete($id)
+    {
         $data = blood_group::find($id);
         if ($data->delete()) {
             return response()->json([
-                'status'=>'Data deleted successfully'
+                'status' => 'Data deleted successfully',
             ]);
-        }else{
+        } else {
             return response()->json([
-                'status'=>'Data not deleted successfully'
+                'status' => 'Data not deleted successfully',
             ]);
         }
     }
