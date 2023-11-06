@@ -23,6 +23,7 @@ import single_period from '../components/admin/main/periods/single.vue'
 
 import add_attendance from '../components/admin/main/attendance/add_attendance.vue'
 import show_attendance from '../components/admin/main/attendance/show_attendance.vue'
+import show_attendance_month from '../components/admin/main/attendance/monthwise.vue'
 import single_att from '../components/admin/main/attendance/single_attendance.vue'
 import detail_att from '../components/admin/main/attendance/detail.vue'
 
@@ -193,6 +194,7 @@ const routes = [
 
     { path: '/admin/add-attendance', component: add_attendance },
     { path: '/admin/attendance-details', component: show_attendance },
+    { path: '/admin/show-student-attendance-monthwise', component: show_attendance_month },
     {
         path: '/admin/single-attendance/:id',
         component: single_att,

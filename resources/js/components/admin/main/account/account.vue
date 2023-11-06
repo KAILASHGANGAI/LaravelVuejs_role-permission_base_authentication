@@ -1,9 +1,27 @@
 <template>
-    <h1>account</h1>
 
-    <section class="container-fluid">
+    <section class="container-fluid card-body ">
         <div class="table-responsive">
-            <table class="table table-striped">
+            <h4 class="card-title">Accounts Details</h4>
+            <DataTable :data="datas" :columns="columns" > 
+                <thead>
+                    <tr>
+                        <th scope="col">S.N</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone_no</th>
+                        <th scope="col">faculty</th>
+                        <!-- <th scope="col">Semester/Year</th>
+                        <th scope="col">Section</th> -->
+                        <th scope="col">Deposited</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Due_Left</th>
+                        <!-- <th scope="col">Payment_method</th> -->
+                        <th scope="col">Fee_type</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead> 
+            </DataTable>
+            <!-- <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">S.N</th>
@@ -36,7 +54,7 @@
                         <td>{{ data.created_at.split("T")[0] }}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>
     </section>
 </template>
@@ -50,6 +68,20 @@ export default {
     data() {
         return {
             datas: [],
+            columns:[
+                {data:'id'},
+                {data:'students.name'},
+                {data:'students.phone_no'},
+                {data:'students.faculty.faculty_name'},
+                // {data:'students.semester.semester_years'},
+                // {data:'students.section.section_name'},
+                {data:'deposited'},
+                {data:'discount'},
+                {data:'left_due'},
+                // {data:'payment_method'},
+                {data:'fee_type'},
+                {data:'created_at'},
+            ]
         };
     },
     created() {

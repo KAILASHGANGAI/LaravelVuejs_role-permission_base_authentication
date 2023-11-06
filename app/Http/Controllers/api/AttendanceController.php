@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\attendance;
 use App\Models\students;
 use App\Models\takeatd;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -17,7 +18,6 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -27,7 +27,6 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -41,34 +40,39 @@ class AttendanceController extends Controller
         if ($request->createattendances_id) {
             $atten = takeatd::find($request->createattendances_id);
             $atten->status = 1;
+
             $atten->save();
-            if (! empty($request->attendances)) {
+            if (!empty($request->attendances)) {
                 foreach ($request->attendances as $value) {
                     $new = new attendance();
                     $new->students_id = $value;
                     $new->createattendances_id = $request->createattendances_id;
                     $new->status = 1;
+                    $new->faculty_id = $atten->faculty_id;
+                    $new->semesters_id = $atten->semesters_id;
+                    $new->section_id = $atten->section_id;
+                    $new->date = Carbon::now()->format('Y-m-d');
                     $new->save();
                 }
-
             }
-            if (! empty($request->absent)) {
+            if (!empty($request->absent)) {
                 foreach ($request->absent as $value) {
                     $new = new attendance();
                     $new->students_id = $value;
                     $new->createattendances_id = $request->createattendances_id;
                     $new->status = 0;
+                    $new->faculty_id = $atten->faculty_id;
+                    $new->semesters_id = $atten->semesters_id;
+                    $new->section_id = $atten->section_id;
+                    $new->date = Carbon::now()->format('Y-m-d');
                     $new->save();
                 }
             }
 
             return response()->json(['status' => 'success']);
-
         } else {
             return response()->json(['status' => 'error']);
-
         }
-
     }
 
     /**
@@ -99,7 +103,6 @@ class AttendanceController extends Controller
             ->where('semester_yrs', $takeatd->semesters_id)->get();
 
         return response()->json($data);
-
     }
 
     /**
@@ -120,5 +123,23 @@ class AttendanceController extends Controller
     public function destroy(attendance $attendance)
     {
         //
+    }
+
+    public function bymonth(Request $request)
+    {
+
+        $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
+
+        if (isset($request->month) && isset($request->year)) {
+            $month = $request->month;
+            $year = $request->year;
+        }
+        $data = students::select('id', 'name', 'faculty_id', 'semesters_id')->with(['attendance' => function ($query) use ($month, $year) {
+            $query->select('id', 'students_id', 'status', 'date')->whereMonth('date', $month)
+                ->whereYear('date', $year)
+                ->orderBy('date');
+        }])->where('faculty_id', $request->faculty)->where('semesters_id', $request->semester)->get();
+        return response()->json($data);
     }
 }

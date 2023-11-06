@@ -12,22 +12,19 @@
                 <th>Semester/Yrs</th>
                 <th>Teacher</th>
                 <th>Topic</th>
-
-                <th>File Path</th>
                 <th>Date</th>
                 <th>Action</th>
             </thead>
             <tbody>
                 <tr v-for="(data, index) in datas" :key="data.id">
-                    <td>{{+ + index }}</td>
+                    <td>{{++ index }}</td>
                     <td>{{ data.subject }} </td>
                     <td>{{ data.faculty.faculty_name }}</td>
                     <td>{{ data.semester.semester_years}}</td>
                     <td>{{ data.user.name }}</td>
                     <td>{{ data.topic }}</td>
-                    <td>{{ data.file_path }}</td>
-
-                    <td>{{ data.created_at }}</td>
+                    
+                    <td>{{ data.created_at.split('T')[0] }}</td>
                     <td>
 
                         <button class=" btn btn-success" @click="Editbotes(data.id)">

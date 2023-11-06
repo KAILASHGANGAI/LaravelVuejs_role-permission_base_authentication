@@ -63,6 +63,8 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
 
     Route::resource('/create-attendance', TakeatdController::class);
     Route::resource('/attendance', AttendanceController::class);
+    Route::post('/attendance/students/bymonth', [AttendanceController::class, 'bymonth']);
+
     Route::post('/attendance/teacher', [TeacherAttendanceController::class, 'store']);
     Route::get('/attendance/teacher/list', [TeacherAttendanceController::class, 'index']);
     Route::post('/attendance/teacher/bydate', [TeacherAttendanceController::class, 'search']);

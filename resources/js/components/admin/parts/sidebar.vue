@@ -86,7 +86,7 @@
         </div>
     </div>
 </li>
-<li class="nav-item" v-if="is('accountent')" >
+<li class="nav-item" v-if="is('accountent|Super-Admin')" >
     <router-link  class="nav-link collapsed" to="/admin/account-details" data-toggle="collapse" data-target="#Account"
         aria-expanded="true" aria-controls="Account">
         <i class="fas fa-fw fa-cog"></i>

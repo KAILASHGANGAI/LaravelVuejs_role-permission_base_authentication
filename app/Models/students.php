@@ -74,8 +74,8 @@ class students extends Model
         return $this->hasMany('App\Models\marks', 'student_id', 'id');
     }
 
-    public function attendance(): HasMany
+    public function attendance()
     {
-        return $this->hasMany(attendance::class, 'students_id', 'id');
+        return $this->hasMany(attendance::class);
     }
 }

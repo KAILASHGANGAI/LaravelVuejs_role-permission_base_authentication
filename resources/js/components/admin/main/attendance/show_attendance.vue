@@ -3,18 +3,21 @@
         <h4 class="card-title pt-3">Students Attendance show
 
             <router-link class="btn btn-primary" to="/admin/add-attendance">Take Attendance</router-link>         
-          <router-link class="btn btn-info mx-2" to="/admin/show-teacher-attendance-monthwise">MonthWise Attendance Show</router-link>           
+          <router-link class="btn btn-info mx-2" to="/admin/show-student-attendance-monthwise">MonthWise Attendance Show</router-link>           
 
         </h4>
+        <!-- <DataTable :data="datas" :columns="columns"> 
+            <thead>
+                <tr>
+                    <th>ID</th> <th>User Name</th>  <th>Faculty</th> <th>Semester/Year</th> <th>Section</th><th>Created </th>
+                </tr>
+            </thead>
+         </DataTable> -->
         <table class="table">
-            <thead class="bg-success text-white">
-                <th>S.n</th>
-                <th>Teacher_Name</th>
-                <th>Faculty</th>
-                <th>Semester</th>
-                <th>Section</th>
-                <th>Date</th>
-                <th>Action</th>
+            <thead>
+                <tr>
+                    <th>ID</th> <th>User Name</th>  <th>Faculty</th> <th>Semester/Year</th> <th>Section</th><th>Created </th> <th>Action</th>
+                </tr>
             </thead>
             <tbody>
               
@@ -44,6 +47,14 @@ export default {
     data() {
         return {
             datas: [],
+            // columns:[
+            //     {data:'id'},
+            //     {data:'user.name'},
+            //     {data:'faculty.faculty_name'},
+            //     {data:'semester.semester_years'},
+            //     {data:'section.section_name'},
+            //     {data:'.created_at'},
+            // ]
         };
     },
     created() {
