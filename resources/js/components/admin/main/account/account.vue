@@ -41,7 +41,7 @@
                 <tbody>
                     <tr v-for="(data, index) in datas" :key="index">
                         <th scope="row">{{ ++index }}</th>
-                        <td>{{ data.students.name }}</td>
+                        <td>{{ data.students.name }}</td>   
                         <td>{{ data.students.phone_no }}</td>
                         <td>{{ data.students.faculty.faculty_name }}</td>
                         <td>{{ data.students.semester.semester_years }}</td>

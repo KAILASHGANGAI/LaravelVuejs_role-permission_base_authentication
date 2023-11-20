@@ -28,6 +28,15 @@
   </div>
   
   <li class="nav-item">
+      <router-link class="nav-link collapsed" to="/student/payments" data-toggle="collapse" data-target="#attendance"
+          aria-expanded="true" aria-controls="attendance">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Account/Payments</span>
+      </router-link>
+    
+  </li>
+   
+  <li class="nav-item">
       <router-link class="nav-link collapsed" to="/student/show-attendance" data-toggle="collapse" data-target="#attendance"
           aria-expanded="true" aria-controls="attendance">
           <i class="fas fa-fw fa-cog"></i>
@@ -35,6 +44,7 @@
       </router-link>
     
   </li>
+
   <li class="nav-item">
       <router-link class="nav-link collapsed" to="/student/show-notes" data-toggle="collapse" data-target="#notes"
           aria-expanded="true" aria-controls="notes">

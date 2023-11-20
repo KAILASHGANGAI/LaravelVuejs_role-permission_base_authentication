@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ownerDetails;
 use App\Models\staff;
 use App\Models\students;
+use Illuminate\Support\Facades\Auth;
 
 class utilityController extends Controller
 {
@@ -27,6 +28,12 @@ class utilityController extends Controller
     {
         $data = ownerDetails::where('status', 1)->first();
 
+        return response()->json($data);
+    }
+
+    public function studentPayment()
+    {
+        $data = students::select('id', 'user_id', 'tuitionfee')->with(['payment'])->where('user_id', Auth::id())->first();
         return response()->json($data);
     }
 }
