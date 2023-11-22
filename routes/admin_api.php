@@ -88,6 +88,7 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
     Route::resource('/exams', ExamController::class);
     Route::post('/routing', [ExamController::class, 'routing']);
     Route::resource('/questions', QuestionController::class);
+    Route::post('/getquestions', [QuestionController::class,'getquestions']);
     Route::post('/getstudents-details', [idcardController::class, 'idcard']);
 
 

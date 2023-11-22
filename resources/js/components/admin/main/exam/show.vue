@@ -16,7 +16,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(data, index) in datas" :key="index">
-                        <td>{{+ + index }}</td>
+                        <td>{{++ index }}</td>
                         <td>{{ data.faculty.faculty_name }}</td>
                         <td>{{ data.semester.semester_years }}</td>
                         <td>{{ data.section.section_name }}</td>
@@ -24,14 +24,14 @@
                         <td>{{ data.date }}</td>
                         <td>{{ data.time }}</td>
                         <td class="">
-                            <span class=" btn btn-warning" @click="View(data.id)">
-                               View
+                            <span class=" btn btn-warning btn-circle btn-sm" @click="View(data.id)">
+                                <i class="fas fa-check"></i>
                             </span>
-                            <span class="  btn btn-success" @click="Edit(data.id)">
-                               Edit
+                            <span class="  btn btn-info btn-circle btn-sm" @click="Edit(data.id)">
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </span>
-                            <span class=" btn btn-danger" @click="Delete(data.id)">
-                                Delete
+                            <span class="btn btn-danger btn-circle btn-sm" @click="Delete(data.id)">
+                                 <i class="fas fa-trash"></i>
                             </span>
                         </td>
 

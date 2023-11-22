@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\exam;
 use App\Models\students;
+use App\Models\subjects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,7 +73,8 @@ class ExamController extends Controller
     public function show($id)
     {
         $exam  = exam::with(['faculty', 'semester', 'section'])->where('id', $id)->first();
-        return response()->json($exam);
+        $subjects = subjects::where('semester_id', $exam->semester_id)->where('faculty_id', $exam->faculty_id)->get();
+        return response()->json(['exam' => $exam, 'subjects' => $subjects]);
     }
 
     /**

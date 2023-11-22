@@ -24,6 +24,9 @@ Route::get('/{pathMatch}', function () {
 Route::get('/admin/{pathMatch}', function () {
     return view('admin.welcome');
 })->where('any', '.*');
+Route::get('/admin/{path1}/{path2}', function () {
+    return view('admin.welcome');
+})->where('path1', '.*')->where('path2', '.*');
 
 Route::get('/teacher/{pathMatch}', function () {
     return view('admin.welcome');
