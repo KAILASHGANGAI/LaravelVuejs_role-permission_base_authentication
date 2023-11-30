@@ -33,8 +33,11 @@ use App\Http\Controllers\api\SubjectsController;
 use App\Http\Controllers\api\TakeatdController;
 use App\Http\Controllers\api\TestimonialsController;
 use App\Http\Controllers\api\utilityController;
+use App\Http\Controllers\NotificationControllers;
 use App\Http\Controllers\TeacherAttendanceController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/notifications', [NotificationControllers::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'role:admin|Super-Admin|accountent'])->group(function () {
     Route::resource('/payment', PaymentController::class);
@@ -88,7 +91,7 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
     Route::resource('/exams', ExamController::class);
     Route::post('/routing', [ExamController::class, 'routing']);
     Route::resource('/questions', QuestionController::class);
-    Route::post('/getquestions', [QuestionController::class,'getquestions']);
+    Route::post('/getquestions', [QuestionController::class, 'getquestions']);
     Route::post('/getstudents-details', [idcardController::class, 'idcard']);
 
 

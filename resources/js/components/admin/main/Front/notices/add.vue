@@ -10,8 +10,6 @@
                             <input type="text" v-model="form.heading" class="form-control">
                         </div>
                     </div>
-
-
                 </div>
                 <div class="row">
                     <div class="col-sm-8">
@@ -56,6 +54,7 @@ export default {
         // if (!User.loggedIn()) {
         //     router.push("/admin/login")
         // }
+       
     },
     methods: {
         changeImg(event) {
@@ -74,9 +73,9 @@ export default {
                     Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
-                router.push('/notices')
+                router.push('/admin/notices')
                 toast.fire({
-                    icon: "succcess",
+                    icon: "success",
                     title: res.data.status
                 })
             }).catch((error) => {

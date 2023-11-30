@@ -60,8 +60,7 @@ export default{
 data(){
     return{
         getAdminToken : store.getters.getAdminToken,
-       
-    }
+        }
 },
 created(){
     

@@ -53,7 +53,7 @@ export default {
                 Authorization: "Bearer " +store.getters.getAdminToken,
             },
         }).then((res) => {
-            console.log(res)
+            
             this.datas = res.data
         }).catch((error) => {
             router.push('/admin/login');
