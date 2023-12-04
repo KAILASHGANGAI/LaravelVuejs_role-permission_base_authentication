@@ -30,7 +30,7 @@
             jsPermissions: {!! auth()->user()
                 ?->jsPermissions() !!}
         }
-    </script>   
+    </script>
 
 
     <script src="{{ asset('../vendor/jquery/jquery.min.js') }}"></script>

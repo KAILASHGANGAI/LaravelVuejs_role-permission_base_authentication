@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class notices extends Model
 {
     use HasFactory;
+    protected $fillable = ['heading','description'];
+
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    
 }

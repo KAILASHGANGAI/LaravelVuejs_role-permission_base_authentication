@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="small text-gray-500">{{notification.data.auther  }} {{ notification.created_at.split("T")[0] }}</div>
+                    <div class="small text-gray-500">{{notification.data.user_name  }} {{ notification.data.date }}</div>
                     <span class="font-weight-bold">{{ notification.data.title }}</span>
                 </div>
             </a>
@@ -122,6 +122,7 @@ export default{
     data(){
         return{
             adminuser:'',
+          
             notifications:[],
         }
     },
@@ -134,14 +135,14 @@ export default{
                 },
             }).then((res) => {
                 this.notifications = res.data
+                console.log(this.notifications)
             })
-            Echo.channel('chat-channel')
-                .listen('NoticeNotification', (e) => {
-                    console.log(e);
-                    this.notifications = e.data
-                
-                });
             
+            Echo.private('testing')
+            .notification((e) => {
+	            this.notifications.push(e.noticication);
+                console.log(e);
+            })
        
     },
     mounted(){

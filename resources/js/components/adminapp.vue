@@ -67,6 +67,7 @@ created(){
     if (this.getAdminToken == 0) {
         router.push('/admin/login')
     }
+   
     setTimeout(() => {
         
         store.dispatch('removeToken')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Events\NoticeEvent;
 use App\Events\SendMessageToClientEvent;
+use App\Events\TestingEvent;
 use App\Http\Controllers\Controller;
 use App\Models\notices;
 use App\Models\User;
@@ -42,27 +43,23 @@ class NoticesController extends Controller
             }
         }
 
-        $data = ['title' => $req->heading, 'user' => Auth::user()->name];
-        Notification::send(User::all(), new NoticeNotification($data));
+        if ($new->save()) {
+            $notice = $new->id;
+            $user_sender = auth()->user();
+            // broadcast(new NoticeNotification($user_sender, $notice))->toOthers();
 
-        // broadcast(new NoticeEvent("demo"))->toOthers();
-        // NoticeEvent::dispatch($data);
-        // $users = User::all();
-        // foreach ($users as $user) {
-        //     $user->notify(new NoticeNotification($data));
-        // }
-        return response()->json([
-            'status' => 'notices added successfully',
-        ]);
-        // if ($new->save()) {
-        //     return response()->json([
-        //         'status' => 'notices added successfully',
-        //     ]);
-        // } else {
-        //     return response()->json([
-        //         'status' => 'notices Not added successfully',
-        //     ]);
-        // }
+            Notification::send(User::all(), new NoticeNotification($user_sender, $notice));
+            // foreach (User::all() as $user) {
+            //     $user->notify(new NoticeNotification($user_sender, $notice));
+            // }
+            return response()->json([
+                'status' => 'notices added successfully',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'notices Not added successfully',
+            ]);
+        }
     }
 
     public function edit($id)

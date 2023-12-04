@@ -7,21 +7,19 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Arr;
 
-class NoticeEvent implements ShouldBroadcast
+class TestingEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $post;
+    public $message;
     /**
      * Create a new event instance.
      */
-    public function __construct($post)
+    public function __construct($message)
     {
-        $this->post = $post;
+        $this->message = $message;
     }
 
     /**
@@ -31,7 +29,6 @@ class NoticeEvent implements ShouldBroadcast
      */
     public function broadcastOn(): array
     {
-
         return [
             new PrivateChannel('testing'),
         ];

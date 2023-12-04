@@ -28,4 +28,10 @@ window.Echo = new Echo({
 
 
 });
+// window.Echo.private('testing')
+//     .listen('NoticeNotification', (e) => {
+//         console.log(e);
+//     });
+
+
 
