@@ -37,7 +37,6 @@ use App\Http\Controllers\NotificationControllers;
 use App\Http\Controllers\TeacherAttendanceController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/notifications', [NotificationControllers::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'role:admin|Super-Admin|accountent'])->group(function () {
     Route::resource('/payment', PaymentController::class);

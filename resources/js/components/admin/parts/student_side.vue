@@ -14,7 +14,7 @@
   
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-      <Router-link class="nav-link" to="/student">
+      <Router-link class="nav-link" to="/admin">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></Router-link>
   </li>

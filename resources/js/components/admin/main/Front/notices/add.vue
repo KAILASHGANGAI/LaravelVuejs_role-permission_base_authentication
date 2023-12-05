@@ -73,7 +73,7 @@ export default {
                     Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
-                // router.push('/admin/notices')
+                router.push('/admin/notices')
                 toast.fire({
                     icon: "success",
                     title: res.data.status

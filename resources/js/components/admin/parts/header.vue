@@ -60,17 +60,22 @@
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="alertsDropdown">
             <h6 class="dropdown-header">
-                Alerts Center
+                Alerts Center  <span class="text-warning small float-end" style="cursor: pointer;" @click="allread()">Mark as all Read</span>
             </h6>
-            <a class="dropdown-item d-flex align-items-center" v-for="(notification,index ) in notifications" :key="index" href="#">
-                <div class="mr-3">
+            <a class="dropdown-item align-items-center" v-for="(notification,index ) in notifications" :key="index" href="#">
+                <div class="d-flex">
+                    <div class="mr-3" >
                     <div class="icon-circle bg-primary">
                         <i class="fas fa-file-alt text-white"></i>
                     </div>
                 </div>
-                <div>
-                    <div class="small text-gray-500">{{notification.data.user_name  }} {{ notification.data.date }}</div>
+                <div @click="markAsRead(notification.id)">
+                    <div class="small text-gray-500"><span class="text-success ">{{notification.data.user_name  }}</span> {{ notification.data.date.split("T")[0] }}</div>
                     <span class="font-weight-bold">{{ notification.data.title }}</span>
+                </div>
+                </div>
+                <div >
+                    <p>{{ notification.data.description }}</p>
                 </div>
             </a>
            
@@ -122,7 +127,6 @@ export default{
     data(){
         return{
             adminuser:'',
-          
             notifications:[],
         }
     },
@@ -134,27 +138,52 @@ export default{
                     Authorization: "Bearer " +store.getters.getAdminToken,
                 },
             }).then((res) => {
-                this.notifications = res.data
-                console.log(this.notifications)
+                
+                this.notifications = res.data.data;
+                this.broadcast(res.data.id)
+                // console.log(res)
             })
             
-            Echo.private('testing')
+            
+       
+    },
+    mounted(){
+       
+    },
+    methods:{
+        allread(){
+            axios.get('/api/notification-allread' , {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " +store.getters.getAdminToken,
+                },
+            }).then((res) => {
+               console.log(res)
+            })
+        },
+        markAsRead(e){
+            axios.get('/api/notification-read/' + e , {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " +store.getters.getAdminToken,
+                },
+            }).then((res) => {
+               console.log(res)
+            })
+        },
+        broadcast(index){
+            Echo.private('testing.'+index)
             .notification((e) => {
 	            this.notifications.push(e.noticication);
                 console.log(e);
             })
-       
-    },
-    mounted(){
-        
-    },
-    methods:{
+        },
         logout() {
             axios.get('/api/logout').then((res) => {
                 store.dispatch('removeAdminToken')
                 store.dispatch('removeAdminUser')
                 router.push('/admin/login')
-                console.log(res)
+                // console.log(res)
             })
         }
     }

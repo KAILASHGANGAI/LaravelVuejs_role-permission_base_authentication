@@ -48,10 +48,10 @@ class NoticesController extends Controller
             $user_sender = auth()->user();
             // broadcast(new NoticeNotification($user_sender, $notice))->toOthers();
 
-            Notification::send(User::all(), new NoticeNotification($user_sender, $notice));
-            // foreach (User::all() as $user) {
-            //     $user->notify(new NoticeNotification($user_sender, $notice));
-            // }
+            // Notification::send(User::all(), new NoticeNotification($user_sender, $notice));
+            foreach (User::all() as $user) {
+                $user->notify(new NoticeNotification($user_sender, $notice));
+            }
             return response()->json([
                 'status' => 'notices added successfully',
             ]);

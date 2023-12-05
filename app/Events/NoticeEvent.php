@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class NoticeEvent implements ShouldBroadcast
 {
@@ -33,7 +34,7 @@ class NoticeEvent implements ShouldBroadcast
     {
 
         return [
-            new PrivateChannel('testing'),
+            new PrivateChannel('testing.' . Auth::id()),
         ];
     }
 }

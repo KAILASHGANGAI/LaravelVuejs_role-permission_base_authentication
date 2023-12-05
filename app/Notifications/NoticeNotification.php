@@ -35,6 +35,7 @@ class NoticeNotification extends Notification implements ShouldBroadcast
             'user_id' => $this->user->id,
             'user_name' => $this->user->name,
             'title' => $this->notice->heading,
+            'description' => $this->notice->description,
             'date' => $this->notice->created_at
         ];
     }
@@ -45,6 +46,7 @@ class NoticeNotification extends Notification implements ShouldBroadcast
                 'user_id' => $this->user->id,
                 'user_name' => $this->user->name,
                 'title' => $this->notice->heading,
+                'description' => $this->notice->description,
                 'date' => $this->notice->created_at
             ]
         ];
