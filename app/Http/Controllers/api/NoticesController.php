@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Events\NoticeEvent;
+use App\Events\SendMessageToClientEvent;
+use App\Events\TestingEvent;
 use App\Http\Controllers\Controller;
 use App\Models\notices;
+use App\Models\User;
+use App\Notifications\NoticeNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class NoticesController extends Controller
@@ -18,6 +25,7 @@ class NoticesController extends Controller
 
     public function store(Request $req)
     {
+
         $new = new notices();
         $new->heading = $req->heading;
         $new->description = $req->description;
@@ -25,16 +33,25 @@ class NoticesController extends Controller
             $position = strpos($req->image, ';');
             $sub = substr($req->image, 0, $position);
             $ext = explode('/', $sub)[1];
-            $name = time().'.'.$ext;
+            $name = time() . '.' . $ext;
             $img = Image::make($req->image)->resize(240, 240);
             $upload_path = 'images/notices/';
-            $image_url = $upload_path.$name;
+            $image_url = $upload_path . $name;
 
             if ($img->save($image_url)) {
                 $new->image = $image_url;
             }
         }
+
         if ($new->save()) {
+            $notice = $new->id;
+            $user_sender = auth()->user();
+            // broadcast(new NoticeNotification($user_sender, $notice))->toOthers();
+
+            // Notification::send(User::all(), new NoticeNotification($user_sender, $notice));
+            foreach (User::all() as $user) {
+                $user->notify(new NoticeNotification($user_sender, $notice));
+            }
             return response()->json([
                 'status' => 'notices added successfully',
             ]);
@@ -62,10 +79,10 @@ class NoticesController extends Controller
             $position = strpos($req->image, ';');
             $sub = substr($req->image, 0, $position);
             $ext = explode('/', $sub)[1];
-            $name = time().'.'.$ext;
+            $name = time() . '.' . $ext;
             $img = Image::make($req->image)->resize(240, 240);
             $upload_path = 'images/notices/';
-            $image_url = $upload_path.$name;
+            $image_url = $upload_path . $name;
             if (isset($update->image)) {
                 unlink($update->image);
             }
@@ -89,7 +106,6 @@ class NoticesController extends Controller
         $data = notices::find($id);
         if (isset($data->image)) {
             unlink($data->image);
-
         }
         if ($data->delete()) {
             return response()->json([

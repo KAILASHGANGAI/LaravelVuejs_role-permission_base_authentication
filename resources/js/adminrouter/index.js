@@ -141,6 +141,7 @@ import Stu_marksheet from "../components/StudentAdmin/marksheet/marksheets.vue";
 import Stu_routing from "../components/StudentAdmin/marksheet/routing.vue";
 import Stu_notice from "../components/StudentAdmin/notice/show.vue";
 import Stu_attendance from '../components/StudentAdmin/attendance/showAttendance.vue'
+import Stu_payment from '../components/StudentAdmin/account/index.vue'
 import Stu_class from '../components/StudentAdmin/classManage/showClass.vue'
 import Stu_class_single from '../components/StudentAdmin/classManage/single.vue'
 
@@ -324,6 +325,7 @@ const routes = [
     { path: '/student/exam-routing', component: Stu_routing },
     { path: '/student/notice', component: Stu_notice },
     { path: '/student/show-attendance', component: Stu_attendance },
+    { path: '/student/payments', component: Stu_payment },
     { path: '/student/show-class', component: Stu_class },
     { path: '/student/periods-single/:id', component: Stu_class_single, props: true },
 

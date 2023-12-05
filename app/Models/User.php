@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(takeatd::class, 'staff_id', 'id');
     }
+
+    public function receivesBroadcastNotificationsOn(): string
+    {
+        return 'testing.' . $this->id;
+    }
 }

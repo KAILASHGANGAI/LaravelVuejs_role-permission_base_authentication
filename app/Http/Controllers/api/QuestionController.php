@@ -19,6 +19,11 @@ class QuestionController extends Controller
 
         return response()->json($data);
     }
+    public function getquestions(Request $request)
+    {
+        $data = question::where('exams_id', $request->exam_id)->where('subject_id', $request->subject_id)->get();
+        return response()->json($data);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -37,8 +42,12 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'subject_id' => 'required'
+        ]);
         $new = new question();
         $new->exams_id = $request->exams_id;
+        $new->subject_id = $request->subject_id;
         $new->questions = $request->questions;
         $new->option1 = $request->option1;
         $new->option2 = $request->option2;
@@ -77,7 +86,6 @@ class QuestionController extends Controller
      */
     public function update(Request $request, question $question)
     {
-        $question->exam_id = $request->exams_id;
         $question->questions = $request->questions;
         $question->option1 = $request->option1;
         $question->option2 = $request->option2;
@@ -85,7 +93,7 @@ class QuestionController extends Controller
         $question->option4 = $request->option4;
         $question->trueoption = $request->trueoption;
         if ($question->save()) {
-            return response()->json(['status' => 'Successfully Added']);
+            return response()->json(['status' => 'Successfully Updated']);
         }
     }
 

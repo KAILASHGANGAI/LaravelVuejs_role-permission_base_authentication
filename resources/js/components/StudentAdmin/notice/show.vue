@@ -4,8 +4,9 @@
         <div class="container">
             <div class="container">
                         <div class="row">
-                            <div class="col-sm-6" v-for="(data, index) in datas" :key="index">
+                            <div class="col-sm-6 p-1" v-for="(data, index) in datas" :key="index">
                                 <div class="bg-info p-4 text-white">
+                                    <span></span>
                                     <h5 class="text-center">{{ data.heading }}</h5>
                                     <p class="text-center">
                                         {{ data.description }}
