@@ -1,5 +1,5 @@
 <template>
-         <h1 class="card-title">show assignment</h1>
+         <h6 class="m-0 font-weight-bold text-primary p-3">show assignment</h6>
     <div class="container card table-responsive">
         <table class="table">
             <thead class="bg-success text-white">
