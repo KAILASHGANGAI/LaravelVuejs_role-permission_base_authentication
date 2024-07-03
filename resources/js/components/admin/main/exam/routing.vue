@@ -1,6 +1,6 @@
 <template>
     <div class="card p-3">
-        <h5 class="card-title">Routing List</h5>
+        <h5 class="card-title">Exams List</h5>
         <div class="d-flex select">
             <div class="form-group">
                 <label for="id">Course <samp style="color: red">*</samp> :</label><br />
@@ -39,19 +39,19 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <table class="table table-bordered table-sm caption-top">
+    <div class="container mt-2">
+        <table class="table table-bordered table-sm caption-top mt-4">
             <caption class="text-center">Exam Routing</caption>
             <thead class="bg-success p-2 text-white">
                 <th>S.N</th>
-                <th>Subject</th>
+                <th>Exams</th>
                 <th>Date</th>
                 <th>Time</th>
             </thead>
             <tbody>
                 <tr v-for="(exam, index) in exams" :key="index">
                     <td>{{+ + index }}</td>
-                    <td>{{ exam.subject }}</td>
+                    <td>{{ exam.exam_type }}</td>
                     <td>{{ exam.date }}</td>
                     <td>{{ exam.time }}</td>
                 </tr>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import store from '../../../../adminstore';
+import store from '../../../../adminstore';
 
 export default {
     data() {

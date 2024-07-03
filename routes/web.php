@@ -24,6 +24,7 @@ Route::get('/{pathMatch}', function () {
 Route::get('/admin/{pathMatch}', function () {
     return view('admin.welcome');
 })->where('any', '.*');
+
 Route::get('/admin/{path1}/{path2}', function () {
     return view('admin.welcome');
 })->where('path1', '.*')->where('path2', '.*');
@@ -31,6 +32,15 @@ Route::get('/admin/{path1}/{path2}', function () {
 Route::get('/teacher/{pathMatch}', function () {
     return view('admin.welcome');
 })->where('any', '.*');
+
+Route::get('/teacher/{path1}/{path2}', function () {
+    return view('admin.welcome');
+})->where('path1', '.*')->where('path2', '.*');
+
 Route::get('/student/{pathMatch}', function () {
     return view('admin.welcome');
 })->where('any', '.*');
+
+Route::get('/student/{path1}/{path2}', function () {
+    return view('admin.welcome');
+})->where('path1', '.*')->where('path2', '.*');

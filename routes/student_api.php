@@ -17,7 +17,7 @@ Route::middleware(['auth:sanctum', 'role:student'])->prefix('student')->group(fu
     Route::resource('/notes', NoteController::class)->only(['index', 'show']);
     Route::get('/download/assignment/{id}', [AssignmentController::class, 'download']);
 
-    Route::resource('/periods', PeriodController::class)->only(['index', 'create']);
+    Route::resource('/periods', PeriodController::class)->only(['index', 'create', 'show']);
 
     Route::get('/exams/list', [ExamController::class, 'index']);
     Route::post('/routing', [ExamController::class, 'routing']);
