@@ -7,6 +7,7 @@ use App\Http\Controllers\api\MarksSheetController;
 use App\Http\Controllers\api\NoteController;
 use App\Http\Controllers\api\NoticesController;
 use App\Http\Controllers\api\PeriodController;
+use App\Http\Controllers\TeacherLeaveManagementController;
 use App\Http\Controllers\TeachersController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,5 @@ Route::middleware(['auth:sanctum', 'role:teacher'])->prefix('teacher')->group(fu
     Route::get('/getclass/details/{id}', [MarksSheetController::class, 'single']);
     Route::get('/notices', [NoticesController::class, 'index']);
     Route::get('/attendance', [TeachersController::class, 'attendence']);
+    Route::resource('/leave', TeacherLeaveManagementController::class)->only(['index', 'show', 'store', 'update']);
 });
