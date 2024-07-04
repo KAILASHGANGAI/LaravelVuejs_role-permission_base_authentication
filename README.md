@@ -19,5 +19,18 @@
     18. websites of the college/ school will be provided if needed. 
     
 
+Installation
+
+git clone gh repo clone KAILASHGANGAI/School_Management_System_role-permission_base_demo
+
+composer install
+
+npm install
+
+npm run dev
+
+php artisan migrate 
+
+php artisan db:seed --class=PermissionsSeeder
 
 
