@@ -33,8 +33,10 @@ use App\Http\Controllers\api\SubjectsController;
 use App\Http\Controllers\api\TakeatdController;
 use App\Http\Controllers\api\TestimonialsController;
 use App\Http\Controllers\api\utilityController;
+use App\Http\Controllers\LeaveManagementController;
 use App\Http\Controllers\NotificationControllers;
 use App\Http\Controllers\TeacherAttendanceController;
+use App\Http\Controllers\TeacherLeaveManagementController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -178,4 +180,7 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
     Route::post('/store-marks', [MarksSheetController::class, 'store']);
     Route::get('/get-marks-lasers/{id}', [MarksSheetController::class, 'lasers']);
     Route::get('/getclass/details/{id}', [MarksSheetController::class, 'single']);
+    Route::resource('/student-leave', LeaveManagementController::class);
+    Route::resource('/teacher-leave', TeacherLeaveManagementController::class);
+
 });
