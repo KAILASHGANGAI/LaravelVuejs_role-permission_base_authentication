@@ -106,6 +106,9 @@ import show_marksheet from "../components/admin/main/marksheet/show.vue";
 import laser_marksheet from "../components/admin/main/marksheet/laser.vue";
 import marksheet from "../components/admin/main/marksheet/marksheets.vue";
 
+import Admin_Stu_leave_list from '../components/admin/main/StudentLeave/index.vue';
+import Admin_Tea_leave_list from '../components/admin/main/TeacherLeave/index.vue';
+
 // teachers section 
 import Tea_add_notes from "../components/TeacherAdmin/notes/create.vue";
 import Tea_show_notes from "../components/TeacherAdmin/notes/show.vue";
@@ -296,6 +299,11 @@ const routes = [
     { path: '/admin/add-marksheet/:id', component: add_marksheet, props: true },
     { path: '/admin/marksheet-laser/:id', component: laser_marksheet, props: true },
     { path: '/admin/marksheet/:id', component: marksheet, props: true },
+
+    { path: '/admin/student-leave', component: Admin_Stu_leave_list },
+
+    { path: '/admin/teacher-leave', component: Admin_Tea_leave_list },
+
     //end of admin section
     // teachers section
     { path: '/teacher/show-notes', component: Tea_show_notes },

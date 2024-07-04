@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import router from '../../../adminrouter';
-import store from '../../../adminstore';
+import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
 export default {
     data() {
         return {

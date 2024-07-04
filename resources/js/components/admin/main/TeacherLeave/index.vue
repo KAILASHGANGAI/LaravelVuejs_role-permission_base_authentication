@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import router from '../../../adminrouter';
-import store from '../../../adminstore';
+import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
 
 export default {
     data() {
@@ -50,7 +50,7 @@ export default {
         //     router.push("/admin/login")
         // }
         //get api data
-        axios.get("/api/teacher/leave", {
+        axios.get("/api/teacher-leave", {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + store.getters.getAdminToken,
@@ -61,9 +61,7 @@ export default {
         });
     },
     methods: {
-        Edit(id) {
-            router.push("/teacher/leave/" + id + "/edit/");
-        },
+      
     },
 };
 </script>

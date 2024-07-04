@@ -15,7 +15,16 @@ class TeacherLeaveManagementController extends Controller
      */
     public function index()
     {
+        $currentMonth = Carbon::now()->month;
+        $user_type = Auth::user()->roles[0]->name;
+
+        if ($user_type == 'teacher') {
         $data =  TeacherLeaveManagement::where('staff_id', Auth::id())->get();
+      
+        }else{
+        $data =  TeacherLeaveManagement::orderBy('id', 'DESC')->get();
+
+        }
         return response()->json($data);
     }
 

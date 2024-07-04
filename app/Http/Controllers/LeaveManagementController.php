@@ -15,7 +15,17 @@ class LeaveManagementController extends Controller
      */
     public function index()
     {
-        $data =  LeaveManagement::where('student_id', Auth::id())->get();
+        $currentMonth = Carbon::now()->month;
+        $user_type = Auth::user()->roles[0]->name;
+
+        if ($user_type == 'student') {
+            $data =  LeaveManagement::where('student_id', Auth::id())->get();
+           
+        }else{
+            $data =  LeaveManagement::orderBy('id','Desc')->get();
+
+        }
+
         return response()->json($data);
     }
 

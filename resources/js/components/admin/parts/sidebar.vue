@@ -101,7 +101,7 @@
             </div>
         </li>
         <li class="nav-item" v-if="is('admin|Super-Admin')">
-            <router-link class="nav-link collapsed" to="/student/leave" data-toggle="collapse" data-target="#leave"
+            <router-link class="nav-link collapsed" to="/admin/student-leave" data-toggle="collapse" data-target="#leave"
                 aria-expanded="true" aria-controls="leave">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Leave Management </span>
@@ -109,12 +109,12 @@
             <div id="leave" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
-                    <router-link class="collapse-item" to="/student/leave">Students Leave Lists</router-link>
-                    <router-link class="collapse-item" to="/student/leave/new">Teacher Leave Create</router-link>
+                    <router-link class="collapse-item" to="/admin/student-leave">Students Leave Lists</router-link>
+                    <router-link class="collapse-item" to="/admin/teacher-leave">Teacher Leave list</router-link>
                 </div>
             </div>
         </li>
-
+        
         <li v-if="is('Super-Admin')" class="nav-item">
             <router-link class="nav-link collapsed" to="/admin/show-books" data-toggle="collapse"
                 data-target="#Libreary" aria-expanded="true" aria-controls="Libreary">

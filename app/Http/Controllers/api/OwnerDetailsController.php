@@ -56,7 +56,11 @@ class OwnerDetailsController extends Controller
 
     public function update(Request $req, $id)
     {
-
+       
+        if ($id == 'undefined') {
+           
+          $this->store($req);
+        }
         $update = ownerDetails::find($id);
         $update->school_name = $req->school_name;
         $update->phone = $req->phone;

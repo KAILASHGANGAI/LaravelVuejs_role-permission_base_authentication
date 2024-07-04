@@ -7,6 +7,7 @@
                 <tr>
                     <th>S.N</th>
                     <th>Leave Type</th>
+                    <th>Days</th>
                     <th>Start</th>
                     <th>End</th>
                     <th>Reason</th>
@@ -18,13 +19,17 @@
                 <tr v-for="(data, index) in datas" :key="index">
                     <td>{{ ++index }}</td>
                     <td>{{ data.leave_type }}</td>
+                    <td>{{ data.leave_days }}</td>
                     <td>{{ data.start_date }}</td>
                     <td>{{ data.end_date }}</td>
                     <td>{{ data.reason }}</td>
                     <td>{{ data.status }}</td>
                     <td>
                         <button v-if="data.status == 'Pending'" class="btn btn-success" @click="Edit(data.id)">
-                            Edit
+                            Approve
+                        </button>
+                        <button v-if="data.status == 'Pending'" class="btn btn-danger" @click="Edit(data.id)">
+                            Reject
                         </button>
 
                     </td>
@@ -36,8 +41,8 @@
 </template>
 
 <script>
-import router from '../../../adminrouter';
-import store from '../../../adminstore';
+import router from '../../../../adminrouter';
+import store from '../../../../adminstore';
 
 export default {
     data() {
@@ -50,7 +55,7 @@ export default {
         //     router.push("/admin/login")
         // }
         //get api data
-        axios.get("/api/teacher/leave", {
+        axios.get("/api/student-leave", {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + store.getters.getAdminToken,
@@ -61,9 +66,7 @@ export default {
         });
     },
     methods: {
-        Edit(id) {
-            router.push("/teacher/leave/" + id + "/edit/");
-        },
+       
     },
 };
 </script>
