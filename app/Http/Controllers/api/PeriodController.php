@@ -7,7 +7,9 @@ use App\Models\faculty;
 use App\Models\period;
 use App\Models\section;
 use App\Models\semester;
+use App\Models\students;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PeriodController extends Controller
 {
@@ -18,7 +20,17 @@ class PeriodController extends Controller
      */
     public function index()
     {
-        $data = period::all();
+        if (Auth::user()->roles[0]->name == 'student') {
+            $student = students::where('user_id', Auth::id())
+                ->first();
+            $data = period::where([
+                'faculty_id' => $student->faculty->faculty_name,
+                'semesters_id' => $student->semester->semester_years,
+            ])
+                ->get();
+        } else {
+            $data = period::all();
+        }
 
         return response()->json($data);
     }

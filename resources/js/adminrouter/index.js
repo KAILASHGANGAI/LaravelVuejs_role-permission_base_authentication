@@ -126,7 +126,9 @@ import Tea_notice from "../components/TeacherAdmin/notice/show.vue";
 import Tea_attendance from '../components/TeacherAdmin/attendance/showAttendance.vue'
 import Tea_class from '../components/TeacherAdmin/classManage/showClass.vue'
 import Tea_class_single from '../components/TeacherAdmin/classManage/single.vue'
-
+import Tea_leave_list from '../components/TeacherAdmin/leave/index.vue'
+import Tea_leave_create from '../components/TeacherAdmin/leave/create.vue'
+import Tea_leave_edit from '../components/TeacherAdmin/leave/edit.vue'
 
 
 // student section 
@@ -144,6 +146,9 @@ import Stu_attendance from '../components/StudentAdmin/attendance/showAttendance
 import Stu_payment from '../components/StudentAdmin/account/index.vue'
 import Stu_class from '../components/StudentAdmin/classManage/showClass.vue'
 import Stu_class_single from '../components/StudentAdmin/classManage/single.vue'
+import Stu_leave_list from '../components/StudentAdmin/leave/index.vue'
+import Stu_leave_create from '../components/StudentAdmin/leave/create.vue'
+import Stu_leave_edit from '../components/StudentAdmin/leave/edit.vue'
 
 const routes = [
     {
@@ -313,6 +318,10 @@ const routes = [
     { path: '/teacher/show-class', component: Tea_class },
     { path: '/teacher/periods/single/:id', component: Tea_class_single, props: true },
 
+    { path: '/teacher/leave', component: Tea_leave_list },
+    { path: '/teacher/leave/new', component: Tea_leave_create },
+    { path: '/teacher/leave/:id/edit', component: Tea_leave_edit, props: true },
+
     //student section 
     { path: '/student/show-notes', component: Stu_show_notes },
     { path: '/student/view-notes/:id', component: Stu_view_notes, props: true },
@@ -328,6 +337,11 @@ const routes = [
     { path: '/student/payments', component: Stu_payment },
     { path: '/student/show-class', component: Stu_class },
     { path: '/student/periods-single/:id', component: Stu_class_single, props: true },
+    { path: '/student/leave', component: Stu_leave_list },
+    { path: '/student/leave/new', component: Stu_leave_create },
+    { path: '/student/leave/:id/edit', component: Stu_leave_edit, props: true },
+
+
 
 ];
 const router = createRouter({

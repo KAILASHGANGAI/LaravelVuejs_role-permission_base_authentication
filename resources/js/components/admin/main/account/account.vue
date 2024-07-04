@@ -2,7 +2,7 @@
 
     <section class="container-fluid card-body ">
         <div class="table-responsive">
-            <h4 class="card-title">Accounts Details</h4>
+            <h6 class="m-0 font-weight-bold text-primary">Accounts Details</h6>
             <DataTable :data="datas" :columns="columns" > 
                 <thead>
                     <tr>

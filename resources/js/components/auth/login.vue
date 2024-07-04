@@ -46,19 +46,19 @@ export default {
     },
     methods: {
         async login() {
-            await  axios.get('/sanctum/csrf-cookie').then(response => {
-             axios.post('/api/login', this.form).then((res) => {
-                console.log(res)
-                if (res.data.status == 1) {
-                    store.dispatch('setUser', res.data.username)
-                    store.dispatch('setToken', res.data.token)
-                    router.push('/post')
-                } else {
+            await axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.post('/api/login', this.form).then((res) => {
+                    console.log(res)
+                    if (res.data.status == 1) {
+                        store.dispatch('setUser', res.data.username)
+                        store.dispatch('setToken', res.data.token)
+                        window.location = '/admin'
+                    } else {
 
-                    this.error = res.data.status
-                }
-            })
-    });
+                        this.error = res.data.status
+                    }
+                })
+            });
         }
     }
 }

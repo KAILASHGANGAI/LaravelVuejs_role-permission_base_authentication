@@ -124,7 +124,10 @@ class ExamController extends Controller
 
     public function routing(Request $request)
     {
-        $data = exam::select('id', 'exam_type', 'date', 'time')->where('faculty_id', $request->faculty)->where('semester_id', $request->semester)->where('section_id', $request->section)->get();
+        $data = exam::select('id', 'exam_type', 'date', 'time')
+            ->where('faculty_id', $request->faculty)
+            ->where('semester_id', $request->semester)
+            ->where('section_id', $request->section)->get();
 
         if (count($data) > 0) {
             return response()->json(['status' => 1, 'data' => $data]);

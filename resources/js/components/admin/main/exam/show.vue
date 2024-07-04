@@ -1,6 +1,6 @@
 <template>
     <div class="container card">
-        <h1 class="card-title">Exams Lists</h1>
+        <h6 class="m-0 font-weight-bold text-primary p-3">Exams Lists</h6>
 
         <div class="table-responsive">
             <table class="table ">

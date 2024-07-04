@@ -64,6 +64,20 @@
     </div>
 </li>
 <li class="nav-item">
+            <router-link class="nav-link collapsed" to="/teacher/leave" data-toggle="collapse" data-target="#leave"
+                aria-expanded="true" aria-controls="leave">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Leave Management </span>
+            </router-link>
+            <div id="leave" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <router-link class="collapse-item" to="/teacher/leave">Leave Lists</router-link>
+                    <router-link class="collapse-item" to="/teacher/leave/new">Leave Create</router-link>
+                </div>
+            </div>
+        </li>
+<li class="nav-item">
     <router-link class="nav-link collapsed" to="/teacher/show-class" data-toggle="collapse" data-target="#Class"
         aria-expanded="true" aria-controls="Class">
         <i class="fas fa-fw fa-cog"></i>

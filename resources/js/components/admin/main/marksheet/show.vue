@@ -1,6 +1,6 @@
 <template>
     <div class="container card">
-        <h1 class="card-title">Marksheet Management System </h1>
+        <h6 class="m-0 font-weight-bold text-primary card-title p-3">Marksheet Management System </h6>
 
         <div class="responsive">
             <table class="table border">

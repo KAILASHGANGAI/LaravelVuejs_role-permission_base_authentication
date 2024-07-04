@@ -1,6 +1,6 @@
 <template>
     <div class="container card responsive">
-        <h1 class="card-title">show notes</h1>
+        <h6 class="m-0 font-weight-bold text-primary p-3">show notes</h6>
 
         <div class="table-responsive">
             <table class="table">

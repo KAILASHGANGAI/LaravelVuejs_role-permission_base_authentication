@@ -8,7 +8,9 @@ use App\Http\Controllers\api\NoteController;
 use App\Http\Controllers\api\NoticesController;
 use App\Http\Controllers\api\PeriodController;
 use App\Http\Controllers\api\utilityController;
+use App\Http\Controllers\LeaveManagementController;
 use App\Http\Controllers\TeachersController;
+use App\Models\LeaveManagement;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'role:student'])->prefix('student')->group(function () {
@@ -17,7 +19,7 @@ Route::middleware(['auth:sanctum', 'role:student'])->prefix('student')->group(fu
     Route::resource('/notes', NoteController::class)->only(['index', 'show']);
     Route::get('/download/assignment/{id}', [AssignmentController::class, 'download']);
 
-    Route::resource('/periods', PeriodController::class)->only(['index', 'create']);
+    Route::resource('/periods', PeriodController::class)->only(['index', 'create', 'show']);
 
     Route::get('/exams/list', [ExamController::class, 'index']);
     Route::post('/routing', [ExamController::class, 'routing']);
@@ -29,4 +31,6 @@ Route::middleware(['auth:sanctum', 'role:student'])->prefix('student')->group(fu
 
     Route::get('/get-marks-lasers/{id}', [MarksSheetController::class, 'lasers']);
     Route::get('/payments', [utilityController::class, 'studentPayment']);
+
+    Route::resource('/leave', LeaveManagementController::class)->only(['index', 'show', 'store', 'update']);
 });

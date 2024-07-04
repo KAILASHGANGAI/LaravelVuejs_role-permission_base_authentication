@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid card p-2">
-        <h1 class="card-title">Libreary Details</h1>
+        <h6 class="m-0 font-weight-bold text-primary p-3">Libreary Details</h6>
         <div class="table-responsive">
             <table class="table table-bordered table-sm">
                 <thead class="bg-success text-white">

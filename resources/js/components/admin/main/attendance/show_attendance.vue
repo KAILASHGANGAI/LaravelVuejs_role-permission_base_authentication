@@ -1,11 +1,11 @@
 <template>
     <div class="container card">
-        <h4 class="card-title pt-3">Students Attendance show
-
+        <h6 class="m-0 font-weight-bold text-primary py-3">Students Attendance show
+<br>
             <router-link class="btn btn-primary" to="/admin/add-attendance">Take Attendance</router-link>         
           <router-link class="btn btn-info mx-2" to="/admin/show-student-attendance-monthwise">MonthWise Attendance Show</router-link>           
 
-        </h4>
+        </h6>
         <!-- <DataTable :data="datas" :columns="columns"> 
             <thead>
                 <tr>

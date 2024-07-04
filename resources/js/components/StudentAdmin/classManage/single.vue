@@ -14,7 +14,7 @@
             </h6>
             <h6>Number Of Periods :{{ datas.no_of_periods }}</h6>
         </div>
-        <table class="table-bordered ">
+        <table :v-if="item" class="table-bordered ">
             <tr>
                 <th>Subjects</th>
                 <td v-for="(item, index) in datas.subjects.split(',')" :key="index">{{ item }}</td>
@@ -31,6 +31,7 @@
 
             </tr>
         </table>
+
     </div>
 </template>
 
@@ -52,15 +53,16 @@ export default {
         axios.get("/api/student/periods/" + this.id, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " +store.getters.getAdminToken,
+                Authorization: "Bearer " + store.getters.getAdminToken,
             },
         }).then((res) => {
             console.log(res.data.subjects);
             this.datas = res.data;
 
         }).catch((error) => {
+            console.log(error)
             router.push('/admin/login');
-        localStorage.clear()
+            localStorage.clear()
             toast.fire({
                 icon: "error",
                 title: error.response.data.message
