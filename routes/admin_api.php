@@ -180,7 +180,7 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
     Route::post('/store-marks', [MarksSheetController::class, 'store']);
     Route::get('/get-marks-lasers/{id}', [MarksSheetController::class, 'lasers']);
     Route::get('/getclass/details/{id}', [MarksSheetController::class, 'single']);
-    Route::resource('/leave', LeaveManagementController::class);
+    Route::resource('/student-leave', LeaveManagementController::class);
     Route::resource('/teacher-leave', TeacherLeaveManagementController::class);
 
 });
