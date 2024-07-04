@@ -131,8 +131,60 @@ class TeacherLeaveManagementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TeacherLeaveManagement $teacherLeaveManagement)
+    public function destroy($id)
     {
-        //
+        $data = TeacherLeaveManagement::where('id', $id)->delete();
+        if($data){
+            $res = [
+                'message'=>'Deleted Successfully'
+            ];
+        }else{
+            $res = [
+                'message'=>'Deleted Successfully'
+            ];
+        }
+        return response()->json($res);
+    }
+    public function approve($id)
+    {
+        $data = TeacherLeaveManagement::where('id', $id)->first();
+        $data->update([
+            'approved_by'=>Auth::id(),
+            'approved_by_name'=>Auth::user()->name,
+            'status'=>'Approved'
+        ]);
+        if($data){
+
+            $res = [
+                'message'=>'Updated Successfully'
+            ];
+        }else{
+            $res = [
+                'message'=>'Failed To Approve'
+            ];
+        }
+        return response()->json($res);
+    }
+    public function reject(Request $request , $id)
+    {
+       
+        $data = TeacherLeaveManagement::where('id', $id)->first();
+        $data->update([
+            'decline_by'=>Auth::id(),
+            'decline_reason'=> $request->rejectReason ?? null, 
+            'decline_by_name'=>Auth::user()->name,
+            'status'=>'Rejected'
+        ]);
+        if($data){
+
+            $res = [
+                'message'=>'Rejected Successfully'
+            ];
+        }else{
+            $res = [
+                'message'=>'Failed To Rejected'
+            ];
+        }
+        return response()->json($res);
     }
 }

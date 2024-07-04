@@ -181,6 +181,10 @@ Route::middleware(['auth:sanctum', 'role:admin|Super-Admin'])->group(function ()
     Route::get('/get-marks-lasers/{id}', [MarksSheetController::class, 'lasers']);
     Route::get('/getclass/details/{id}', [MarksSheetController::class, 'single']);
     Route::resource('/student-leave', LeaveManagementController::class);
-    Route::resource('/teacher-leave', TeacherLeaveManagementController::class);
+    Route::get('/student-leave-approve/{id}', [LeaveManagementController::class , 'approve']);
+    Route::post('/student-leave-reject/{id}', [LeaveManagementController::class , 'reject']);
 
-});
+    Route::resource('/teacher-leave', TeacherLeaveManagementController::class);
+    Route::get('/teacher-leave-approve/{id}', [TeacherLeaveManagementController::class , 'approve']);
+    Route::post('/teacher-leave-reject/{id}', [TeacherLeaveManagementController::class , 'reject']);
+}); 

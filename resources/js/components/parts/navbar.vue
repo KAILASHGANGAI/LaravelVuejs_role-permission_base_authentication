@@ -13,8 +13,8 @@
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/login"
-                            v-if="$store.getters.getToken == 0">Login</router-link>
+                        <a v-if="$store.getters.getToken == 0" class="nav-link" href="/admin/login">Login</a>
+                        
 
                     </li>
                     <li class="nav-item">
