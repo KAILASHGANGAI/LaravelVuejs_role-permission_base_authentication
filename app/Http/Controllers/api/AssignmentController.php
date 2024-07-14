@@ -8,6 +8,7 @@ use App\Models\students;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class AssignmentController extends Controller
 {
@@ -40,23 +41,7 @@ class AssignmentController extends Controller
         return response()->json($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function download($id)
-    {
-        $data = assignment::findorfail($id);
-        $filePath = $data->file_path;
-        $fullPath = storage_path('app/' . $filePath);
-
-        if (Storage::exists($filePath)) {
-            return response()->download($fullPath);
-        } else {
-            return 'failed';
-        }
-    }
+  
 
     /**
      * Store a newly created resource in storage.
@@ -74,18 +59,21 @@ class AssignmentController extends Controller
         $new->teachers_id = Auth::id();
         $new->topic = $request->topic;
         $new->deadline = $request->deadline;
-        if ($request->file()) {
-            $file_name = time() . '_' . $request->file->getClientOriginalName();
-            $file_path = $request->file('file')->storeAs('uploads/assignments', $file_name, 'public');
 
-            $newname = time() . '_' . $request->file->getClientOriginalName();
-            $new->file_path = 'public/' . $file_path;
-            $new->save();
+        if ($request->file('file')) {
+           
+            $file_name = time() . '_' . $request->file('file')->getClientOriginalName();
 
-            return response()->json(['status' => 'File uploaded successfully.']);
+            $request->file('file')->move(public_path('uploads/assignments'), $file_name);
+
+            $new->file_path = '/uploads/assignments/' . $file_name;
+
         }
+        $new->save();
 
-        return response()->json(['status' => 'File Not uploaded.']);
+       
+        return response()->json(['status' => 'File usploaded successfully.']);
+
     }
 
     /**
@@ -93,9 +81,11 @@ class AssignmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(assignment $assignment)
+    public function show( $id)
     {
+        $assignment = assignment::with(['faculty:id,faculty_name', 'semester:id,semester_years'])->find($id);
         return response()->json($assignment);
+
     }
 
     /**
@@ -124,19 +114,24 @@ class AssignmentController extends Controller
         $assignment->topic = $request->topic;
         $assignment->deadline = $request->deadline;
 
-        if ($request->file()) {
-            if (Storage::exists($assignment->file_path)) {
-                Storage::delete($assignment->file_path);
+        if ($request->file('file')) {
+            if ($assignment->file_path) {
+                $unlinkpath = public_path($assignment->file_path);
+                if (File::exists($unlinkpath)) {
+                    unlink($unlinkpath);
+                }
             }
-            $file_name = time() . '_' . $request->file->getClientOriginalName();
-            $file_path = $request->file('file')->storeAs('uploads/assignments', $file_name, 'public');
 
-            $newname = time() . '_' . $request->file->getClientOriginalName();
-            $assignment->file_path = 'public/' . $file_path;
+            $file_name = time() . '_' . $request->file('file')->getClientOriginalName();
+
+            $request->file('file')->move(public_path('uploads/assignments'), $file_name);
+
+            $assignment->file_path = '/uploads/assignments/' . $file_name;
+
         }
         $assignment->save();
 
-        return response()->json(['ststus' => 'assignments Updated successfully.']);
+        return response()->json(['message' => 'assignments Updated successfully.']);
     }
 
     /**
@@ -146,15 +141,32 @@ class AssignmentController extends Controller
      */
     public function destroy(assignment $assignment)
     {
-        $filePath = $assignment->file_path;
-
-        if (Storage::exists($filePath)) {
-            Storage::delete($filePath);
+        if ($assignment->file_path) {
+            $unlinkpath = public_path($assignment->file_path);
+            if (File::exists($unlinkpath)) {
+                unlink($unlinkpath);
+            }
         }
         if ($assignment->delete()) {
             return response()->json([
                 'status' => 'deleted successfully',
             ]);
+        }
+    }
+    public function download($id)
+    {
+        try {
+            $data = assignment::findOrFail($id);
+            $filePath = $data->file_path;
+            $fullPath = public_path($filePath);
+
+            if (File::exists($fullPath)) {
+                return response()->download($fullPath,);
+            } else {
+                return 'File not found';
+            }
+        } catch (\Exception $e) {
+            return 'Error: ' . $e->getMessage();
         }
     }
 }

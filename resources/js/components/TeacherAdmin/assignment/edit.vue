@@ -21,7 +21,8 @@
                                         Select Semester / year <samp style="color: red">*</samp>
                                     </label>
                                     <br />
-                                    <select class="form-control " name="semester" id="semester" v-model="semester" required>
+                                    <select class="form-control " name="semester" id="semester" v-model="semester"
+                                        required>
                                         <option value=" ">Select Semester</option>
                                         <option :value="sem.id" v-for="sem in sems" :key="sem.id">
                                             {{ sem.semester_years }}
@@ -95,7 +96,7 @@ export default {
         //     router.push("/admin/login")
         // }
         //get api data
-        axios.get("/api/student/facylty/class/section", {
+        axios.get("/api/teacher/facylty/class/section", {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + store.getters.getAdminToken,
@@ -113,9 +114,9 @@ export default {
                 title: error.response.data.message
             })
         }),
-        this.getdata()
+            this.getdata()
     },
-    props:['id'],
+    props: ['id'],
     methods: {
         onChange(e) {
             this.file = e.target.files[0];
@@ -140,9 +141,10 @@ export default {
             data.append('id', this.id);
             axios.post('/api/teacher/assignment/update', data, config)
                 .then(function (res) {
+                  
                     toast.fire({
-
-                        title: res.data.success
+                        icon: "success",
+                        title: res.data.message
                     })
                     router.push('/teacher/show-assignment')
                 })
@@ -150,23 +152,23 @@ export default {
                     console.log(err)
                 });
         },
-        getdata(){
+        getdata() {
             axios.get("/api/teacher/assignment/" + this.id + "/edit", {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + store.getters.getAdminToken,
-            },
-        }).then((res) => {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + store.getters.getAdminToken,
+                },
+            }).then((res) => {
 
-            this.faculty = res.data.faculty_id
-            this.semester = res.data.semesters_id
-            this.section = res.data.sections_id
-            this.subjects = res.data.subject
-            this.teacher = res.data.teachers_id
-            this.topic = res.data.topic
-            this.deadline = res.data.deadline
+                this.faculty = res.data.faculty_id
+                this.semester = res.data.semesters_id
+                this.section = res.data.sections_id
+                this.subjects = res.data.subject
+                this.teacher = res.data.teachers_id
+                this.topic = res.data.topic
+                this.deadline = res.data.deadline
 
-        });
+            });
         }
     }
 }

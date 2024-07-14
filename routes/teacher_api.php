@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'role:teacher'])->prefix('teacher')->group(function () {
     Route::get('/facylty/class/section', [levelManageCon::class, 'index']);
+    
     Route::resource('/assignment', AssignmentController::class);
     Route::resource('/notes', NoteController::class);
     Route::post('/notes/update', [NoteController::class, 'update']);
     Route::post('/assignment/update', [AssignmentController::class, 'update']);
-    Route::get('/download/assignment/{id}', [AssignmentController::class, 'download']);
+    Route::get('/download/notes/{id}', [NoteController::class, 'download']);
 
     Route::resource('/periods', PeriodController::class)->only(['index', 'show']);
 
@@ -32,3 +33,4 @@ Route::middleware(['auth:sanctum', 'role:teacher'])->prefix('teacher')->group(fu
     Route::get('/attendance', [TeachersController::class, 'attendence']);
     Route::resource('/leave', TeacherLeaveManagementController::class)->only(['index', 'show', 'store', 'update']);
 });
+Route::get('/download/assignment/{id}', [AssignmentController::class, 'download']);

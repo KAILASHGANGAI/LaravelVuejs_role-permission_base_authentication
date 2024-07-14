@@ -1,17 +1,28 @@
 <template>
-    <h1>View Note</h1>
     <div class="container">
-        <div>
-            <span>Subject: {{ datas.subject }}</span> <br>
-            <span>faculty_id: {{ datas.faculty_id }}</span> <br>
-            <span>sections_id: {{ datas.sections_id }}</span><br>
-            <span>students_id: {{ datas.students_id }}</span><br>
-            <span>topic: {{ datas.topic }}</span> <br>
-            <span>deadline: {{ datas.deadline }}</span><br>
-            <span>Date: {{ datas.created_at.split('T')[0] }}</span>
+        <div class="row">
+            <div class="col-sm-4">
+                <h1>View Note</h1>
 
+                <div>
+                    <span>Subject: {{ datas.subject }}</span> <br>
+                    <span>faculty_id: {{ datas.faculty.faculty_name }}</span> <br>
+                    <span>Semester: {{ datas.semester.semester_years }}</span> <br>
+                    <span>students_id: {{ datas.students_id }}</span><br>
+                    <span>topic: {{ datas.topic }}</span> <br>
+                    <span>deadline: {{ datas.deadline }}</span><br>
+                    <span>Date: {{ datas.created_at.split('T')[0] }}</span>
+
+                </div>
+                <button class="btn btn-primary" @click="download">Download</button>
+            </div>
+            <div class="col-sm-8">
+                <embed :src="datas.file_path + '#toolbar=0&navpanes=0&scrollbar=0'" type="" class="w-100"
+                    style="height: 90vh;">
+
+            </div>
         </div>
-        <button class="btn btn-primary" @click="download">Download</button>
+
 
     </div>
 </template>
@@ -36,7 +47,7 @@ export default {
         //     router.push("/admin/login")
         // }
         //get api data
-        axios.get("/api/student/facylty/class/section", {
+        axios.get("/api/student/get-facylty/class/section", {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + store.getters.getAdminToken,
@@ -47,7 +58,7 @@ export default {
                 (this.sems = res.data.sem),
                 (this.sections = res.data.section);
         });
-        axios.get("/api/student/assignment/" + this.id, {
+        axios.get("/api/student/notes/" + this.id, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + store.getters.getAdminToken,
@@ -68,30 +79,16 @@ export default {
     },
     methods: {
         download() {
-            axios.get('/api/student/download/assignment/' + this.id, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + store.getters.getAdminToken,
-                },
-            }).then((res) => {
-                const pdfData = res.data
-                const blob = new Blob([pdfData], { type: 'application/pdf' })
-                const url = URL.createObjectURL(blob)
 
-                const a = document.createElement('a')
-                a.href = url
-                a.download = 'example.pdf'
-                a.click()
+            window.location.href = '/api/download/notes/' + this.id;
+        },
 
-                URL.revokeObjectURL(url)
-
-                toast.fire({
-                    icon: "success",
-                    title: res.data.message
-                })
-            })
-        }
     }
 
 }
 </script>
+<style scoped>
+#toolbar {
+    display: none !important;
+}
+</style>

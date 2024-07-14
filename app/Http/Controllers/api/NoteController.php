@@ -5,9 +5,11 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\note;
 use App\Models\students;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class NoteController extends Controller
 {
@@ -54,29 +56,31 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+            $request->validate([
+                'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,pdf',
+            ]);
+            $new = new note();
+            $new->subject = $request->subjects;
+            $new->faculty_id = $request->faculty;
+            $new->semesters_id = $request->semester;
+            $new->teachers_id = Auth::id();
+            $new->topic = $request->topic;
 
-        $request->validate([
-            'file' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,pdf',
-        ]);
-        $new = new note();
-        $new->subject = $request->subjects;
-        $new->faculty_id = $request->faculty;
-        $new->semesters_id = $request->semester;
-        $new->teachers_id = Auth::id();
-        $new->topic = $request->topic;
+            if ($request->file('file')) {
 
-        if ($request->file()) {
-            $file_name = time() . '_' . $request->file->getClientOriginalName();
-            $file_path = $request->file('file')->storeAs('uploads/notes', $file_name, 'public');
+                $file_name = time() . '_' . $request->file('file')->getClientOriginalName();
 
-            $newname = time() . '_' . $request->file->getClientOriginalName();
-            $new->file_path = 'public/' . $file_path;
+                $request->file('file')->move(public_path('uploads/notes'), $file_name);
+
+                $new->file_path = '/uploads/notes/' . $file_name;
+            }
             $new->save();
 
-            return response()->json(['success' => 'File uploaded successfully.']);
+            return response()->json(['success' => 'Note Uploaded uploaded.']);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
         }
-
-        return response()->json(['success' => 'File Not uploaded.']);
     }
 
     /**
@@ -84,9 +88,10 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(note $note)
+    public function show($id)
     {
-        //
+        $note = note::with(['faculty:id,faculty_name', 'semester:id,semester_years'])->find($id);
+        return response()->json($note);
     }
 
     /**
@@ -113,15 +118,21 @@ class NoteController extends Controller
         $note->semesters_id = $request->semester;
         $note->teachers_id = Auth::id();
         $note->topic = $request->topic;
-        if ($request->file()) {
-            if (Storage::exists($note->file_path)) {
-                Storage::delete($note->file_path);
+        if ($request->file('file')) {
+            if ($note->file_path) {
+                $unlinkpath = public_path($note->file_path);
+                if (File::exists($unlinkpath)) {
+                    unlink($unlinkpath);
+                }
             }
-            $file_name = time() . '_' . $request->file->getClientOriginalName();
-            $file_path = $request->file('file')->storeAs('uploads/notes', $file_name, 'public');
 
-            $newname = time() . '_' . $request->file->getClientOriginalName();
-            $note->file_path = 'public/' . $file_path;
+            $file_name = time() . '_' . $request->file('file')->getClientOriginalName();
+
+            $request->file('file')->move(public_path('uploads/notes'), $file_name);
+
+            $note->file_path = '/uploads/notes/' . $file_name;
+
+           
         }
         $note->save();
 
@@ -135,15 +146,37 @@ class NoteController extends Controller
      */
     public function destroy(note $note)
     {
-        $filePath = $note->file_path;
-
-        if (Storage::exists($filePath)) {
-            Storage::delete($filePath);
+        if ($note->file_path) {
+            $unlinkpath = public_path($note->file_path);
+            if (File::exists($unlinkpath)) {
+                unlink($unlinkpath);
+            }
         }
         if ($note->delete()) {
             return response()->json([
                 'status' => 'deleted successfully',
             ]);
+        }
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function download($id)
+    {
+        try {
+            $data = Note::findOrFail($id);
+            $filePath = $data->file_path;
+            $fullPath = public_path($filePath);
+
+            if (File::exists($fullPath)) {
+                return response()->download($fullPath,);
+            } else {
+                return 'File not found';
+            }
+        } catch (\Exception $e) {
+            return 'Error: ' . $e->getMessage();
         }
     }
 }

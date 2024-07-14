@@ -34,3 +34,4 @@ Route::middleware(['auth:sanctum', 'role:student'])->prefix('student')->group(fu
 
     Route::resource('/leave', LeaveManagementController::class)->only(['index', 'show', 'store', 'update']);
 });
+Route::get('/download/notes/{id}', [NoteController::class, 'download'])->middleware('auth');

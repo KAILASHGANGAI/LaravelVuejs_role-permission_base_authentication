@@ -63,7 +63,7 @@ data(){
         }
 },
 created(){
-    
+    this.checkExpiration()
     if (this.getAdminToken == 0) {
         router.push('/admin/login')
     }
@@ -74,7 +74,27 @@ created(){
         store.dispatch('removeUser')
         localStorage.clear()
     }, 24 * 60 * 60 * 1000); 
+
+    
   },
+  methods:{
+    checkExpiration() {
+      const expireAt = localStorage.getItem('expire_at');
+      console.log(expireAt);
+      if (expireAt) {
+        const now = new Date().getTime();
+        console.log(now);
+        console.log(now-expireAt)
+        if (now > expireAt) {
+          localStorage.clear();
+          router.push('/admin/login')
+        } 
+      }else{
+        localStorage.clear();
+        router.push('/admin/login')
+      }
+    }
+  }
 
     
 }

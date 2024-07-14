@@ -20,7 +20,7 @@ export default{
             axios.get('/api/logout').then((res) => {
                 store.dispatch('removeToken')
                 store.dispatch('removeUser')
-                router.push({name:home})
+               window.location = "/admin/login"
                 console.log(res)
             })
         }
