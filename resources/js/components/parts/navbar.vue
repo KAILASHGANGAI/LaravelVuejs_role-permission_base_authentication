@@ -13,7 +13,7 @@
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a v-if="$store.getters.getToken == 0" class="nav-link" href="/admin/login">Login</a>
+                        <a v-if="$store.getters.getToken == 0" class="nav-link" href="/login">Login</a>
                         
 
                     </li>
